@@ -24,10 +24,6 @@ The default output will be printed to stdout in YAML format. One can use \-o opt
 
 .SH OPTIONS
 .PP
-\fB\-\-allow\-missing\-template\-keys\fP=true
-    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
-
-.PP
 \fB\-f\fP, \fB\-\-filename\fP=[]
     Filename, directory, or URL to files to need to get converted.
 
@@ -36,11 +32,7 @@ The default output will be printed to stdout in YAML format. One can use \-o opt
     If true, convert will NOT try to contact api\-server but run locally.
 
 .PP
-\fB\-\-no\-headers\fP=false
-    When using the default or custom\-column output format, don't print headers (default print headers).
-
-.PP
-\fB\-o\fP, \fB\-\-output\fP=""
+\fB\-o\fP, \fB\-\-output\fP="yaml"
     Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
 \[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
 \[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
@@ -53,23 +45,6 @@ The default output will be printed to stdout in YAML format. One can use \-o opt
 .PP
 \fB\-R\fP, \fB\-\-recursive\fP=false
     Process the directory used in \-f, \-\-filename recursively. Useful when you want to manage related manifests organized within the same directory.
-
-.PP
-\fB\-a\fP, \fB\-\-show\-all\fP=true
-    When printing, show all resources (default show all pods including terminated one.)
-
-.PP
-\fB\-\-show\-labels\fP=false
-    When printing, show all labels as the last column (default hide labels column)
-
-.PP
-\fB\-\-sort\-by\fP=""
-    If non\-empty, sort list types using this field specification.  The field specification is expressed as a JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath expression must be an integer or a string.
-
-.PP
-\fB\-\-template\fP=""
-    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
 
 .PP
 \fB\-\-validate\fP=true
@@ -98,7 +73,7 @@ The default output will be printed to stdout in YAML format. One can use \-o opt
     Path to the file containing Azure container registry configuration information.
 
 .PP
-\fB\-\-cache\-dir\fP="/home/username/.kube/http\-cache"
+\fB\-\-cache\-dir\fP="/Users/zchee/.kube/http\-cache"
     Default HTTP cache directory
 
 .PP
@@ -170,10 +145,6 @@ The default output will be printed to stdout in YAML format. One can use \-o opt
     If present, the namespace scope for this CLI request
 
 .PP
-\fB\-\-password\fP=""
-    Password for basic authentication to the API server
-
-.PP
 \fB\-\-request\-timeout\fP="0"
     The length of time to wait before giving up on a single server request. Non\-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests.
 
@@ -192,10 +163,6 @@ The default output will be printed to stdout in YAML format. One can use \-o opt
 .PP
 \fB\-\-user\fP=""
     The name of the kubeconfig user to use
-
-.PP
-\fB\-\-username\fP=""
-    Username for basic authentication to the API server
 
 .PP
 \fB\-v\fP, \fB\-\-v\fP=0

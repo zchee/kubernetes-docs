@@ -25,7 +25,7 @@ kubeadm config upload from-flags [flags]
       --cri-socket string                    Specify the CRI socket to connect to. (default "/var/run/dockershim.sock")
       --feature-gates string                 A set of key=value pairs that describe feature gates for various features. Options are:
                                              Auditing=true|false (ALPHA - default=false)
-                                             CoreDNS=true|false (BETA - default=false)
+                                             CoreDNS=true|false (default=true)
                                              DynamicKubeletConfig=true|false (ALPHA - default=false)
                                              SelfHosting=true|false (ALPHA - default=false)
                                              StoreCertsInSecrets=true|false (ALPHA - default=false)
@@ -35,7 +35,7 @@ kubeadm config upload from-flags [flags]
       --pod-network-cidr string              Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
       --service-cidr string                  Use alternative range of IP address for service VIPs. (default "10.96.0.0/12")
       --service-dns-domain string            Use alternative domain for services, e.g. "myorg.internal". (default "cluster.local")
-      --token string                         The token to use for establishing bidirectional trust between nodes and masters.
+      --token string                         The token to use for establishing bidirectional trust between nodes and masters. The format is [a-z0-9]{6}\.[a-z0-9]{16} - e.g. abcdef.0123456789abcdef
       --token-ttl duration                   The duration before the bootstrap token is automatically deleted. If set to '0', the token will never expire. (default 24h0m0s)
 ```
 

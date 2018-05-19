@@ -41,7 +41,7 @@ Plugins are subcommands that are not part of the major command\-line distributio
     Path to the file containing Azure container registry configuration information.
 
 .PP
-\fB\-\-cache\-dir\fP="/home/username/.kube/http\-cache"
+\fB\-\-cache\-dir\fP="/Users/zchee/.kube/http\-cache"
     Default HTTP cache directory
 
 .PP
@@ -113,10 +113,6 @@ Plugins are subcommands that are not part of the major command\-line distributio
     If present, the namespace scope for this CLI request
 
 .PP
-\fB\-\-password\fP=""
-    Password for basic authentication to the API server
-
-.PP
 \fB\-\-request\-timeout\fP="0"
     The length of time to wait before giving up on a single server request. Non\-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests.
 
@@ -137,10 +133,6 @@ Plugins are subcommands that are not part of the major command\-line distributio
     The name of the kubeconfig user to use
 
 .PP
-\fB\-\-username\fP=""
-    Username for basic authentication to the API server
-
-.PP
 \fB\-v\fP, \fB\-\-v\fP=0
     log level for V logs
 
@@ -155,7 +147,7 @@ Plugins are subcommands that are not part of the major command\-line distributio
 
 .SH SEE ALSO
 .PP
-\fBkubectl(1)\fP,
+\fBkubectl(1)\fP, \fBkubectl\-plugin\-helm(1)\fP,
 
 
 .SH HISTORY

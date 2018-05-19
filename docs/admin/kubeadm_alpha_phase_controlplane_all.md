@@ -33,7 +33,7 @@ kubeadm alpha phase controlplane all [flags]
       --controller-manager-extra-args mapStringString   A set of extra flags to pass to the Controller Manager or override default ones in form of <flagname>=<value>
       --feature-gates string                            A set of key=value pairs that describe feature gates for various features. Options are:
                                                         Auditing=true|false (ALPHA - default=false)
-                                                        CoreDNS=true|false (BETA - default=false)
+                                                        CoreDNS=true|false (default=true)
                                                         DynamicKubeletConfig=true|false (ALPHA - default=false)
                                                         SelfHosting=true|false (ALPHA - default=false)
                                                         StoreCertsInSecrets=true|false (ALPHA - default=false)

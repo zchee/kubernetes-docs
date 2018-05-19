@@ -1,0 +1,63 @@
+.TH "KUBERNETES" "1" " kubernetes User Manuals" "Eric Paris" "Jan 2015"  ""
+
+
+.SH NAME
+.PP
+kubeadm config images pull \- Pull images used by kubeadm.
+
+
+.SH SYNOPSIS
+.PP
+\fBkubeadm config images pull\fP [OPTIONS]
+
+
+.SH DESCRIPTION
+.PP
+Pull images used by kubeadm.
+
+
+.SH OPTIONS
+.PP
+\fB\-\-feature\-gates\fP=""
+    A set of key=value pairs that describe feature gates for various features. Options are:
+Auditing=true|false (ALPHA \- default=false)
+CoreDNS=true|false (default=true)
+DynamicKubeletConfig=true|false (ALPHA \- default=false)
+SelfHosting=true|false (ALPHA \- default=false)
+StoreCertsInSecrets=true|false (ALPHA \- default=false)
+
+.PP
+\fB\-\-kubernetes\-version\fP="stable\-1.10"
+    Choose a specific Kubernetes version for the control plane.
+
+
+.SH OPTIONS INHERITED FROM PARENT COMMANDS
+.PP
+\fB\-\-azure\-container\-registry\-config\fP=""
+    Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-google\-json\-key\fP=""
+    The Google Cloud Platform Service Account JSON Key to use for authentication.
+
+.PP
+\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
+    The KubeConfig file to use when talking to the cluster.
+
+.PP
+\fB\-\-log\-flush\-frequency\fP=5s
+    Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-version\fP=false
+    Print version information and quit
+
+
+.SH SEE ALSO
+.PP
+\fBkubeadm\-config\-images(1)\fP,
+
+
+.SH HISTORY
+.PP
+January 2015, Originally compiled by Eric Paris (eparis at redhat dot com) based on the kubernetes source material, but hopefully they have been automatically generated since!

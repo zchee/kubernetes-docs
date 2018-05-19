@@ -3,7 +3,7 @@
 
 .SH NAME
 .PP
-kubectl rolling\-update \- Perform a rolling update of the given ReplicationController
+kubectl rolling\-update \- Perform a rolling update. This command is deprecated, use rollout instead.
 
 
 .SH SYNOPSIS
@@ -24,10 +24,6 @@ Replaces the specified replication controller with a new replication controller 
 
 
 .SH OPTIONS
-.PP
-\fB\-\-allow\-missing\-template\-keys\fP=true
-    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
-
 .PP
 \fB\-\-container\fP=""
     Container name which will have its image upgraded. Only relevant when \-\-image is specified, ignored otherwise. Required when using \-\-image on a multi\-container pod
@@ -53,19 +49,11 @@ Replaces the specified replication controller with a new replication controller 
     Explicit policy for when to pull container images. Required when \-\-image is same as existing image, ignored otherwise.
 
 .PP
-\fB\-\-no\-headers\fP=false
-    When using the default or custom\-column output format, don't print headers (default print headers).
-
-.PP
 \fB\-o\fP, \fB\-\-output\fP=""
     Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
 \[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
 \[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
 \[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
-
-.PP
-\fB\-\-output\-version\fP=""
-    DEPRECATED: To use a specific API version, fully\-qualify the resource, version, and group (for example: 'jobs.v1.batch/myjob').
 
 .PP
 \fB\-\-poll\-interval\fP=3s
@@ -74,23 +62,6 @@ Replaces the specified replication controller with a new replication controller 
 .PP
 \fB\-\-rollback\fP=false
     If true, this is a request to abort an existing rollout that is partially rolled out. It effectively reverses current and next and runs a rollout
-
-.PP
-\fB\-a\fP, \fB\-\-show\-all\fP=true
-    When printing, show all resources (default show all pods including terminated one.)
-
-.PP
-\fB\-\-show\-labels\fP=false
-    When printing, show all labels as the last column (default hide labels column)
-
-.PP
-\fB\-\-sort\-by\fP=""
-    If non\-empty, sort list types using this field specification.  The field specification is expressed as a JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath expression must be an integer or a string.
-
-.PP
-\fB\-\-template\fP=""
-    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
 
 .PP
 \fB\-\-timeout\fP=5m0s
@@ -127,7 +98,7 @@ Replaces the specified replication controller with a new replication controller 
     Path to the file containing Azure container registry configuration information.
 
 .PP
-\fB\-\-cache\-dir\fP="/home/username/.kube/http\-cache"
+\fB\-\-cache\-dir\fP="/Users/zchee/.kube/http\-cache"
     Default HTTP cache directory
 
 .PP
@@ -199,10 +170,6 @@ Replaces the specified replication controller with a new replication controller 
     If present, the namespace scope for this CLI request
 
 .PP
-\fB\-\-password\fP=""
-    Password for basic authentication to the API server
-
-.PP
 \fB\-\-request\-timeout\fP="0"
     The length of time to wait before giving up on a single server request. Non\-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests.
 
@@ -221,10 +188,6 @@ Replaces the specified replication controller with a new replication controller 
 .PP
 \fB\-\-user\fP=""
     The name of the kubeconfig user to use
-
-.PP
-\fB\-\-username\fP=""
-    Username for basic authentication to the API server
 
 .PP
 \fB\-v\fP, \fB\-\-v\fP=0

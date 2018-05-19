@@ -6,21 +6,8 @@ description: "Show details of a specific resource or group of resources \n\nPrin
   that type, provide a name prefix, or label selector. For example: \n\n  $ kubectl
   describe TYPE NAME_PREFIX\n  \nwill first check for an exact match on TYPE and NAME
   PREFIX. If no such resource exists, it will output details for every resource that
-  has a name prefixed with NAME PREFIX.\n\nValid resource types include: \n\n  * all
-  \ \n  * certificatesigningrequests (aka 'csr')  \n  * clusterrolebindings  \n  *
-  clusterroles  \n  * componentstatuses (aka 'cs')  \n  * configmaps (aka 'cm')  \n
-  \ * controllerrevisions  \n  * cronjobs  \n  * customresourcedefinition (aka 'crd')
-  \ \n  * daemonsets (aka 'ds')  \n  * deployments (aka 'deploy')  \n  * endpoints
-  (aka 'ep')  \n  * events (aka 'ev')  \n  * horizontalpodautoscalers (aka 'hpa')
-  \ \n  * ingresses (aka 'ing')  \n  * jobs  \n  * limitranges (aka 'limits')  \n
-  \ * namespaces (aka 'ns')  \n  * networkpolicies (aka 'netpol')  \n  * nodes (aka
-  'no')  \n  * persistentvolumeclaims (aka 'pvc')  \n  * persistentvolumes (aka 'pv')
-  \ \n  * poddisruptionbudgets (aka 'pdb')  \n  * podpreset  \n  * pods (aka 'po')
-  \ \n  * podsecuritypolicies (aka 'psp')  \n  * podtemplates  \n  * replicasets (aka
-  'rs')  \n  * replicationcontrollers (aka 'rc')  \n  * resourcequotas (aka 'quota')
-  \ \n  * rolebindings  \n  * roles  \n  * secrets  \n  * serviceaccounts (aka 'sa')
-  \ \n  * services (aka 'svc')  \n  * statefulsets (aka 'sts')  \n  * storageclasses
-  (aka 'sc')"
+  has a name prefixed with NAME PREFIX.\n\nUse \"kubectl api-resources\" for a complete
+  list of supported resources."
 options:
 - name: all-namespaces
   default_value: "false"
@@ -58,7 +45,7 @@ inherited_options:
   usage: |
     Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
 - name: cache-dir
-  default_value: /home/username/.kube/http-cache
+  default_value: /Users/zchee/.kube/http-cache
   usage: Default HTTP cache directory
 - name: certificate-authority
   usage: Path to a cert file for the certificate authority
@@ -90,8 +77,6 @@ inherited_options:
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
-- name: password
-  usage: Password for basic authentication to the API server
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -106,8 +91,6 @@ inherited_options:
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: username
-  usage: Username for basic authentication to the API server
 - name: v
   shorthand: v
   default_value: "0"

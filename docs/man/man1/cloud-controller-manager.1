@@ -20,7 +20,7 @@ the cloud specific control loops shipped with Kubernetes.
 .SH OPTIONS
 .PP
 \fB\-\-address\fP=0.0.0.0
-    DEPRECATED: the IP address on which to listen for the \-\-port port. See \-\-bind\-address instead.
+    DEPRECATED: the IP address on which to listen for the \-\-port port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). See \-\-bind\-address instead.
 
 .PP
 \fB\-\-allocate\-node\-cidrs\fP=false
@@ -120,7 +120,7 @@ RunAsGroup=true|false (ALPHA \- default=false)
 ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
 ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
-StorageObjectInUseProtection=true|false (BETA \- default=true)
+StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
 SupportIPVSProxyMode=true|false (BETA \- default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)

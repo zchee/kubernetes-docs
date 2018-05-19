@@ -26,7 +26,7 @@ kubeadm alpha phase kubeconfig user [flags]
       --cert-dir string                      The path where certificates are stored (default "/etc/kubernetes/pki")
       --client-name string                   The name of user. It will be used as the CN if client certificates are created
   -h, --help                                 help for user
-      --kubeconfig-dir string                The port where to save the kubeconfig file (default "/etc/kubernetes")
+      --kubeconfig-dir string                The path where to save the kubeconfig file (default "/etc/kubernetes")
       --org strings                          The orgnizations of the client certificate. It will be used as the O if client certificates are created
       --token string                         The token that should be used as the authentication mechanism for this kubeconfig, instead of client certificates
 ```

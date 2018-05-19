@@ -2,23 +2,25 @@ name: api-resources
 synopsis: Print the supported API resources on the server
 description: Print the supported API resources on the server
 options:
-- name: allow-missing-template-keys
-  default_value: "true"
-  usage: |
-    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: api-group
-  usage: The API group to use when talking to the server.
+  usage: Limit to resources in the specified API group.
+- name: cached
+  default_value: "false"
+  usage: Use the cached list of resources if available.
 - name: namespaced
   default_value: "true"
-  usage: Namespaced indicates if a resource is namespaced or not.
+  usage: |
+    If false, non-namespaced resources will be returned, otherwise returning namespaced resources by default.
 - name: no-headers
   default_value: "false"
   usage: |
     When using the default or custom-column output format, don't print headers (default print headers).
 - name: output
   shorthand: o
-  usage: |
-    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+  usage: 'Output format. One of: wide|name.'
+- name: verbs
+  default_value: '[]'
+  usage: Limit to resources that support the specified verbs.
 inherited_options:
 - name: alsologtostderr
   default_value: "false"
@@ -30,7 +32,7 @@ inherited_options:
   usage: |
     Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
 - name: cache-dir
-  default_value: /home/username/.kube/http-cache
+  default_value: /Users/zchee/.kube/http-cache
   usage: Default HTTP cache directory
 - name: certificate-authority
   usage: Path to a cert file for the certificate authority
@@ -62,8 +64,6 @@ inherited_options:
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
-- name: password
-  usage: Password for basic authentication to the API server
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -78,8 +78,6 @@ inherited_options:
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: username
-  usage: Username for basic authentication to the API server
 - name: v
   shorthand: v
   default_value: "0"

@@ -46,7 +46,7 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-apiserver\-count\fP=1
-    The number of apiservers running in the cluster, must be a positive number.
+    The number of apiservers running in the cluster, must be a positive number. (In use when \-\-endpoint\-reconciler\-type=master\-count is enabled.)
 
 .PP
 \fB\-\-audit\-log\-batch\-buffer\-size\fP=10000
@@ -97,6 +97,18 @@ cluster's shared state through which all other components interact.
     If set, all requests coming to the apiserver will be logged to this file.  '\-' means standard out.
 
 .PP
+\fB\-\-audit\-log\-truncate\-enabled\fP=false
+    Whether event and batch truncating is enabled.
+
+.PP
+\fB\-\-audit\-log\-truncate\-max\-batch\-size\fP=10485760
+    Maximum size of the batch sent to the underlying backend. Actual serialized size can be several hundreds of bytes greater. If a batch exceeds this limit, it is split into several batches of smaller size.
+
+.PP
+\fB\-\-audit\-log\-truncate\-max\-event\-size\fP=102400
+    Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, andif this doesn't reduce the size enough, event is discarded.
+
+.PP
 \fB\-\-audit\-log\-version\fP="audit.k8s.io/v1beta1"
     API group and version used for serializing audit events written to log.
 
@@ -143,6 +155,18 @@ cluster's shared state through which all other components interact.
 .PP
 \fB\-\-audit\-webhook\-mode\fP="batch"
     Strategy for sending audit events. Blocking indicates sending events should block server responses. Batch causes the backend to buffer and write events asynchronously. Known modes are batch,blocking.
+
+.PP
+\fB\-\-audit\-webhook\-truncate\-enabled\fP=false
+    Whether event and batch truncating is enabled.
+
+.PP
+\fB\-\-audit\-webhook\-truncate\-max\-batch\-size\fP=10485760
+    Maximum size of the batch sent to the underlying backend. Actual serialized size can be several hundreds of bytes greater. If a batch exceeds this limit, it is split into several batches of smaller size.
+
+.PP
+\fB\-\-audit\-webhook\-truncate\-max\-event\-size\fP=102400
+    Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, andif this doesn't reduce the size enough, event is discarded.
 
 .PP
 \fB\-\-audit\-webhook\-version\fP="audit.k8s.io/v1beta1"
@@ -253,7 +277,7 @@ cluster's shared state through which all other components interact.
     Enables swagger ui on the apiserver at /swagger\-ui
 
 .PP
-\fB\-\-endpoint\-reconciler\-type\fP="master\-count"
+\fB\-\-endpoint\-reconciler\-type\fP="lease"
     Use an endpoint reconciler (master\-count, lease, none)
 
 .PP
@@ -346,7 +370,7 @@ RunAsGroup=true|false (ALPHA \- default=false)
 ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
 ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
-StorageObjectInUseProtection=true|false (BETA \- default=true)
+StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
 SupportIPVSProxyMode=true|false (BETA \- default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
@@ -486,8 +510,8 @@ VolumeSubpath=true|false (default=true)
     Private key for the client certificate used to prove the identity of the aggregator or kube\-apiserver when it must call out during a request. This includes proxying requests to a user api\-server and calling out to webhook admission plugins.
 
 .PP
-\fB\-\-repair\-malformed\-updates\fP=true
-    If true, server will do its best to fix the update request to pass the validation, e.g., setting empty UID in update request to its existing value. This flag can be turned off after we fix all the clients that send malformed updates.
+\fB\-\-repair\-malformed\-updates\fP=false
+    deprecated
 
 .PP
 \fB\-\-request\-timeout\fP=1m0s
@@ -566,8 +590,8 @@ VolumeSubpath=true|false (default=true)
     The media type to use to store objects in storage. Some resources or storage backends may only support a specific media type and will ignore this setting.
 
 .PP
-\fB\-\-storage\-versions\fP="admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,kubeadm.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1alpha1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1"
-    The per\-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all registered groups, which is derived from the KUBE\_API\_VERSIONS environment variable.
+\fB\-\-storage\-versions\fP="admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1"
+    The per\-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all known groups.
 
 .PP
 \fB\-\-target\-ram\-mb\fP=0

@@ -6,21 +6,8 @@ description: "Display one or many resources \n\nPrints a table of the most impor
   will only see results in your current namespace unless you pass --all-namespaces.
   \n\nUninitialized objects are not shown unless --include-uninitialized is passed.
   \n\nBy specifying the output as 'template' and providing a Go template as the value
-  of the --template flag, you can filter the attributes of the fetched resources.\n\nValid
-  resource types include: \n\n  * all  \n  * certificatesigningrequests (aka 'csr')
-  \ \n  * clusterrolebindings  \n  * clusterroles  \n  * componentstatuses (aka 'cs')
-  \ \n  * configmaps (aka 'cm')  \n  * controllerrevisions  \n  * cronjobs  \n  *
-  customresourcedefinition (aka 'crd')  \n  * daemonsets (aka 'ds')  \n  * deployments
-  (aka 'deploy')  \n  * endpoints (aka 'ep')  \n  * events (aka 'ev')  \n  * horizontalpodautoscalers
-  (aka 'hpa')  \n  * ingresses (aka 'ing')  \n  * jobs  \n  * limitranges (aka 'limits')
-  \ \n  * namespaces (aka 'ns')  \n  * networkpolicies (aka 'netpol')  \n  * nodes
-  (aka 'no')  \n  * persistentvolumeclaims (aka 'pvc')  \n  * persistentvolumes (aka
-  'pv')  \n  * poddisruptionbudgets (aka 'pdb')  \n  * podpreset  \n  * pods (aka
-  'po')  \n  * podsecuritypolicies (aka 'psp')  \n  * podtemplates  \n  * replicasets
-  (aka 'rs')  \n  * replicationcontrollers (aka 'rc')  \n  * resourcequotas (aka 'quota')
-  \ \n  * rolebindings  \n  * roles  \n  * secrets  \n  * serviceaccounts (aka 'sa')
-  \ \n  * services (aka 'svc')  \n  * statefulsets (aka 'sts')  \n  * storageclasses
-  (aka 'sc')"
+  of the --template flag, you can filter the attributes of the fetched resources.\n\nUse
+  \"kubectl api-resources\" for a complete list of supported resources."
 options:
 - name: all-namespaces
   default_value: "false"
@@ -67,9 +54,6 @@ options:
   shorthand: o
   usage: |
     Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
-- name: output-version
-  usage: |
-    DEPRECATED: To use a specific API version, fully-qualify the resource, version, and group (for example: 'jobs.v1.batch/myjob').
 - name: raw
   usage: |
     Raw URI to request from the server.  Uses the transport specified by the kubeconfig file.
@@ -129,7 +113,7 @@ inherited_options:
   usage: |
     Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
 - name: cache-dir
-  default_value: /home/username/.kube/http-cache
+  default_value: /Users/zchee/.kube/http-cache
   usage: Default HTTP cache directory
 - name: certificate-authority
   usage: Path to a cert file for the certificate authority
@@ -161,8 +145,6 @@ inherited_options:
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
-- name: password
-  usage: Password for basic authentication to the API server
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -177,8 +159,6 @@ inherited_options:
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: username
-  usage: Username for basic authentication to the API server
 - name: v
   shorthand: v
   default_value: "0"
@@ -189,14 +169,15 @@ inherited_options:
 example: "  # List all pods in ps output format.\n  kubectl get pods\n  \n  # List
   all pods in ps output format with more information (such as node name).\n  kubectl
   get pods -o wide\n  \n  # List a single replication controller with specified NAME
-  in ps output format.\n  kubectl get replicationcontroller web\n  \n  # List a single
-  pod in JSON output format.\n  kubectl get -o json pod web-pod-13je7\n  \n  # List
-  a pod identified by type and name specified in \"pod.yaml\" in JSON output format.\n
-  \ kubectl get -f pod.yaml -o json\n  \n  # Return only the phase value of the specified
-  pod.\n  kubectl get -o template pod/web-pod-13je7 --template={{.status.phase}}\n
-  \ \n  # List all replication controllers and services together in ps output format.\n
-  \ kubectl get rc,services\n  \n  # List one or more resources by their type and
-  names.\n  kubectl get rc/web service/frontend pods/web-pod-13je7\n  \n  # List all
-  resources with different types.\n  kubectl get all"
+  in ps output format.\n  kubectl get replicationcontroller web\n  \n  # List deployments
+  in JSON output format, in the \"v1\" version of the \"apps\" API group:\n  kubectl
+  get deployments.v1.apps -o json\n  \n  # List a single pod in JSON output format.\n
+  \ kubectl get -o json pod web-pod-13je7\n  \n  # List a pod identified by type and
+  name specified in \"pod.yaml\" in JSON output format.\n  kubectl get -f pod.yaml
+  -o json\n  \n  # Return only the phase value of the specified pod.\n  kubectl get
+  -o template pod/web-pod-13je7 --template={{.status.phase}}\n  \n  # List all replication
+  controllers and services together in ps output format.\n  kubectl get rc,services\n
+  \ \n  # List one or more resources by their type and names.\n  kubectl get rc/web
+  service/frontend pods/web-pod-13je7"
 see_also:
 - kubectl

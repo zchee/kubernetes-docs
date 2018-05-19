@@ -30,7 +30,7 @@ kubeadm alpha phase kubeconfig all [flags]
       --cert-dir string                      The path where certificates are stored (default "/etc/kubernetes/pki")
       --config string                        Path to kubeadm config file. WARNING: Usage of a configuration file is experimental
   -h, --help                                 help for all
-      --kubeconfig-dir string                The port where to save the kubeconfig file (default "/etc/kubernetes")
+      --kubeconfig-dir string                The path where to save the kubeconfig file (default "/etc/kubernetes")
       --node-name string                     The node name that should be used for the kubelet client certificate
 ```
 

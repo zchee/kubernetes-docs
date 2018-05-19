@@ -117,7 +117,7 @@ RunAsGroup=true|false (ALPHA \- default=false)
 ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
 ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
-StorageObjectInUseProtection=true|false (BETA \- default=true)
+StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
 SupportIPVSProxyMode=true|false (BETA \- default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
@@ -154,6 +154,10 @@ VolumeSubpath=true|false (default=true)
 .PP
 \fB\-\-iptables\-sync\-period\fP=30s
     The maximum interval of how often iptables rules are refreshed (e.g. '5s', '1m', '2h22m').  Must be greater than 0.
+
+.PP
+\fB\-\-ipvs\-exclude\-cidrs\fP=[]
+    A comma\-separated list of CIDR's which the ipvs proxier should not touch when cleaning up IPVS rules.
 
 .PP
 \fB\-\-ipvs\-min\-sync\-period\fP=0s

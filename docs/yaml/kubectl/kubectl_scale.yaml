@@ -23,7 +23,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output mode. Use "-o name" for shorter output (resource/name).
+    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
 - name: record
   default_value: "false"
   usage: |
@@ -34,7 +34,7 @@ options:
   usage: |
     Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
 - name: replicas
-  default_value: "-1"
+  default_value: "0"
   usage: The new desired number of replicas. Required.
 - name: resource-version
   usage: |
@@ -58,7 +58,7 @@ inherited_options:
   usage: |
     Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
 - name: cache-dir
-  default_value: /home/username/.kube/http-cache
+  default_value: /Users/zchee/.kube/http-cache
   usage: Default HTTP cache directory
 - name: certificate-authority
   usage: Path to a cert file for the certificate authority
@@ -90,8 +90,6 @@ inherited_options:
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
-- name: password
-  usage: Password for basic authentication to the API server
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -106,8 +104,6 @@ inherited_options:
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: username
-  usage: Username for basic authentication to the API server
 - name: v
   shorthand: v
   default_value: "0"

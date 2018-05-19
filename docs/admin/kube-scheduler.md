@@ -19,11 +19,11 @@ kube-scheduler [flags]
 ### Options
 
 ```
-      --address string                           The IP address to serve on (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
-      --algorithm-provider string                The scheduling algorithm provider to use, one of: ClusterAutoscalerProvider | DefaultProvider
+      --address string                           DEPRECATED: the IP address on which to listen for the --port port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). See --bind-address instead. (default "0.0.0.0")
+      --algorithm-provider string                DEPRECATED: the scheduling algorithm provider to use, one of: ClusterAutoscalerProvider | DefaultProvider
       --azure-container-registry-config string   Path to the file containing Azure container registry configuration information.
-      --config string                            The path to the configuration file.
-      --contention-profiling                     Enable lock contention profiling, if profiling is enabled
+      --config string                            The path to the configuration file. Flags override values in this file.
+      --contention-profiling                     DEPRECATED: enable lock contention profiling, if profiling is enabled
       --feature-gates mapStringBool              A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                  APIListChunking=true|false (BETA - default=true)
                                                  APIResponseCompression=true|false (ALPHA - default=false)
@@ -64,7 +64,7 @@ kube-scheduler [flags]
                                                  ScheduleDaemonSetPods=true|false (ALPHA - default=false)
                                                  ServiceNodeExclusion=true|false (ALPHA - default=false)
                                                  ServiceProxyAllowExternalIPs=true|false (DEPRECATED - default=false)
-                                                 StorageObjectInUseProtection=true|false (BETA - default=true)
+                                                 StorageObjectInUseProtection=true|false (default=true)
                                                  StreamingProxyRedirects=true|false (BETA - default=true)
                                                  SupportIPVSProxyMode=true|false (BETA - default=true)
                                                  SupportPodPidsLimit=true|false (ALPHA - default=false)
@@ -74,28 +74,28 @@ kube-scheduler [flags]
                                                  VolumeScheduling=true|false (BETA - default=true)
                                                  VolumeSubpath=true|false (default=true)
   -h, --help                                     help for kube-scheduler
-      --kube-api-burst int32                     Burst to use while talking with kubernetes apiserver (default 100)
-      --kube-api-content-type string             Content type of requests sent to apiserver. (default "application/vnd.kubernetes.protobuf")
-      --kube-api-qps float32                     QPS to use while talking with kubernetes apiserver (default 50)
-      --kubeconfig string                        Path to kubeconfig file with authorization and master location information.
+      --kube-api-burst int32                     DEPRECATED: burst to use while talking with kubernetes apiserver (default 100)
+      --kube-api-content-type string             DEPRECATED: content type of requests sent to apiserver. (default "application/vnd.kubernetes.protobuf")
+      --kube-api-qps float32                     DEPRECATED: QPS to use while talking with kubernetes apiserver (default 50)
+      --kubeconfig string                        DEPRECATED: path to kubeconfig file with authorization and master location information.
       --leader-elect                             Start a leader election client and gain leadership before executing the main loop. Enable this when running replicated components for high availability. (default true)
       --leader-elect-lease-duration duration     The duration that non-leader candidates will wait after observing a leadership renewal until attempting to acquire leadership of a led but unrenewed leader slot. This is effectively the maximum duration that a leader can be stopped before it is replaced by another candidate. This is only applicable if leader election is enabled. (default 15s)
       --leader-elect-renew-deadline duration     The interval between attempts by the acting master to renew a leadership slot before it stops leading. This must be less than or equal to the lease duration. This is only applicable if leader election is enabled. (default 10s)
       --leader-elect-resource-lock endpoints     The type of resource object that is used for locking during leader election. Supported options are endpoints (default) and `configmaps`. (default "endpoints")
       --leader-elect-retry-period duration       The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled. (default 2s)
-      --lock-object-name string                  Define the name of the lock object. (default "kube-scheduler")
-      --lock-object-namespace string             Define the namespace of the lock object. (default "kube-system")
+      --lock-object-name string                  DEPRECATED: define the name of the lock object. (default "kube-scheduler")
+      --lock-object-namespace string             DEPRECATED: define the namespace of the lock object. (default "kube-system")
       --log-flush-frequency duration             Maximum number of seconds between log flushes (default 5s)
       --master string                            The address of the Kubernetes API server (overrides any value in kubeconfig)
-      --policy-config-file string                File with scheduler policy configuration. This file is used if policy ConfigMap is not provided or --use-legacy-policy-config=true
-      --policy-configmap string                  Name of the ConfigMap object that contains scheduler's policy configuration. It must exist in the system namespace before scheduler initialization if --use-legacy-policy-config=false. The config must be provided as the value of an element in 'Data' map with the key='policy.cfg'
-      --policy-configmap-namespace string        The namespace where policy ConfigMap is located. The kube-system namespace will be used if this is not provided or is empty. (default "kube-system")
-      --port int32                               The port that the scheduler's http service runs on (default 10251)
-      --profiling                                Enable profiling via web interface host:port/debug/pprof/
-      --scheduler-name string                    Name of the scheduler, used to select which pods will be processed by this scheduler, based on pod's "spec.schedulerName". (default "default-scheduler")
-      --use-legacy-policy-config                 When set to true, scheduler will ignore policy ConfigMap and uses policy config file
+      --policy-config-file string                DEPRECATED: file with scheduler policy configuration. This file is used if policy ConfigMap is not provided or --use-legacy-policy-config=true
+      --policy-configmap string                  DEPRECATED: name of the ConfigMap object that contains scheduler's policy configuration. It must exist in the system namespace before scheduler initialization if --use-legacy-policy-config=false. The config must be provided as the value of an element in 'Data' map with the key='policy.cfg'
+      --policy-configmap-namespace string        DEPRECATED: the namespace where policy ConfigMap is located. The kube-system namespace will be used if this is not provided or is empty. (default "kube-system")
+      --port int                                 DEPRECATED: the port on which to serve HTTP insecurely without authentication and authorization. If 0, don't serve HTTPS at all. See --secure-port instead. (default 10251)
+      --profiling                                DEPRECATED: enable profiling via web interface host:port/debug/pprof/
+      --scheduler-name string                    DEPRECATED: name of the scheduler, used to select which pods will be processed by this scheduler, based on pod's "spec.schedulerName". (default "default-scheduler")
+      --use-legacy-policy-config                 DEPRECATED: when set to true, scheduler will ignore policy ConfigMap and uses policy config file
       --version version[=true]                   Print version information and quit
       --write-config-to string                   If set, write the configuration values to this file and exit.
 ```
 
-###### Auto generated by spf13/cobra on 21-Apr-2018
+###### Auto generated by spf13/cobra on 19-May-2018

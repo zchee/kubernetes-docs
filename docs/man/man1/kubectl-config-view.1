@@ -37,35 +37,15 @@ You can use \-\-output jsonpath={...} to extract specific values using a jsonpat
     Remove all information not used by current\-context from the output
 
 .PP
-\fB\-\-no\-headers\fP=false
-    When using the default or custom\-column output format, don't print headers (default print headers).
-
-.PP
-\fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
+\fB\-o\fP, \fB\-\-output\fP="yaml"
+    Output format. One of: json|yaml|name|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
 \[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
 \[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
 \[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
 
 .PP
-\fB\-\-output\-version\fP=""
-    DEPRECATED: To use a specific API version, fully\-qualify the resource, version, and group (for example: 'jobs.v1.batch/myjob').
-
-.PP
 \fB\-\-raw\fP=false
     Display raw byte data
-
-.PP
-\fB\-a\fP, \fB\-\-show\-all\fP=true
-    When printing, show all resources (default show all pods including terminated one.)
-
-.PP
-\fB\-\-show\-labels\fP=false
-    When printing, show all labels as the last column (default hide labels column)
-
-.PP
-\fB\-\-sort\-by\fP=""
-    If non\-empty, sort list types using this field specification.  The field specification is expressed as a JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath expression must be an integer or a string.
 
 .PP
 \fB\-\-template\fP=""
@@ -95,7 +75,7 @@ You can use \-\-output jsonpath={...} to extract specific values using a jsonpat
     Path to the file containing Azure container registry configuration information.
 
 .PP
-\fB\-\-cache\-dir\fP="/home/username/.kube/http\-cache"
+\fB\-\-cache\-dir\fP="/Users/zchee/.kube/http\-cache"
     Default HTTP cache directory
 
 .PP
@@ -167,10 +147,6 @@ You can use \-\-output jsonpath={...} to extract specific values using a jsonpat
     If present, the namespace scope for this CLI request
 
 .PP
-\fB\-\-password\fP=""
-    Password for basic authentication to the API server
-
-.PP
 \fB\-\-request\-timeout\fP="0"
     The length of time to wait before giving up on a single server request. Non\-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests.
 
@@ -189,10 +165,6 @@ You can use \-\-output jsonpath={...} to extract specific values using a jsonpat
 .PP
 \fB\-\-user\fP=""
     The name of the kubeconfig user to use
-
-.PP
-\fB\-\-username\fP=""
-    Username for basic authentication to the API server
 
 .PP
 \fB\-v\fP, \fB\-\-v\fP=0

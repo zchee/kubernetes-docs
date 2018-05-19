@@ -46,7 +46,7 @@ The configuration is located in the "kube\-system" namespace in the "kubeadm\-co
 \fB\-\-feature\-gates\fP=""
     A set of key=value pairs that describe feature gates for various features. Options are:
 Auditing=true|false (ALPHA \- default=false)
-CoreDNS=true|false (BETA \- default=false)
+CoreDNS=true|false (default=true)
 DynamicKubeletConfig=true|false (ALPHA \- default=false)
 SelfHosting=true|false (ALPHA \- default=false)
 StoreCertsInSecrets=true|false (ALPHA \- default=false)
@@ -73,7 +73,7 @@ StoreCertsInSecrets=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-token\fP=""
-    The token to use for establishing bidirectional trust between nodes and masters.
+    The token to use for establishing bidirectional trust between nodes and masters. The format is [a\-z0\-9]{6}.[a\-z0\-9]{16} \- e.g. abcdef.0123456789abcdef
 
 .PP
 \fB\-\-token\-ttl\fP=24h0m0s

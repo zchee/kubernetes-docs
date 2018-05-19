@@ -61,7 +61,7 @@ kubeadm join [flags]
       --discovery-token-unsafe-skip-ca-verification   For token-based discovery, allow joining without --discovery-token-ca-cert-hash pinning.
       --feature-gates string                          A set of key=value pairs that describe feature gates for various features. Options are:
                                                       Auditing=true|false (ALPHA - default=false)
-                                                      CoreDNS=true|false (BETA - default=false)
+                                                      CoreDNS=true|false (default=true)
                                                       DynamicKubeletConfig=true|false (ALPHA - default=false)
                                                       SelfHosting=true|false (ALPHA - default=false)
                                                       StoreCertsInSecrets=true|false (ALPHA - default=false)

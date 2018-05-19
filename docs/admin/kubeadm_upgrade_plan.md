@@ -1,12 +1,12 @@
 
-Check which versions are available to upgrade to and validate whether your current cluster is upgradeable.
+Check which versions are available to upgrade to and validate whether your current cluster is upgradeable. To skip the internet check, pass in the optional [version] parameter.
 
 ### Synopsis
 
-Check which versions are available to upgrade to and validate whether your current cluster is upgradeable.
+Check which versions are available to upgrade to and validate whether your current cluster is upgradeable. To skip the internet check, pass in the optional [version] parameter.
 
 ```
-kubeadm upgrade plan [flags]
+kubeadm upgrade plan [version] [flags]
 ```
 
 ### Options
@@ -23,7 +23,7 @@ kubeadm upgrade plan [flags]
       --config string                      Path to kubeadm config file. WARNING: Usage of a configuration file is experimental!
       --feature-gates string               A set of key=value pairs that describe feature gates for various features.Options are:
                                            Auditing=true|false (ALPHA - default=false)
-                                           CoreDNS=true|false (BETA - default=false)
+                                           CoreDNS=true|false (default=true)
                                            DynamicKubeletConfig=true|false (ALPHA - default=false)
                                            SelfHosting=true|false (ALPHA - default=false)
                                            StoreCertsInSecrets=true|false (ALPHA - default=false)

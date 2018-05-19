@@ -1,15 +1,12 @@
 name: rolling-update
-synopsis: Perform a rolling update of the given ReplicationController
+synopsis: |
+  Perform a rolling update. This command is deprecated, use rollout instead.
 description: "Perform a rolling update of the given ReplicationController. \n\nReplaces
   the specified replication controller with a new replication controller by updating
   one pod at a time to use the new PodTemplate. The new-controller.json must specify
   the same namespace as the existing replication controller and overwrite at least
   one (common) label in its replicaSelector. \n\n! http://kubernetes.io/images/docs/kubectl_rollingupdate.svg"
 options:
-- name: allow-missing-template-keys
-  default_value: "true"
-  usage: |
-    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: container
   usage: |
     Container name which will have its image upgraded. Only relevant when --image is specified, ignored otherwise. Required when using --image on a multi-container pod
@@ -32,17 +29,10 @@ options:
 - name: image-pull-policy
   usage: |
     Explicit policy for when to pull container images. Required when --image is same as existing image, ignored otherwise.
-- name: no-headers
-  default_value: "false"
-  usage: |
-    When using the default or custom-column output format, don't print headers (default print headers).
 - name: output
   shorthand: o
   usage: |
     Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
-- name: output-version
-  usage: |
-    DEPRECATED: To use a specific API version, fully-qualify the resource, version, and group (for example: 'jobs.v1.batch/myjob').
 - name: poll-interval
   default_value: 3s
   usage: |
@@ -51,21 +41,6 @@ options:
   default_value: "false"
   usage: |
     If true, this is a request to abort an existing rollout that is partially rolled out. It effectively reverses current and next and runs a rollout
-- name: show-all
-  shorthand: a
-  default_value: "true"
-  usage: |
-    When printing, show all resources (default show all pods including terminated one.)
-- name: show-labels
-  default_value: "false"
-  usage: |
-    When printing, show all labels as the last column (default hide labels column)
-- name: sort-by
-  usage: |
-    If non-empty, sort list types using this field specification.  The field specification is expressed as a JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath expression must be an integer or a string.
-- name: template
-  usage: |
-    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 - name: timeout
   default_value: 5m0s
   usage: |
@@ -89,7 +64,7 @@ inherited_options:
   usage: |
     Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
 - name: cache-dir
-  default_value: /home/username/.kube/http-cache
+  default_value: /Users/zchee/.kube/http-cache
   usage: Default HTTP cache directory
 - name: certificate-authority
   usage: Path to a cert file for the certificate authority
@@ -121,8 +96,6 @@ inherited_options:
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
-- name: password
-  usage: Password for basic authentication to the API server
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -137,8 +110,6 @@ inherited_options:
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: username
-  usage: Username for basic authentication to the API server
 - name: v
   shorthand: v
   default_value: "0"

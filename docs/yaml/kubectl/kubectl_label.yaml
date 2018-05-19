@@ -13,14 +13,13 @@ options:
   default_value: "false"
   usage: |
     Select all resources, including uninitialized ones, in the namespace of the specified resource types
-- name: allow-missing-template-keys
-  default_value: "true"
-  usage: |
-    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: dry-run
   default_value: "false"
   usage: |
     If true, only print the object that would be sent, without sending it.
+- name: field-selector
+  usage: |
+    Selector (field query) to filter on, supports '=', '==', and '!='.(e.g. --field-selector key1=value1,key2=value2). The server only supports a limited number of field queries per type.
 - name: filename
   shorthand: f
   default_value: '[]'
@@ -36,17 +35,10 @@ options:
 - name: local
   default_value: "false"
   usage: If true, label will NOT contact api-server but run locally.
-- name: no-headers
-  default_value: "false"
-  usage: |
-    When using the default or custom-column output format, don't print headers (default print headers).
 - name: output
   shorthand: o
   usage: |
     Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
-- name: output-version
-  usage: |
-    DEPRECATED: To use a specific API version, fully-qualify the resource, version, and group (for example: 'jobs.v1.batch/myjob').
 - name: overwrite
   default_value: "false"
   usage: |
@@ -67,21 +59,6 @@ options:
   shorthand: l
   usage: |
     Selector (label query) to filter on, not including uninitialized ones, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2).
-- name: show-all
-  shorthand: a
-  default_value: "true"
-  usage: |
-    When printing, show all resources (default show all pods including terminated one.)
-- name: show-labels
-  default_value: "false"
-  usage: |
-    When printing, show all labels as the last column (default hide labels column)
-- name: sort-by
-  usage: |
-    If non-empty, sort list types using this field specification.  The field specification is expressed as a JSONPath expression (e.g. '{.metadata.name}'). The field in the API resource specified by this JSONPath expression must be an integer or a string.
-- name: template
-  usage: |
-    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 inherited_options:
 - name: alsologtostderr
   default_value: "false"
@@ -93,7 +70,7 @@ inherited_options:
   usage: |
     Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
 - name: cache-dir
-  default_value: /home/username/.kube/http-cache
+  default_value: /Users/zchee/.kube/http-cache
   usage: Default HTTP cache directory
 - name: certificate-authority
   usage: Path to a cert file for the certificate authority
@@ -125,8 +102,6 @@ inherited_options:
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
-- name: password
-  usage: Password for basic authentication to the API server
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -141,8 +116,6 @@ inherited_options:
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: username
-  usage: Username for basic authentication to the API server
 - name: v
   shorthand: v
   default_value: "0"
