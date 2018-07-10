@@ -62,34 +62,41 @@ kube-controller-manager [flags]
                                                                           AdvancedAuditing=true|false (BETA - default=true)
                                                                           AllAlpha=true|false (ALPHA - default=false)
                                                                           AppArmor=true|false (BETA - default=true)
+                                                                          AttachVolumeLimit=true|false (ALPHA - default=false)
                                                                           BalanceAttachedNodeVolumes=true|false (ALPHA - default=false)
                                                                           BlockVolume=true|false (ALPHA - default=false)
                                                                           CPUManager=true|false (BETA - default=true)
-                                                                          CRIContainerLogRotation=true|false (ALPHA - default=false)
+                                                                          CRIContainerLogRotation=true|false (BETA - default=true)
+                                                                          CSIBlockVolume=true|false (ALPHA - default=false)
                                                                           CSIPersistentVolume=true|false (BETA - default=true)
                                                                           CustomPodDNS=true|false (BETA - default=true)
-                                                                          CustomResourceSubresources=true|false (ALPHA - default=false)
+                                                                          CustomResourceSubresources=true|false (BETA - default=true)
                                                                           CustomResourceValidation=true|false (BETA - default=true)
                                                                           DebugContainers=true|false (ALPHA - default=false)
                                                                           DevicePlugins=true|false (BETA - default=true)
-                                                                          DynamicKubeletConfig=true|false (ALPHA - default=false)
+                                                                          DynamicKubeletConfig=true|false (BETA - default=true)
+                                                                          DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                                           EnableEquivalenceClassCache=true|false (ALPHA - default=false)
-                                                                          ExpandPersistentVolumes=true|false (ALPHA - default=false)
+                                                                          ExpandInUsePersistentVolumes=true|false (ALPHA - default=false)
+                                                                          ExpandPersistentVolumes=true|false (BETA - default=true)
                                                                           ExperimentalCriticalPodAnnotation=true|false (ALPHA - default=false)
                                                                           ExperimentalHostUserNamespaceDefaulting=true|false (BETA - default=false)
                                                                           GCERegionalPersistentDisk=true|false (BETA - default=true)
                                                                           HugePages=true|false (BETA - default=true)
                                                                           HyperVContainer=true|false (ALPHA - default=false)
                                                                           Initializers=true|false (ALPHA - default=false)
+                                                                          KubeletPluginsWatcher=true|false (ALPHA - default=false)
                                                                           LocalStorageCapacityIsolation=true|false (BETA - default=true)
                                                                           MountContainers=true|false (ALPHA - default=false)
                                                                           MountPropagation=true|false (BETA - default=true)
                                                                           PersistentLocalVolumes=true|false (BETA - default=true)
-                                                                          PodPriority=true|false (ALPHA - default=false)
+                                                                          PodPriority=true|false (BETA - default=true)
+                                                                          PodReadinessGates=true|false (BETA - default=false)
                                                                           PodShareProcessNamespace=true|false (ALPHA - default=false)
                                                                           QOSReserved=true|false (ALPHA - default=false)
                                                                           ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                                           ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
+                                                                          ResourceQuotaScopeSelectors=true|false (ALPHA - default=false)
                                                                           RotateKubeletClientCertificate=true|false (BETA - default=true)
                                                                           RotateKubeletServerCertificate=true|false (ALPHA - default=false)
                                                                           RunAsGroup=true|false (ALPHA - default=false)
@@ -98,13 +105,16 @@ kube-controller-manager [flags]
                                                                           ServiceProxyAllowExternalIPs=true|false (DEPRECATED - default=false)
                                                                           StorageObjectInUseProtection=true|false (default=true)
                                                                           StreamingProxyRedirects=true|false (BETA - default=true)
-                                                                          SupportIPVSProxyMode=true|false (BETA - default=true)
+                                                                          SupportIPVSProxyMode=true|false (default=true)
                                                                           SupportPodPidsLimit=true|false (ALPHA - default=false)
+                                                                          Sysctls=true|false (BETA - default=true)
                                                                           TaintBasedEvictions=true|false (ALPHA - default=false)
                                                                           TaintNodesByCondition=true|false (ALPHA - default=false)
                                                                           TokenRequest=true|false (ALPHA - default=false)
+                                                                          TokenRequestProjection=true|false (ALPHA - default=false)
                                                                           VolumeScheduling=true|false (BETA - default=true)
                                                                           VolumeSubpath=true|false (default=true)
+                                                                          VolumeSubpathEnvExpansion=true|false (ALPHA - default=false)
       --flex-volume-plugin-dir string                                     Full path of the directory in which the flex volume plugin should search for additional third party volume plugins. (default "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/")
   -h, --help                                                              help for kube-controller-manager
       --horizontal-pod-autoscaler-downscale-delay duration                The period since last downscale, before another downscale can be performed in horizontal pod autoscaler. (default 5m0s)
@@ -147,12 +157,13 @@ kube-controller-manager [flags]
       --root-ca-file string                                               If set, this root certificate authority will be included in service account's token secret. This must be a valid PEM-encoded CA bundle.
       --route-reconciliation-period duration                              The period for reconciling routes created for Nodes by cloud provider. (default 10s)
       --secondary-node-eviction-rate float32                              Number of nodes per second on which pods are deleted in case of node failure when a zone is unhealthy (see --unhealthy-zone-threshold for definition of healthy/unhealthy). Zone refers to entire cluster in non-multizone clusters. This value is implicitly overridden to 0 if the cluster size is smaller than --large-cluster-size-threshold. (default 0.01)
-      --secure-port int                                                   The port on which to serve HTTPS with authentication and authorization. If 0, don't serve HTTPS at all.
+      --secure-port int                                                   The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
+      --service-account-private-key-file string                           Filename containing a PEM-encoded private RSA or ECDSA key used to sign service account tokens.
       --service-cluster-ip-range string                                   CIDR Range for Services in cluster. Requires --allocate-node-cidrs to be true
       --terminated-pod-gc-threshold int32                                 Number of terminated pods that can exist before the terminated pod garbage collector starts deleting terminated pods. If <= 0, the terminated pod garbage collector is disabled. (default 12500)
       --tls-cert-file string                                              File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and --tls-cert-file and --tls-private-key-file are not provided, a self-signed certificate and key are generated for the public address and saved to the directory specified by --cert-dir.
-      --tls-cipher-suites strings                                         Comma-separated list of cipher suites for the server. Values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants). If omitted, the default Go cipher suites will be used
-      --tls-min-version string                                            Minimum TLS version supported. Value must match version names from https://golang.org/pkg/crypto/tls/#pkg-constants.
+      --tls-cipher-suites strings                                         Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_RC4_128_SHA
+      --tls-min-version string                                            Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12
       --tls-private-key-file string                                       File containing the default x509 private key matching --tls-cert-file.
       --tls-sni-cert-key namedCertKey                                     A pair of x509 certificate and private key file paths, optionally suffixed with a list of domain patterns which are fully qualified domain names, possibly with prefixed wildcard segments. If no domain patterns are provided, the names of the certificate are extracted. Non-wildcard matches trump over wildcard matches, explicit domain patterns trump over extracted names. For multiple key/certificate pairs, use the --tls-sni-cert-key multiple times. Examples: "example.crt,example.key" or "foo.crt,foo.key:*.foo.com,foo.com". (default [])
       --unhealthy-zone-threshold float32                                  Fraction of Nodes in a zone which needs to be not Ready (minimum 3) for zone to be treated as unhealthy.  (default 0.55)
@@ -160,4 +171,4 @@ kube-controller-manager [flags]
       --version version[=true]                                            Print version information and quit
 ```
 
-###### Auto generated by spf13/cobra on 19-May-2018
+###### Auto generated by spf13/cobra on 10-Jul-2018

@@ -26,7 +26,7 @@ kubeadm alpha phase controlplane apiserver [flags]
                                                SelfHosting=true|false (ALPHA - default=false)
                                                StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                   help for apiserver
-      --kubernetes-version string              Choose a specific Kubernetes version for the control plane (default "stable-1.10")
+      --kubernetes-version string              Choose a specific Kubernetes version for the control plane (default "stable-1.11")
       --service-cidr string                    The range of IP address used for service VIPs (default "10.96.0.0/12")
 ```
 

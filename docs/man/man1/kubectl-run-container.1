@@ -21,6 +21,10 @@ Creates a deployment or job to manage the created container(s).
 
 .SH OPTIONS
 .PP
+\fB\-\-allow\-missing\-template\-keys\fP=true
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+
+.PP
 \fB\-\-attach\fP=false
     If true, wait for the Pod to start running, and then attach to the Pod as if 'kubectl attach ...' were called.  Default false, unless '\-i/\-\-stdin' is set, in which case the default is true. With '\-\-restart=Never' the exit code of the container process is returned.
 
@@ -46,7 +50,7 @@ Creates a deployment or job to manage the created container(s).
 
 .PP
 \fB\-f\fP, \fB\-\-filename\fP=[]
-    Filename, directory, or URL to files to use to replace the resource.
+    to use to replace the resource.
 
 .PP
 \fB\-\-force\fP=false
@@ -87,10 +91,7 @@ Creates a deployment or job to manage the created container(s).
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
-\[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
-\[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
+    Output format. One of: json|yaml|name|go\-template|go\-template\-file|templatefile|template|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-\-overrides\fP=""
@@ -157,12 +158,21 @@ Creates a deployment or job to manage the created container(s).
     Keep stdin open on the container(s) in the pod, even if nothing is attached.
 
 .PP
+\fB\-\-template\fP=""
+    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
+\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
+
+.PP
 \fB\-\-timeout\fP=0s
     The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
 
 .PP
 \fB\-t\fP, \fB\-\-tty\fP=false
     Allocated a TTY for each container in the pod.
+
+.PP
+\fB\-\-wait\fP=false
+    If true, wait for resources to be gone before returning. This waits for finalizers.
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS

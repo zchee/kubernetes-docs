@@ -106,7 +106,7 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-audit\-log\-truncate\-max\-event\-size\fP=102400
-    Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, andif this doesn't reduce the size enough, event is discarded.
+    Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, and if this doesn't reduce the size enough, event is discarded.
 
 .PP
 \fB\-\-audit\-log\-version\fP="audit.k8s.io/v1beta1"
@@ -166,7 +166,7 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-audit\-webhook\-truncate\-max\-event\-size\fP=102400
-    Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, andif this doesn't reduce the size enough, event is discarded.
+    Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, and if this doesn't reduce the size enough, event is discarded.
 
 .PP
 \fB\-\-audit\-webhook\-version\fP="audit.k8s.io/v1beta1"
@@ -336,34 +336,41 @@ APIResponseCompression=true|false (ALPHA \- default=false)
 AdvancedAuditing=true|false (BETA \- default=true)
 AllAlpha=true|false (ALPHA \- default=false)
 AppArmor=true|false (BETA \- default=true)
+AttachVolumeLimit=true|false (ALPHA \- default=false)
 BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
 BlockVolume=true|false (ALPHA \- default=false)
 CPUManager=true|false (BETA \- default=true)
-CRIContainerLogRotation=true|false (ALPHA \- default=false)
+CRIContainerLogRotation=true|false (BETA \- default=true)
+CSIBlockVolume=true|false (ALPHA \- default=false)
 CSIPersistentVolume=true|false (BETA \- default=true)
 CustomPodDNS=true|false (BETA \- default=true)
-CustomResourceSubresources=true|false (ALPHA \- default=false)
+CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
 DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
-DynamicKubeletConfig=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=true)
+DynamicProvisioningScheduling=true|false (ALPHA \- default=false)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
-ExpandPersistentVolumes=true|false (ALPHA \- default=false)
+ExpandInUsePersistentVolumes=true|false (ALPHA \- default=false)
+ExpandPersistentVolumes=true|false (BETA \- default=true)
 ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
 ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
 GCERegionalPersistentDisk=true|false (BETA \- default=true)
 HugePages=true|false (BETA \- default=true)
 HyperVContainer=true|false (ALPHA \- default=false)
 Initializers=true|false (ALPHA \- default=false)
+KubeletPluginsWatcher=true|false (ALPHA \- default=false)
 LocalStorageCapacityIsolation=true|false (BETA \- default=true)
 MountContainers=true|false (ALPHA \- default=false)
 MountPropagation=true|false (BETA \- default=true)
 PersistentLocalVolumes=true|false (BETA \- default=true)
-PodPriority=true|false (ALPHA \- default=false)
+PodPriority=true|false (BETA \- default=true)
+PodReadinessGates=true|false (BETA \- default=false)
 PodShareProcessNamespace=true|false (ALPHA \- default=false)
 QOSReserved=true|false (ALPHA \- default=false)
 ReadOnlyAPIDataVolumes=true|false (DEPRECATED \- default=true)
 ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (ALPHA \- default=false)
 RotateKubeletClientCertificate=true|false (BETA \- default=true)
 RotateKubeletServerCertificate=true|false (ALPHA \- default=false)
 RunAsGroup=true|false (ALPHA \- default=false)
@@ -372,13 +379,16 @@ ServiceNodeExclusion=true|false (ALPHA \- default=false)
 ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
 StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
-SupportIPVSProxyMode=true|false (BETA \- default=true)
+SupportIPVSProxyMode=true|false (default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
+Sysctls=true|false (BETA \- default=true)
 TaintBasedEvictions=true|false (ALPHA \- default=false)
 TaintNodesByCondition=true|false (ALPHA \- default=false)
 TokenRequest=true|false (ALPHA \- default=false)
+TokenRequestProjection=true|false (ALPHA \- default=false)
 VolumeScheduling=true|false (BETA \- default=true)
 VolumeSubpath=true|false (default=true)
+VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-google\-json\-key\fP=""
@@ -543,7 +553,7 @@ VolumeSubpath=true|false (default=true)
 
 .PP
 \fB\-\-secure\-port\fP=6443
-    The port on which to serve HTTPS with authentication and authorization. If 0, don't serve HTTPS at all.
+    The port on which to serve HTTPS with authentication and authorization.It cannot switched off with 0.
 
 .PP
 \fB\-\-service\-account\-api\-audiences\fP=[]
@@ -560,6 +570,10 @@ VolumeSubpath=true|false (default=true)
 .PP
 \fB\-\-service\-account\-lookup\fP=true
     If true, validate ServiceAccount tokens exist in etcd as part of authentication.
+
+.PP
+\fB\-\-service\-account\-max\-token\-expiration\fP=0s
+    The maximum validity duration of a token created by the service account token issuer. If an otherwise valid TokenRequest with a validity duration larger than this value is requested, a token will be issued with a validity duration of this value.
 
 .PP
 \fB\-\-service\-account\-signing\-key\-file\fP=""
@@ -590,7 +604,7 @@ VolumeSubpath=true|false (default=true)
     The media type to use to store objects in storage. Some resources or storage backends may only support a specific media type and will ignore this setting.
 
 .PP
-\fB\-\-storage\-versions\fP="admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1"
+\fB\-\-storage\-versions\fP="admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,coordination.k8s.io/v1beta1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1"
     The per\-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all known groups.
 
 .PP
@@ -603,13 +617,11 @@ VolumeSubpath=true|false (default=true)
 
 .PP
 \fB\-\-tls\-cipher\-suites\fP=[]
-    Comma\-separated list of cipher suites for the server. Values are from tls package constants (
-\[la]https://golang.org/pkg/crypto/tls/#pkg-constants\[ra]). If omitted, the default Go cipher suites will be used
+    Comma\-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_ECDSA\_WITH\_RC4\_128\_SHA,TLS\_ECDHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_RSA\_WITH\_RC4\_128\_SHA,TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_RSA\_WITH\_RC4\_128\_SHA
 
 .PP
 \fB\-\-tls\-min\-version\fP=""
-    Minimum TLS version supported. Value must match version names from 
-\[la]https://golang.org/pkg/crypto/tls/#pkg-constants\[ra].
+    Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12
 
 .PP
 \fB\-\-tls\-private\-key\-file\fP=""

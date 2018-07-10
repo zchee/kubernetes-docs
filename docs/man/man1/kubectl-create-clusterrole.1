@@ -18,6 +18,10 @@ Create a ClusterRole.
 
 .SH OPTIONS
 .PP
+\fB\-\-aggregation\-rule\fP=
+    An aggregation label selector for combining ClusterRoles.
+
+.PP
 \fB\-\-allow\-missing\-template\-keys\fP=true
     If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 
@@ -31,10 +35,7 @@ Create a ClusterRole.
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
-\[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
-\[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
+    Output format. One of: json|yaml|name|template|go\-template|go\-template\-file|templatefile|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-\-resource\fP=[]
@@ -207,6 +208,9 @@ Create a ClusterRole.
   
   # Create a ClusterRole name "foo" with NonResourceURL specified
   kubectl create clusterrole "foo" \-\-verb=get \-\-non\-resource\-url=/logs/*
+  
+  # Create a ClusterRole name "monitoring" with AggregationRule specified
+  kubectl create clusterrole monitoring \-\-aggregation\-rule="rbac.example.com/aggregate\-to\-monitoring=true"
 
 .fi
 .RE

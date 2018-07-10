@@ -20,7 +20,7 @@ kubeadm config images list [flags]
                                     SelfHosting=true|false (ALPHA - default=false)
                                     StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                        help for list
-      --kubernetes-version string   Choose a specific Kubernetes version for the control plane. (default "stable-1.10")
+      --kubernetes-version string   Choose a specific Kubernetes version for the control plane. (default "stable-1.11")
 ```
 
 ### Options inherited from parent commands

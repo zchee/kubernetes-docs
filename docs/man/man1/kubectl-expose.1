@@ -27,6 +27,10 @@ pod (po), service (svc), replicationcontroller (rc), deployment (deploy), replic
 
 .SH OPTIONS
 .PP
+\fB\-\-allow\-missing\-template\-keys\fP=true
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+
+.PP
 \fB\-\-cluster\-ip\fP=""
     ClusterIP to be assigned to the service. Leave empty to auto\-allocate, or set to 'None' to create a headless service.
 
@@ -64,10 +68,7 @@ pod (po), service (svc), replicationcontroller (rc), deployment (deploy), replic
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
-\[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
-\[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
+    Output format. One of: json|yaml|name|template|go\-template|go\-template\-file|templatefile|jsonpath\-file|jsonpath.
 
 .PP
 \fB\-\-overrides\fP=""
@@ -104,6 +105,11 @@ pod (po), service (svc), replicationcontroller (rc), deployment (deploy), replic
 .PP
 \fB\-\-target\-port\fP=""
     Name or number for the port on the container that the service should direct traffic to. Optional.
+
+.PP
+\fB\-\-template\fP=""
+    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
+\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
 
 .PP
 \fB\-\-type\fP=""

@@ -7,6 +7,10 @@ description: "Convert config files between different API versions. Both YAML and
   output will be printed to stdout in YAML format. One can use -o option to change
   to output destination."
 options:
+- name: allow-missing-template-keys
+  default_value: "true"
+  usage: |
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: filename
   shorthand: f
   default_value: '[]'
@@ -20,7 +24,7 @@ options:
   shorthand: o
   default_value: yaml
   usage: |
-    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath-file|jsonpath.
 - name: output-version
   usage: |
     Output the formatted object with the given group version (for ex: 'extensions/v1beta1').)
@@ -29,6 +33,9 @@ options:
   default_value: "false"
   usage: |
     Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
+- name: template
+  usage: |
+    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 - name: validate
   default_value: "true"
   usage: |

@@ -39,8 +39,7 @@ options:
 - name: filename
   shorthand: f
   default_value: '[]'
-  usage: |
-    Filename, directory, or URL to files containing the resource to delete.
+  usage: containing the resource to delete.
 - name: force
   default_value: "false"
   usage: |
@@ -78,6 +77,10 @@ options:
   default_value: 0s
   usage: |
     The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
+- name: wait
+  default_value: "true"
+  usage: |
+    If true, wait for resources to be gone before returning. This waits for finalizers.
 inherited_options:
 - name: alsologtostderr
   default_value: "false"

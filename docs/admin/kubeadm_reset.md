@@ -14,7 +14,7 @@ kubeadm reset [flags]
 ```
       --cert-dir string                   The path to the directory where the certificates are stored. If specified, clean this directory. (default "/etc/kubernetes/pki")
       --cri-socket string                 The path to the CRI socket to use with crictl when cleaning up containers. (default "/var/run/dockershim.sock")
-      --force                             Reset the node without prompting for confirmation.
+  -f, --force                             Reset the node without prompting for confirmation.
   -h, --help                              help for reset
       --ignore-preflight-errors strings   A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
 ```

@@ -39,10 +39,7 @@ Create a priorityclass with the specified name, value, globalDefault and descrip
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
-\[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
-\[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
+    Output format. One of: json|yaml|name|template|go\-template|go\-template\-file|templatefile|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-\-save\-config\fP=false
@@ -194,7 +191,7 @@ Create a priorityclass with the specified name, value, globalDefault and descrip
 
 .nf
   # Create a priorityclass named high\-priority
-  kubectl create priorityclass default\-priority \-\-value=1000 \-\-description="high priority"
+  kubectl create priorityclass high\-priority \-\-value=1000 \-\-description="high priority"
   
   # Create a priorityclass named default\-priority that considered as the global default priority
   kubectl create priorityclass default\-priority \-\-value=1000 \-\-global\-default=true \-\-description="default priority"

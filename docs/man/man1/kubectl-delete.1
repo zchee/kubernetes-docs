@@ -43,7 +43,7 @@ Note that the delete command does NOT do resource version checks, so if someone 
 
 .PP
 \fB\-f\fP, \fB\-\-filename\fP=[]
-    Filename, directory, or URL to files containing the resource to delete.
+    containing the resource to delete.
 
 .PP
 \fB\-\-force\fP=false
@@ -80,6 +80,10 @@ Note that the delete command does NOT do resource version checks, so if someone 
 .PP
 \fB\-\-timeout\fP=0s
     The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
+
+.PP
+\fB\-\-wait\fP=true
+    If true, wait for resources to be gone before returning. This waits for finalizers.
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS

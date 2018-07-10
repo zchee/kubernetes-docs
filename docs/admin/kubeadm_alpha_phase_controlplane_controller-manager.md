@@ -18,7 +18,7 @@ kubeadm alpha phase controlplane controller-manager [flags]
       --config string                                   Path to kubeadm config file. WARNING: Usage of a configuration file is experimental
       --controller-manager-extra-args mapStringString   A set of extra flags to pass to the Controller Manager or override default ones in form of <flagname>=<value>
   -h, --help                                            help for controller-manager
-      --kubernetes-version string                       Choose a specific Kubernetes version for the control plane (default "stable-1.10")
+      --kubernetes-version string                       Choose a specific Kubernetes version for the control plane (default "stable-1.11")
       --pod-network-cidr string                         The range of IP addresses used for the Pod network
 ```
 

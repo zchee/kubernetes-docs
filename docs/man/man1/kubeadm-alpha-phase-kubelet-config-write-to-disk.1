@@ -3,17 +3,17 @@
 
 .SH NAME
 .PP
-kubeadm alpha phase kubelet init \- Writes init kubelet configuration to disk
+kubeadm alpha phase kubelet config write\-to\-disk \- Writes kubelet configuration to disk, either based on the \-\-config argument.
 
 
 .SH SYNOPSIS
 .PP
-\fBkubeadm alpha phase kubelet init\fP [OPTIONS]
+\fBkubeadm alpha phase kubelet config write\-to\-disk\fP [OPTIONS]
 
 
 .SH DESCRIPTION
 .PP
-Writes init kubelet configuration to disk for dynamic kubelet configuration feature. Please note that the kubelet configuration can be passed to kubeadm as a value into the master configuration file.
+Writes kubelet configuration to disk, based on the kubeadm configuration passed via "\-\-config".
 
 .PP
 Alpha Disclaimer: this command is currently alpha.
@@ -48,8 +48,8 @@ Alpha Disclaimer: this command is currently alpha.
 .RS
 
 .nf
-  # Writes init kubelet configuration to disk.
-  kubeadm alpha phase kubelet init
+  # Extracts the kubelet configuration from a kubeadm configuration file
+  kubeadm alpha phase kubelet config write\-to\-disk \-\-config kubeadm.yaml
 
 .fi
 .RE
@@ -57,7 +57,7 @@ Alpha Disclaimer: this command is currently alpha.
 
 .SH SEE ALSO
 .PP
-\fBkubeadm\-alpha\-phase\-kubelet(1)\fP,
+\fBkubeadm\-alpha\-phase\-kubelet\-config(1)\fP,
 
 
 .SH HISTORY

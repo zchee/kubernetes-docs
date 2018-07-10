@@ -1,5 +1,5 @@
 
-Adopts dynamic kubelet configuration.
+Commands related to handling the kubelet.
 
 ### Synopsis
 

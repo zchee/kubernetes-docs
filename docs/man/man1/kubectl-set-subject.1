@@ -22,6 +22,10 @@ Update User, Group or ServiceAccount in a RoleBinding/ClusterRoleBinding.
     Select all resources, including uninitialized ones, in the namespace of the specified resource types
 
 .PP
+\fB\-\-allow\-missing\-template\-keys\fP=true
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+
+.PP
 \fB\-\-dry\-run\fP=false
     If true, only print the object that would be sent, without sending it.
 
@@ -43,10 +47,7 @@ Update User, Group or ServiceAccount in a RoleBinding/ClusterRoleBinding.
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
-\[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
-\[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
+    Output format. One of: json|yaml|name|template|go\-template|go\-template\-file|templatefile|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-R\fP, \fB\-\-recursive\fP=false
@@ -59,6 +60,11 @@ Update User, Group or ServiceAccount in a RoleBinding/ClusterRoleBinding.
 .PP
 \fB\-\-serviceaccount\fP=[]
     Service accounts to bind to the role
+
+.PP
+\fB\-\-template\fP=""
+    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
+\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS

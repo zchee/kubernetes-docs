@@ -12,6 +12,10 @@ description: "Expose a resource as a new Kubernetes service. \n\nLooks up a depl
   \n\nPossible resources include (case insensitive): \n\npod (po), service (svc),
   replicationcontroller (rc), deployment (deploy), replicaset (rs)"
 options:
+- name: allow-missing-template-keys
+  default_value: "true"
+  usage: |
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: cluster-ip
   usage: |
     ClusterIP to be assigned to the service. Leave empty to auto-allocate, or set to 'None' to create a headless service.
@@ -44,7 +48,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+    Output format. One of: json|yaml|name|go-template|go-template-file|templatefile|template|jsonpath-file|jsonpath.
 - name: overrides
   usage: |
     An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.
@@ -76,6 +80,9 @@ options:
 - name: target-port
   usage: |
     Name or number for the port on the container that the service should direct traffic to. Optional.
+- name: template
+  usage: |
+    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 - name: type
   usage: |
     Type for this service: ClusterIP, NodePort, LoadBalancer, or ExternalName. Default is 'ClusterIP'.

@@ -3,6 +3,10 @@ synopsis: Run a particular image on the cluster
 description: "Create and run a particular image, possibly replicated. \n\nCreates
   a deployment or job to manage the created container(s)."
 options:
+- name: allow-missing-template-keys
+  default_value: "true"
+  usage: |
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: attach
   default_value: "false"
   usage: |
@@ -29,8 +33,7 @@ options:
 - name: filename
   shorthand: f
   default_value: '[]'
-  usage: |
-    Filename, directory, or URL to files to use to replace the resource.
+  usage: to use to replace the resource.
 - name: force
   default_value: "false"
   usage: |
@@ -65,7 +68,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
 - name: overrides
   usage: |
     An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.
@@ -124,6 +127,9 @@ options:
   default_value: "false"
   usage: |
     Keep stdin open on the container(s) in the pod, even if nothing is attached.
+- name: template
+  usage: |
+    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 - name: timeout
   default_value: 0s
   usage: |
@@ -132,6 +138,10 @@ options:
   shorthand: t
   default_value: "false"
   usage: Allocated a TTY for each container in the pod.
+- name: wait
+  default_value: "false"
+  usage: |
+    If true, wait for resources to be gone before returning. This waits for finalizers.
 inherited_options:
 - name: alsologtostderr
   default_value: "false"

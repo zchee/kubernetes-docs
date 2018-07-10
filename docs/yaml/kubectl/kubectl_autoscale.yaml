@@ -7,6 +7,10 @@ description: "Creates an autoscaler that automatically chooses and sets the numb
   as a reference. An autoscaler can automatically increase or decrease number of pods
   deployed within the system as needed."
 options:
+- name: allow-missing-template-keys
+  default_value: "true"
+  usage: |
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: cpu-percent
   default_value: "-1"
   usage: |
@@ -38,7 +42,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath-file|jsonpath.
 - name: record
   default_value: "false"
   usage: |
@@ -52,6 +56,9 @@ options:
   default_value: "false"
   usage: |
     If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+- name: template
+  usage: |
+    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 inherited_options:
 - name: alsologtostderr
   default_value: "false"

@@ -36,7 +36,7 @@ kube-apiserver [flags]
       --audit-log-path string                                   If set, all requests coming to the apiserver will be logged to this file.  '-' means standard out.
       --audit-log-truncate-enabled                              Whether event and batch truncating is enabled.
       --audit-log-truncate-max-batch-size int                   Maximum size of the batch sent to the underlying backend. Actual serialized size can be several hundreds of bytes greater. If a batch exceeds this limit, it is split into several batches of smaller size. (default 10485760)
-      --audit-log-truncate-max-event-size int                   Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, andif this doesn't reduce the size enough, event is discarded. (default 102400)
+      --audit-log-truncate-max-event-size int                   Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, and if this doesn't reduce the size enough, event is discarded. (default 102400)
       --audit-log-version string                                API group and version used for serializing audit events written to log. (default "audit.k8s.io/v1beta1")
       --audit-policy-file string                                Path to the file that defines the audit policy configuration. Requires the 'AdvancedAuditing' feature gate. With AdvancedAuditing, a profile is required to enable auditing.
       --audit-webhook-batch-buffer-size int                     The size of the buffer to store events before batching and writing. Only used in batch mode. (default 10000)
@@ -50,7 +50,7 @@ kube-apiserver [flags]
       --audit-webhook-mode string                               Strategy for sending audit events. Blocking indicates sending events should block server responses. Batch causes the backend to buffer and write events asynchronously. Known modes are batch,blocking. (default "batch")
       --audit-webhook-truncate-enabled                          Whether event and batch truncating is enabled.
       --audit-webhook-truncate-max-batch-size int               Maximum size of the batch sent to the underlying backend. Actual serialized size can be several hundreds of bytes greater. If a batch exceeds this limit, it is split into several batches of smaller size. (default 10485760)
-      --audit-webhook-truncate-max-event-size int               Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, andif this doesn't reduce the size enough, event is discarded. (default 102400)
+      --audit-webhook-truncate-max-event-size int               Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, and if this doesn't reduce the size enough, event is discarded. (default 102400)
       --audit-webhook-version string                            API group and version used for serializing audit events written to webhook. (default "audit.k8s.io/v1beta1")
       --authentication-token-webhook-cache-ttl duration         The duration to cache responses from the webhook token authenticator. (default 2m0s)
       --authentication-token-webhook-config-file string         File with webhook configuration for token authentication in kubeconfig format. The API server will query the remote service to determine authentication for bearer tokens.
@@ -96,34 +96,41 @@ kube-apiserver [flags]
                                                                 AdvancedAuditing=true|false (BETA - default=true)
                                                                 AllAlpha=true|false (ALPHA - default=false)
                                                                 AppArmor=true|false (BETA - default=true)
+                                                                AttachVolumeLimit=true|false (ALPHA - default=false)
                                                                 BalanceAttachedNodeVolumes=true|false (ALPHA - default=false)
                                                                 BlockVolume=true|false (ALPHA - default=false)
                                                                 CPUManager=true|false (BETA - default=true)
-                                                                CRIContainerLogRotation=true|false (ALPHA - default=false)
+                                                                CRIContainerLogRotation=true|false (BETA - default=true)
+                                                                CSIBlockVolume=true|false (ALPHA - default=false)
                                                                 CSIPersistentVolume=true|false (BETA - default=true)
                                                                 CustomPodDNS=true|false (BETA - default=true)
-                                                                CustomResourceSubresources=true|false (ALPHA - default=false)
+                                                                CustomResourceSubresources=true|false (BETA - default=true)
                                                                 CustomResourceValidation=true|false (BETA - default=true)
                                                                 DebugContainers=true|false (ALPHA - default=false)
                                                                 DevicePlugins=true|false (BETA - default=true)
-                                                                DynamicKubeletConfig=true|false (ALPHA - default=false)
+                                                                DynamicKubeletConfig=true|false (BETA - default=true)
+                                                                DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                                 EnableEquivalenceClassCache=true|false (ALPHA - default=false)
-                                                                ExpandPersistentVolumes=true|false (ALPHA - default=false)
+                                                                ExpandInUsePersistentVolumes=true|false (ALPHA - default=false)
+                                                                ExpandPersistentVolumes=true|false (BETA - default=true)
                                                                 ExperimentalCriticalPodAnnotation=true|false (ALPHA - default=false)
                                                                 ExperimentalHostUserNamespaceDefaulting=true|false (BETA - default=false)
                                                                 GCERegionalPersistentDisk=true|false (BETA - default=true)
                                                                 HugePages=true|false (BETA - default=true)
                                                                 HyperVContainer=true|false (ALPHA - default=false)
                                                                 Initializers=true|false (ALPHA - default=false)
+                                                                KubeletPluginsWatcher=true|false (ALPHA - default=false)
                                                                 LocalStorageCapacityIsolation=true|false (BETA - default=true)
                                                                 MountContainers=true|false (ALPHA - default=false)
                                                                 MountPropagation=true|false (BETA - default=true)
                                                                 PersistentLocalVolumes=true|false (BETA - default=true)
-                                                                PodPriority=true|false (ALPHA - default=false)
+                                                                PodPriority=true|false (BETA - default=true)
+                                                                PodReadinessGates=true|false (BETA - default=false)
                                                                 PodShareProcessNamespace=true|false (ALPHA - default=false)
                                                                 QOSReserved=true|false (ALPHA - default=false)
                                                                 ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                                 ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
+                                                                ResourceQuotaScopeSelectors=true|false (ALPHA - default=false)
                                                                 RotateKubeletClientCertificate=true|false (BETA - default=true)
                                                                 RotateKubeletServerCertificate=true|false (ALPHA - default=false)
                                                                 RunAsGroup=true|false (ALPHA - default=false)
@@ -132,13 +139,16 @@ kube-apiserver [flags]
                                                                 ServiceProxyAllowExternalIPs=true|false (DEPRECATED - default=false)
                                                                 StorageObjectInUseProtection=true|false (default=true)
                                                                 StreamingProxyRedirects=true|false (BETA - default=true)
-                                                                SupportIPVSProxyMode=true|false (BETA - default=true)
+                                                                SupportIPVSProxyMode=true|false (default=true)
                                                                 SupportPodPidsLimit=true|false (ALPHA - default=false)
+                                                                Sysctls=true|false (BETA - default=true)
                                                                 TaintBasedEvictions=true|false (ALPHA - default=false)
                                                                 TaintNodesByCondition=true|false (ALPHA - default=false)
                                                                 TokenRequest=true|false (ALPHA - default=false)
+                                                                TokenRequestProjection=true|false (ALPHA - default=false)
                                                                 VolumeScheduling=true|false (BETA - default=true)
                                                                 VolumeSubpath=true|false (default=true)
+                                                                VolumeSubpathEnvExpansion=true|false (ALPHA - default=false)
   -h, --help                                                    help for kube-apiserver
       --http2-max-streams-per-connection int                    The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
       --insecure-bind-address ip                                The IP address on which to serve the --insecure-port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). (default 127.0.0.1) (DEPRECATED: This flag will be removed in a future version.)
@@ -176,21 +186,22 @@ kube-apiserver [flags]
       --requestheader-group-headers strings                     List of request headers to inspect for groups. X-Remote-Group is suggested.
       --requestheader-username-headers strings                  List of request headers to inspect for usernames. X-Remote-User is common.
       --runtime-config mapStringString                          A set of key=value pairs that describe runtime configuration that may be passed to apiserver. <group>/<version> (or <version> for the core group) key can be used to turn on/off specific api versions. api/all is special key to control all api versions, be careful setting it false, unless you know what you do. api/legacy is deprecated, we will remove it in the future, so stop using it.
-      --secure-port int                                         The port on which to serve HTTPS with authentication and authorization. If 0, don't serve HTTPS at all. (default 6443)
+      --secure-port int                                         The port on which to serve HTTPS with authentication and authorization.It cannot switched off with 0. (default 6443)
       --service-account-api-audiences strings                   Identifiers of the API. The service account token authenticator will validate that tokens used against the API are bound to at least one of these audiences.
       --service-account-issuer string                           Identifier of the service account token issuer. The issuer will assert this identifier in "iss" claim of issued tokens. This value is a string or URI.
       --service-account-key-file stringArray                    File containing PEM-encoded x509 RSA or ECDSA private or public keys, used to verify ServiceAccount tokens. The specified file can contain multiple keys, and the flag can be specified multiple times with different files. If unspecified, --tls-private-key-file is used. Must be specified when --service-account-signing-key is provided
       --service-account-lookup                                  If true, validate ServiceAccount tokens exist in etcd as part of authentication. (default true)
+      --service-account-max-token-expiration duration           The maximum validity duration of a token created by the service account token issuer. If an otherwise valid TokenRequest with a validity duration larger than this value is requested, a token will be issued with a validity duration of this value.
       --service-account-signing-key-file string                 Path to the file that contains the current private key of the service account token issuer. The issuer will sign issued ID tokens with this private key. (Requires the 'TokenRequest' feature gate.)
       --service-cluster-ip-range ipNet                          A CIDR notation IP range from which to assign service cluster IPs. This must not overlap with any IP ranges assigned to nodes for pods. (default 10.0.0.0/24)
       --service-node-port-range portRange                       A port range to reserve for services with NodePort visibility. Example: '30000-32767'. Inclusive at both ends of the range. (default 30000-32767)
       --storage-backend string                                  The storage backend for persistence. Options: 'etcd3' (default), 'etcd2'.
       --storage-media-type string                               The media type to use to store objects in storage. Some resources or storage backends may only support a specific media type and will ignore this setting. (default "application/vnd.kubernetes.protobuf")
-      --storage-versions string                                 The per-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all known groups. (default "admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1")
+      --storage-versions string                                 The per-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all known groups. (default "admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,coordination.k8s.io/v1beta1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1")
       --target-ram-mb int                                       Memory limit for apiserver in MB (used to configure sizes of caches, etc.)
       --tls-cert-file string                                    File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and --tls-cert-file and --tls-private-key-file are not provided, a self-signed certificate and key are generated for the public address and saved to the directory specified by --cert-dir.
-      --tls-cipher-suites strings                               Comma-separated list of cipher suites for the server. Values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants). If omitted, the default Go cipher suites will be used
-      --tls-min-version string                                  Minimum TLS version supported. Value must match version names from https://golang.org/pkg/crypto/tls/#pkg-constants.
+      --tls-cipher-suites strings                               Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_RC4_128_SHA
+      --tls-min-version string                                  Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12
       --tls-private-key-file string                             File containing the default x509 private key matching --tls-cert-file.
       --tls-sni-cert-key namedCertKey                           A pair of x509 certificate and private key file paths, optionally suffixed with a list of domain patterns which are fully qualified domain names, possibly with prefixed wildcard segments. If no domain patterns are provided, the names of the certificate are extracted. Non-wildcard matches trump over wildcard matches, explicit domain patterns trump over extracted names. For multiple key/certificate pairs, use the --tls-sni-cert-key multiple times. Examples: "example.crt,example.key" or "foo.crt,foo.key:*.foo.com,foo.com". (default [])
       --token-auth-file string                                  If set, the file that will be used to secure the secure port of the API server via token authentication.
@@ -199,4 +210,4 @@ kube-apiserver [flags]
       --watch-cache-sizes strings                               List of watch cache sizes for every resource (pods, nodes, etc.), comma separated. The individual override format: resource[.group]#size, where resource is lowercase plural (no version), group is optional, and size is a number. It takes effect when watch-cache is enabled. Some resources (replicationcontrollers, endpoints, nodes, pods, services, apiservices.apiregistration.k8s.io) have system defaults set by heuristics, others default to default-watch-cache-size
 ```
 
-###### Auto generated by spf13/cobra on 19-May-2018
+###### Auto generated by spf13/cobra on 10-Jul-2018

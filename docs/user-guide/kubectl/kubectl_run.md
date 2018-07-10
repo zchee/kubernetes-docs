@@ -55,13 +55,14 @@ kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=rep
 ### Options
 
 ```
+      --allow-missing-template-keys    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats. (default true)
       --attach                         If true, wait for the Pod to start running, and then attach to the Pod as if 'kubectl attach ...' were called.  Default false, unless '-i/--stdin' is set, in which case the default is true. With '--restart=Never' the exit code of the container process is returned.
       --cascade                        If true, cascade the deletion of the resources managed by this resource (e.g. Pods created by a ReplicationController).  Default true. (default true)
       --command                        If true and extra arguments are present, use them as the 'command' field in the container, rather than the 'args' field which is the default.
       --dry-run                        If true, only print the object that would be sent, without sending it.
       --env stringArray                Environment variables to set in the container
       --expose                         If true, a public, external service is created for the container(s) which are run
-  -f, --filename strings               Filename, directory, or URL to files to use to replace the resource.
+  -f, --filename strings               to use to replace the resource.
       --force                          Only used when grace-period=0. If true, immediately remove resources from API and bypass graceful deletion. Note that immediate deletion of some resources may result in inconsistency or data loss and requires confirmation.
       --generator string               The name of the API generator to use, see http://kubernetes.io/docs/user-guide/kubectl-conventions/#generators for a list.
       --grace-period int               Period of time in seconds given to the resource to terminate gracefully. Ignored if negative. Set to 1 for immediate shutdown. Can only be set to 0 when --force is true (force deletion). (default -1)
@@ -72,7 +73,7 @@ kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=rep
   -l, --labels string                  Comma separated labels to apply to the pod(s). Will override previous values.
       --leave-stdin-open               If the pod is started in interactive mode or with stdin, leave stdin open after the first attach completes. By default, stdin will be closed after the first attach completes.
       --limits string                  The resource requirement limits for this container.  For example, 'cpu=200m,memory=512Mi'.  Note that server side components may assign limits depending on the server configuration, such as limit ranges.
-  -o, --output string                  Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+  -o, --output string                  Output format. One of: json|yaml|name|go-template|go-template-file|templatefile|template|jsonpath|jsonpath-file.
       --overrides string               An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.
       --pod-running-timeout duration   The length of time (like 5s, 2m, or 3h, higher than zero) to wait until at least one pod is running (default 1m0s)
       --port string                    The port that this container exposes.  If --expose is true, this is also the port used by the service that is created.
@@ -89,8 +90,10 @@ kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=rep
       --service-overrides string       An inline JSON override for the generated service object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.  Only used if --expose is true.
       --serviceaccount string          Service account to set in the pod spec
   -i, --stdin                          Keep stdin open on the container(s) in the pod, even if nothing is attached.
+      --template string                Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
       --timeout duration               The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
   -t, --tty                            Allocated a TTY for each container in the pod.
+      --wait                           If true, wait for resources to be gone before returning. This waits for finalizers.
 ```
 
 ### Options inherited from parent commands
@@ -125,4 +128,4 @@ kubectl run NAME --image=image [--env="key=value"] [--port=port] [--replicas=rep
 
 * [kubectl](kubectl.md)	 - kubectl controls the Kubernetes cluster manager
 
-###### Auto generated by spf13/cobra on 19-May-2018
+###### Auto generated by spf13/cobra on 10-Jul-2018

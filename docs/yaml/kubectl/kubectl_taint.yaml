@@ -13,10 +13,14 @@ options:
 - name: all
   default_value: "false"
   usage: Select all nodes in the cluster
+- name: allow-missing-template-keys
+  default_value: "true"
+  usage: |
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=... See custom columns [http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath template [http://kubernetes.io/docs/user-guide/jsonpath].
+    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
 - name: overwrite
   default_value: "false"
   usage: |
@@ -25,6 +29,9 @@ options:
   shorthand: l
   usage: |
     Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2)
+- name: template
+  usage: |
+    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 - name: validate
   default_value: "true"
   usage: |

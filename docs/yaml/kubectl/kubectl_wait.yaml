@@ -1,0 +1,116 @@
+name: wait
+synopsis: |
+  Experimental: Wait for a specific condition on one or many resources.
+description: "Experimental: Wait for a specific condition on one or many resources.
+  \n\nThe command takes multiple resources and waits until the specified condition
+  is seen in the Status field of every given resource. \n\nAlternatively, the command
+  can wait for the given set of resources to be deleted by providing the \"delete\"
+  keyword as the value to the --for flag. \n\nA successful message will be printed
+  to stdout indicating when the specified condition has been met. One can use -o option
+  to change to output destination."
+options:
+- name: all-namespaces
+  default_value: "false"
+  usage: |
+    If present, list the requested object(s) across all namespaces. Namespace in current context is ignored even if specified with --namespace.
+- name: allow-missing-template-keys
+  default_value: "true"
+  usage: |
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+- name: filename
+  shorthand: f
+  default_value: '[]'
+  usage: identifying the resource.
+- name: for
+  usage: 'The condition to wait on: [delete|condition=condition-name].'
+- name: output
+  shorthand: o
+  usage: |
+    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath|jsonpath-file.
+- name: recursive
+  shorthand: R
+  default_value: "true"
+  usage: |
+    Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
+- name: selector
+  shorthand: l
+  usage: |
+    Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2)
+- name: template
+  usage: |
+    Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+- name: timeout
+  default_value: 30s
+  usage: |
+    The length of time to wait before giving up.  Zero means check once and don't wait, negative means wait for a week.
+inherited_options:
+- name: alsologtostderr
+  default_value: "false"
+  usage: log to standard error as well as files
+- name: as
+  usage: Username to impersonate for the operation
+- name: as-group
+  default_value: '[]'
+  usage: |
+    Group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+- name: cache-dir
+  default_value: /Users/zchee/.kube/http-cache
+  usage: Default HTTP cache directory
+- name: certificate-authority
+  usage: Path to a cert file for the certificate authority
+- name: client-certificate
+  usage: Path to a client certificate file for TLS
+- name: client-key
+  usage: Path to a client key file for TLS
+- name: cluster
+  usage: The name of the kubeconfig cluster to use
+- name: context
+  usage: The name of the kubeconfig context to use
+- name: insecure-skip-tls-verify
+  default_value: "false"
+  usage: |
+    If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
+- name: kubeconfig
+  usage: Path to the kubeconfig file to use for CLI requests.
+- name: log-backtrace-at
+  default_value: :0
+  usage: when logging hits line file:N, emit a stack trace
+- name: log-dir
+  usage: If non-empty, write log files in this directory
+- name: logtostderr
+  default_value: "false"
+  usage: log to standard error instead of files
+- name: match-server-version
+  default_value: "false"
+  usage: Require server version to match client version
+- name: namespace
+  shorthand: "n"
+  usage: If present, the namespace scope for this CLI request
+- name: request-timeout
+  default_value: "0"
+  usage: |
+    The length of time to wait before giving up on a single server request. Non-zero values should contain a corresponding time unit (e.g. 1s, 2m, 3h). A value of zero means don't timeout requests.
+- name: server
+  shorthand: s
+  usage: The address and port of the Kubernetes API server
+- name: stderrthreshold
+  default_value: "2"
+  usage: logs at or above this threshold go to stderr
+- name: token
+  usage: Bearer token for authentication to the API server
+- name: user
+  usage: The name of the kubeconfig user to use
+- name: v
+  shorthand: v
+  default_value: "0"
+  usage: log level for V logs
+- name: vmodule
+  usage: |
+    comma-separated list of pattern=N settings for file-filtered logging
+example: "  # Wait for the pod \"busybox1\" to contain the status condition of type
+  \"Ready\".\n  kubectl wait --for=condition=Ready pod/busybox1\n  \n  # Wait for
+  the pod \"busybox1\" to be deleted, with a timeout of 60s, after having issued the
+  \"delete\" command.\n  kubectl delete pod/busybox1\n  kubectl wait --for=delete
+  pod/busybox1 --timeout=60s"
+see_also:
+- kubectl

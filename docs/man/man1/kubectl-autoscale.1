@@ -21,6 +21,10 @@ Looks up a Deployment, ReplicaSet, or ReplicationController by name and creates 
 
 .SH OPTIONS
 .PP
+\fB\-\-allow\-missing\-template\-keys\fP=true
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+
+.PP
 \fB\-\-cpu\-percent\fP=\-1
     The target average CPU utilization (represented as a percent of requested CPU) over all the pods. If it's not specified or negative, a default autoscaling policy will be used.
 
@@ -50,10 +54,7 @@ Looks up a Deployment, ReplicaSet, or ReplicationController by name and creates 
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|wide|name|custom\-columns=...|custom\-columns\-file=...|go\-template=...|go\-template\-file=...|jsonpath=...|jsonpath\-file=... See custom columns [
-\[la]http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns\[ra]], golang template [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]] and jsonpath template [
-\[la]http://kubernetes.io/docs/user-guide/jsonpath\[ra]].
+    Output format. One of: json|yaml|name|go\-template\-file|templatefile|template|go\-template|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-\-record\fP=false
@@ -66,6 +67,11 @@ Looks up a Deployment, ReplicaSet, or ReplicationController by name and creates 
 .PP
 \fB\-\-save\-config\fP=false
     If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+
+.PP
+\fB\-\-template\fP=""
+    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
+\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS

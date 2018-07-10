@@ -70,4 +70,13 @@ inherited_options:
     comma-separated list of pattern=N settings for file-filtered logging
 see_also:
 - kubectl
+- ca-cert
+- extract-context
+- gke-ui
 - helm
+- mtail
+- refresh-tokens
+- rm-standalone-pods
+- ssh
+- svcat
+- view-secret

@@ -182,34 +182,41 @@ APIResponseCompression=true|false (ALPHA \- default=false)
 AdvancedAuditing=true|false (BETA \- default=true)
 AllAlpha=true|false (ALPHA \- default=false)
 AppArmor=true|false (BETA \- default=true)
+AttachVolumeLimit=true|false (ALPHA \- default=false)
 BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
 BlockVolume=true|false (ALPHA \- default=false)
 CPUManager=true|false (BETA \- default=true)
-CRIContainerLogRotation=true|false (ALPHA \- default=false)
+CRIContainerLogRotation=true|false (BETA \- default=true)
+CSIBlockVolume=true|false (ALPHA \- default=false)
 CSIPersistentVolume=true|false (BETA \- default=true)
 CustomPodDNS=true|false (BETA \- default=true)
-CustomResourceSubresources=true|false (ALPHA \- default=false)
+CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
 DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
-DynamicKubeletConfig=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=true)
+DynamicProvisioningScheduling=true|false (ALPHA \- default=false)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
-ExpandPersistentVolumes=true|false (ALPHA \- default=false)
+ExpandInUsePersistentVolumes=true|false (ALPHA \- default=false)
+ExpandPersistentVolumes=true|false (BETA \- default=true)
 ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
 ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
 GCERegionalPersistentDisk=true|false (BETA \- default=true)
 HugePages=true|false (BETA \- default=true)
 HyperVContainer=true|false (ALPHA \- default=false)
 Initializers=true|false (ALPHA \- default=false)
+KubeletPluginsWatcher=true|false (ALPHA \- default=false)
 LocalStorageCapacityIsolation=true|false (BETA \- default=true)
 MountContainers=true|false (ALPHA \- default=false)
 MountPropagation=true|false (BETA \- default=true)
 PersistentLocalVolumes=true|false (BETA \- default=true)
-PodPriority=true|false (ALPHA \- default=false)
+PodPriority=true|false (BETA \- default=true)
+PodReadinessGates=true|false (BETA \- default=false)
 PodShareProcessNamespace=true|false (ALPHA \- default=false)
 QOSReserved=true|false (ALPHA \- default=false)
 ReadOnlyAPIDataVolumes=true|false (DEPRECATED \- default=true)
 ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (ALPHA \- default=false)
 RotateKubeletClientCertificate=true|false (BETA \- default=true)
 RotateKubeletServerCertificate=true|false (ALPHA \- default=false)
 RunAsGroup=true|false (ALPHA \- default=false)
@@ -218,13 +225,16 @@ ServiceNodeExclusion=true|false (ALPHA \- default=false)
 ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
 StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
-SupportIPVSProxyMode=true|false (BETA \- default=true)
+SupportIPVSProxyMode=true|false (default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
+Sysctls=true|false (BETA \- default=true)
 TaintBasedEvictions=true|false (ALPHA \- default=false)
 TaintNodesByCondition=true|false (ALPHA \- default=false)
 TokenRequest=true|false (ALPHA \- default=false)
+TokenRequestProjection=true|false (ALPHA \- default=false)
 VolumeScheduling=true|false (BETA \- default=true)
 VolumeSubpath=true|false (default=true)
+VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-flex\-volume\-plugin\-dir\fP="/usr/libexec/kubernetes/kubelet\-plugins/volume/exec/"
@@ -404,7 +414,7 @@ VolumeSubpath=true|false (default=true)
 
 .PP
 \fB\-\-secure\-port\fP=0
-    The port on which to serve HTTPS with authentication and authorization. If 0, don't serve HTTPS at all.
+    The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
 
 .PP
 \fB\-\-service\-account\-private\-key\-file\fP=""
@@ -424,13 +434,11 @@ VolumeSubpath=true|false (default=true)
 
 .PP
 \fB\-\-tls\-cipher\-suites\fP=[]
-    Comma\-separated list of cipher suites for the server. Values are from tls package constants (
-\[la]https://golang.org/pkg/crypto/tls/#pkg-constants\[ra]). If omitted, the default Go cipher suites will be used
+    Comma\-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_ECDSA\_WITH\_RC4\_128\_SHA,TLS\_ECDHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_RSA\_WITH\_RC4\_128\_SHA,TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_RSA\_WITH\_RC4\_128\_SHA
 
 .PP
 \fB\-\-tls\-min\-version\fP=""
-    Minimum TLS version supported. Value must match version names from 
-\[la]https://golang.org/pkg/crypto/tls/#pkg-constants\[ra].
+    Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12
 
 .PP
 \fB\-\-tls\-private\-key\-file\fP=""

@@ -30,13 +30,11 @@ kubeadm config upload from-flags [flags]
                                              SelfHosting=true|false (ALPHA - default=false)
                                              StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                 help for from-flags
-      --kubernetes-version string            Choose a specific Kubernetes version for the control plane. (default "stable-1.10")
+      --kubernetes-version string            Choose a specific Kubernetes version for the control plane. (default "stable-1.11")
       --node-name string                     Specify the node name.
       --pod-network-cidr string              Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
       --service-cidr string                  Use alternative range of IP address for service VIPs. (default "10.96.0.0/12")
       --service-dns-domain string            Use alternative domain for services, e.g. "myorg.internal". (default "cluster.local")
-      --token string                         The token to use for establishing bidirectional trust between nodes and masters. The format is [a-z0-9]{6}\.[a-z0-9]{16} - e.g. abcdef.0123456789abcdef
-      --token-ttl duration                   The duration before the bootstrap token is automatically deleted. If set to '0', the token will never expire. (default 24h0m0s)
 ```
 
 ### Options inherited from parent commands
