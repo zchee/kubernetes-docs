@@ -26,7 +26,7 @@ controller, and serviceaccounts controller.
 .SH OPTIONS
 .PP
 \fB\-\-address\fP=0.0.0.0
-    DEPRECATED: the IP address on which to listen for the \-\-port port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). See \-\-bind\-address instead.
+    DEPRECATED: see \-\-bind\-address instead.
 
 .PP
 \fB\-\-allocate\-node\-cidrs\fP=false
@@ -194,6 +194,7 @@ CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
 DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
+DryRun=true|false (ALPHA \- default=false)
 DynamicKubeletConfig=true|false (BETA \- default=true)
 DynamicProvisioningScheduling=true|false (ALPHA \- default=false)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
@@ -212,13 +213,13 @@ MountPropagation=true|false (BETA \- default=true)
 PersistentLocalVolumes=true|false (BETA \- default=true)
 PodPriority=true|false (BETA \- default=true)
 PodReadinessGates=true|false (BETA \- default=false)
-PodShareProcessNamespace=true|false (ALPHA \- default=false)
+PodShareProcessNamespace=true|false (BETA \- default=true)
 QOSReserved=true|false (ALPHA \- default=false)
 ReadOnlyAPIDataVolumes=true|false (DEPRECATED \- default=true)
 ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
-ResourceQuotaScopeSelectors=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
 RotateKubeletClientCertificate=true|false (BETA \- default=true)
-RotateKubeletServerCertificate=true|false (ALPHA \- default=false)
+RotateKubeletServerCertificate=true|false (BETA \- default=true)
 RunAsGroup=true|false (ALPHA \- default=false)
 ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
@@ -229,7 +230,7 @@ SupportIPVSProxyMode=true|false (default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
 Sysctls=true|false (BETA \- default=true)
 TaintBasedEvictions=true|false (ALPHA \- default=false)
-TaintNodesByCondition=true|false (ALPHA \- default=false)
+TaintNodesByCondition=true|false (BETA \- default=true)
 TokenRequest=true|false (ALPHA \- default=false)
 TokenRequestProjection=true|false (ALPHA \- default=false)
 VolumeScheduling=true|false (BETA \- default=true)
@@ -358,7 +359,7 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-port\fP=10252
-    DEPRECATED: the port on which to serve HTTP insecurely without authentication and authorization. If 0, don't serve HTTPS at all. See \-\-secure\-port instead.
+    DEPRECATED: see \-\-secure\-port instead.
 
 .PP
 \fB\-\-profiling\fP=false

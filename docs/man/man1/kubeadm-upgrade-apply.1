@@ -27,7 +27,7 @@ Upgrade your Kubernetes cluster to the specified version.
 
 .PP
 \fB\-\-config\fP=""
-    Path to kubeadm config file. WARNING: Usage of a configuration file is experimental!
+    Path to kubeadm config file (WARNING: Usage of a configuration file is experimental)
 
 .PP
 \fB\-\-cri\-socket\fP="/var/run/dockershim.sock"
@@ -43,10 +43,10 @@ Upgrade your Kubernetes cluster to the specified version.
 
 .PP
 \fB\-\-feature\-gates\fP=""
-    A set of key=value pairs that describe feature gates for various features.Options are:
+    A set of key=value pairs that describe feature gates for various features. Options are:
 Auditing=true|false (ALPHA \- default=false)
 CoreDNS=true|false (default=true)
-DynamicKubeletConfig=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=false)
 SelfHosting=true|false (ALPHA \- default=false)
 StoreCertsInSecrets=true|false (ALPHA \- default=false)
 
@@ -63,16 +63,12 @@ StoreCertsInSecrets=true|false (ALPHA \- default=false)
     The maximum amount of time to wait for the control plane pods to be downloaded.
 
 .PP
-\fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
-    The KubeConfig file to use when talking to the cluster.
+\fB\-\-kubeconfig\fP="/usr/local/share/kubectl/config"
+    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
 
 .PP
 \fB\-\-print\-config\fP=false
     Specifies whether the configuration file that will be used in the upgrade should be printed or not.
-
-.PP
-\fB\-\-skip\-preflight\-checks\fP=false
-    Skip preflight checks that normally run before modifying the system.
 
 .PP
 \fB\-y\fP, \fB\-\-yes\fP=false

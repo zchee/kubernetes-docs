@@ -14,7 +14,7 @@ kubeadm config print\-default \- Print the default values for a kubeadm configur
 .SH DESCRIPTION
 .PP
 This command prints the default InitConfiguration object that is used for 'kubeadm init' and 'kubeadm upgrade',
-and the default NodeConfiguration object that is used for 'kubeadm join'.
+and the default JoinConfiguration object that is used for 'kubeadm join'.
 
 .PP
 Note that sensitive values like the Bootstrap Token fields are replaced with silly values like {"abcdef.0123456789abcdef" "" "nil" <nil> [] []} in order to pass validation but
@@ -24,7 +24,7 @@ not perform the real computation for creating a token.
 .SH OPTIONS
 .PP
 \fB\-\-api\-objects\fP=[]
-    A comma\-separated list for API objects to print the default values for. Available values: [InitConfiguration MasterConfiguration NodeConfiguration]. This flag unset means 'print all known objects'
+    A comma\-separated list for API objects to print the default values for. Available values: [InitConfiguration ClusterConfiguration JoinConfiguration KubeProxyConfiguration KubeletConfiguration MasterConfiguration]. This flag unset means 'print all known objects'
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS
@@ -38,7 +38,7 @@ not perform the real computation for creating a token.
 
 .PP
 \fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
-    The KubeConfig file to use when talking to the cluster.
+    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
 
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s

@@ -22,7 +22,7 @@ cluster's shared state through which all other components interact.
 .SH OPTIONS
 .PP
 \fB\-\-address\fP=127.0.0.1
-    DEPRECATED: see \-\-insecure\-bind\-address instead.
+    DEPRECATED: see \-\-bind\-address instead.
 
 .PP
 \fB\-\-admission\-control\fP=[]
@@ -53,15 +53,15 @@ cluster's shared state through which all other components interact.
     The size of the buffer to store events before batching and writing. Only used in batch mode.
 
 .PP
-\fB\-\-audit\-log\-batch\-max\-size\fP=400
+\fB\-\-audit\-log\-batch\-max\-size\fP=1
     The maximum size of a batch. Only used in batch mode.
 
 .PP
-\fB\-\-audit\-log\-batch\-max\-wait\fP=30s
+\fB\-\-audit\-log\-batch\-max\-wait\fP=0s
     The amount of time to wait before force writing the batch that hadn't reached the max size. Only used in batch mode.
 
 .PP
-\fB\-\-audit\-log\-batch\-throttle\-burst\fP=15
+\fB\-\-audit\-log\-batch\-throttle\-burst\fP=0
     Maximum number of requests sent at the same moment if ThrottleQPS was not utilized before. Only used in batch mode.
 
 .PP
@@ -69,7 +69,7 @@ cluster's shared state through which all other components interact.
     Whether batching throttling is enabled. Only used in batch mode.
 
 .PP
-\fB\-\-audit\-log\-batch\-throttle\-qps\fP=10
+\fB\-\-audit\-log\-batch\-throttle\-qps\fP=0
     Maximum average number of batches per second. Only used in batch mode.
 
 .PP
@@ -250,15 +250,15 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-disable\-admission\-plugins\fP=[]
-    admission plugins that should be disabled although they are in the default enabled plugins list. Comma\-delimited list of admission plugins: AlwaysAdmit, AlwaysDeny, AlwaysPullImages, DefaultStorageClass, DefaultTolerationSeconds, DenyEscalatingExec, DenyExecOnPrivileged, EventRateLimit, ExtendedResourceToleration, ImagePolicyWebhook, Initializers, LimitPodHardAntiAffinityTopology, LimitRanger, MutatingAdmissionWebhook, NamespaceAutoProvision, NamespaceExists, NamespaceLifecycle, NodeRestriction, OwnerReferencesPermissionEnforcement, PersistentVolumeClaimResize, PersistentVolumeLabel, PodNodeSelector, PodPreset, PodSecurityPolicy, PodTolerationRestriction, Priority, ResourceQuota, SecurityContextDeny, ServiceAccount, StorageObjectInUseProtection, ValidatingAdmissionWebhook. The order of plugins in this flag does not matter.
+    admission plugins that should be disabled although they are in the default enabled plugins list (NamespaceLifecycle, LimitRanger, ServiceAccount, Priority, DefaultTolerationSeconds, DefaultStorageClass, PersistentVolumeClaimResize, MutatingAdmissionWebhook, ValidatingAdmissionWebhook, ResourceQuota). Comma\-delimited list of admission plugins: AlwaysAdmit, AlwaysDeny, AlwaysPullImages, DefaultStorageClass, DefaultTolerationSeconds, DenyEscalatingExec, DenyExecOnPrivileged, EventRateLimit, ExtendedResourceToleration, ImagePolicyWebhook, Initializers, LimitPodHardAntiAffinityTopology, LimitRanger, MutatingAdmissionWebhook, NamespaceAutoProvision, NamespaceExists, NamespaceLifecycle, NodeRestriction, OwnerReferencesPermissionEnforcement, PersistentVolumeClaimResize, PersistentVolumeLabel, PodNodeSelector, PodPreset, PodSecurityPolicy, PodTolerationRestriction, Priority, ResourceQuota, SecurityContextDeny, ServiceAccount, StorageObjectInUseProtection, ValidatingAdmissionWebhook. The order of plugins in this flag does not matter.
 
 .PP
 \fB\-\-enable\-admission\-plugins\fP=[]
-    admission plugins that should be enabled in addition to default enabled ones. Comma\-delimited list of admission plugins: AlwaysAdmit, AlwaysDeny, AlwaysPullImages, DefaultStorageClass, DefaultTolerationSeconds, DenyEscalatingExec, DenyExecOnPrivileged, EventRateLimit, ExtendedResourceToleration, ImagePolicyWebhook, Initializers, LimitPodHardAntiAffinityTopology, LimitRanger, MutatingAdmissionWebhook, NamespaceAutoProvision, NamespaceExists, NamespaceLifecycle, NodeRestriction, OwnerReferencesPermissionEnforcement, PersistentVolumeClaimResize, PersistentVolumeLabel, PodNodeSelector, PodPreset, PodSecurityPolicy, PodTolerationRestriction, Priority, ResourceQuota, SecurityContextDeny, ServiceAccount, StorageObjectInUseProtection, ValidatingAdmissionWebhook. The order of plugins in this flag does not matter.
+    admission plugins that should be enabled in addition to default enabled ones (NamespaceLifecycle, LimitRanger, ServiceAccount, Priority, DefaultTolerationSeconds, DefaultStorageClass, PersistentVolumeClaimResize, MutatingAdmissionWebhook, ValidatingAdmissionWebhook, ResourceQuota). Comma\-delimited list of admission plugins: AlwaysAdmit, AlwaysDeny, AlwaysPullImages, DefaultStorageClass, DefaultTolerationSeconds, DenyEscalatingExec, DenyExecOnPrivileged, EventRateLimit, ExtendedResourceToleration, ImagePolicyWebhook, Initializers, LimitPodHardAntiAffinityTopology, LimitRanger, MutatingAdmissionWebhook, NamespaceAutoProvision, NamespaceExists, NamespaceLifecycle, NodeRestriction, OwnerReferencesPermissionEnforcement, PersistentVolumeClaimResize, PersistentVolumeLabel, PodNodeSelector, PodPreset, PodSecurityPolicy, PodTolerationRestriction, Priority, ResourceQuota, SecurityContextDeny, ServiceAccount, StorageObjectInUseProtection, ValidatingAdmissionWebhook. The order of plugins in this flag does not matter.
 
 .PP
 \fB\-\-enable\-aggregator\-routing\fP=false
-    Turns on aggregator routing requests to endoints IP rather than cluster IP.
+    Turns on aggregator routing requests to endpoints IP rather than cluster IP.
 
 .PP
 \fB\-\-enable\-bootstrap\-token\-auth\fP=false
@@ -348,6 +348,7 @@ CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
 DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
+DryRun=true|false (ALPHA \- default=false)
 DynamicKubeletConfig=true|false (BETA \- default=true)
 DynamicProvisioningScheduling=true|false (ALPHA \- default=false)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
@@ -366,13 +367,13 @@ MountPropagation=true|false (BETA \- default=true)
 PersistentLocalVolumes=true|false (BETA \- default=true)
 PodPriority=true|false (BETA \- default=true)
 PodReadinessGates=true|false (BETA \- default=false)
-PodShareProcessNamespace=true|false (ALPHA \- default=false)
+PodShareProcessNamespace=true|false (BETA \- default=true)
 QOSReserved=true|false (ALPHA \- default=false)
 ReadOnlyAPIDataVolumes=true|false (DEPRECATED \- default=true)
 ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
-ResourceQuotaScopeSelectors=true|false (ALPHA \- default=false)
+ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
 RotateKubeletClientCertificate=true|false (BETA \- default=true)
-RotateKubeletServerCertificate=true|false (ALPHA \- default=false)
+RotateKubeletServerCertificate=true|false (BETA \- default=true)
 RunAsGroup=true|false (ALPHA \- default=false)
 ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
@@ -383,7 +384,7 @@ SupportIPVSProxyMode=true|false (default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
 Sysctls=true|false (BETA \- default=true)
 TaintBasedEvictions=true|false (ALPHA \- default=false)
-TaintNodesByCondition=true|false (ALPHA \- default=false)
+TaintNodesByCondition=true|false (BETA \- default=true)
 TokenRequest=true|false (ALPHA \- default=false)
 TokenRequestProjection=true|false (ALPHA \- default=false)
 VolumeScheduling=true|false (BETA \- default=true)
@@ -404,7 +405,7 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-insecure\-port\fP=8080
-    The port on which to serve unsecured, unauthenticated access. It is assumed that firewall rules are set up such that this port is not reachable from outside of the cluster and that port 443 on the cluster's public address is proxied to this port. This is performed by nginx in the default setup. Set to zero to disable.
+    The port on which to serve unsecured, unauthenticated access.
 
 .PP
 \fB\-\-kubelet\-certificate\-authority\fP=""
@@ -505,7 +506,7 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-port\fP=8080
-    DEPRECATED: see \-\-insecure\-port instead.
+    DEPRECATED: see \-\-secure\-port instead.
 
 .PP
 \fB\-\-profiling\fP=true
@@ -604,7 +605,7 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     The media type to use to store objects in storage. Some resources or storage backends may only support a specific media type and will ignore this setting.
 
 .PP
-\fB\-\-storage\-versions\fP="admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,componentconfig/v1alpha1,coordination.k8s.io/v1beta1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1"
+\fB\-\-storage\-versions\fP="admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,coordination.k8s.io/v1beta1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1"
     The per\-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all known groups.
 
 .PP

@@ -3,65 +3,26 @@
 
 .SH NAME
 .PP
-kubectl wait \- Experimental: Wait for a specific condition on one or many resources.
+kubectl plugin list \- list all visible plugin executables on a user's PATH
 
 
 .SH SYNOPSIS
 .PP
-\fBkubectl wait\fP [OPTIONS]
+\fBkubectl plugin list\fP [OPTIONS]
 
 
 .SH DESCRIPTION
 .PP
-Experimental: Wait for a specific condition on one or many resources.
+List all available plugin files on a user's PATH.
 
 .PP
-The command takes multiple resources and waits until the specified condition is seen in the Status field of every given resource.
-
-.PP
-Alternatively, the command can wait for the given set of resources to be deleted by providing the "delete" keyword as the value to the \-\-for flag.
-
-.PP
-A successful message will be printed to stdout indicating when the specified condition has been met. One can use \-o option to change to output destination.
+Available plugin files are those that are: \- executable \- anywhere on the user's PATH \- begin with "kubectl\-"
 
 
 .SH OPTIONS
 .PP
-\fB\-\-all\-namespaces\fP=false
-    If present, list the requested object(s) across all namespaces. Namespace in current context is ignored even if specified with \-\-namespace.
-
-.PP
-\fB\-\-allow\-missing\-template\-keys\fP=true
-    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
-
-.PP
-\fB\-f\fP, \fB\-\-filename\fP=[]
-    identifying the resource.
-
-.PP
-\fB\-\-for\fP=""
-    The condition to wait on: [delete|condition=condition\-name].
-
-.PP
-\fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|name|template|go\-template|go\-template\-file|templatefile|jsonpath|jsonpath\-file.
-
-.PP
-\fB\-R\fP, \fB\-\-recursive\fP=true
-    Process the directory used in \-f, \-\-filename recursively. Useful when you want to manage related manifests organized within the same directory.
-
-.PP
-\fB\-l\fP, \fB\-\-selector\fP=""
-    Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. \-l key1=value1,key2=value2)
-
-.PP
-\fB\-\-template\fP=""
-    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
-\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
-
-.PP
-\fB\-\-timeout\fP=30s
-    The length of time to wait before giving up.  Zero means check once and don't wait, negative means wait for a week.
+\fB\-\-name\-only\fP=false
+    If true, display only the binary name of each plugin, rather than its full path
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS
@@ -190,25 +151,9 @@ A successful message will be printed to stdout indicating when the specified con
     comma\-separated list of pattern=N settings for file\-filtered logging
 
 
-.SH EXAMPLE
-.PP
-.RS
-
-.nf
-  # Wait for the pod "busybox1" to contain the status condition of type "Ready".
-  kubectl wait \-\-for=condition=Ready pod/busybox1
-  
-  # Wait for the pod "busybox1" to be deleted, with a timeout of 60s, after having issued the "delete" command.
-  kubectl delete pod/busybox1
-  kubectl wait \-\-for=delete pod/busybox1 \-\-timeout=60s
-
-.fi
-.RE
-
-
 .SH SEE ALSO
 .PP
-\fBkubectl(1)\fP,
+\fBkubectl\-plugin(1)\fP,
 
 
 .SH HISTORY

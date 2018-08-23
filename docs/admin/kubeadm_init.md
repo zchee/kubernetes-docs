@@ -22,7 +22,7 @@ kubeadm init [flags]
       --feature-gates string                 A set of key=value pairs that describe feature gates for various features. Options are:
                                              Auditing=true|false (ALPHA - default=false)
                                              CoreDNS=true|false (default=true)
-                                             DynamicKubeletConfig=true|false (ALPHA - default=false)
+                                             DynamicKubeletConfig=true|false (BETA - default=false)
                                              SelfHosting=true|false (ALPHA - default=false)
                                              StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                 help for init

@@ -1440,6 +1440,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">QueryParameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dryRun</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PathParameter</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">namespace</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">object name and auth scope, such as for teams and projects</p></td>
@@ -1475,6 +1483,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">202</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accepted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../definitions#_v1_status">v1.Status</a></p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
@@ -1655,7 +1668,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="sect2">
-<h3 id="_watch_individual_changes_to_a_list_of_event">watch individual changes to a list of Event</h3>
+<h3 id="_watch_individual_changes_to_a_list_of_event_deprecated_use_the_em_watch_em_parameter_with_a_list_operation_instead">watch individual changes to a list of Event. deprecated: use the <em>watch</em> parameter with a list operation instead.</h3>
 <div class="listingblock">
 <div class="content">
 <pre>GET /apis/events.k8s.io/v1beta1/watch/events</pre>
@@ -1829,7 +1842,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="sect2">
-<h3 id="_watch_individual_changes_to_a_list_of_event_2">watch individual changes to a list of Event</h3>
+<h3 id="_watch_individual_changes_to_a_list_of_event_deprecated_use_the_em_watch_em_parameter_with_a_list_operation_instead_2">watch individual changes to a list of Event. deprecated: use the <em>watch</em> parameter with a list operation instead.</h3>
 <div class="listingblock">
 <div class="content">
 <pre>GET /apis/events.k8s.io/v1beta1/watch/namespaces/{namespace}/events</pre>
@@ -2011,7 +2024,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="sect2">
-<h3 id="_watch_changes_to_an_object_of_kind_event">watch changes to an object of kind Event</h3>
+<h3 id="_watch_changes_to_an_object_of_kind_event_deprecated_use_the_em_watch_em_parameter_with_a_list_operation_instead_filtered_to_a_single_item_with_the_em_fieldselector_em_parameter">watch changes to an object of kind Event. deprecated: use the <em>watch</em> parameter with a list operation instead, filtered to a single item with the <em>fieldSelector</em> parameter.</h3>
 <div class="listingblock">
 <div class="content">
 <pre>GET /apis/events.k8s.io/v1beta1/watch/namespaces/{namespace}/events/{name}</pre>

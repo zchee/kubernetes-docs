@@ -91,7 +91,7 @@ Creates a deployment or job to manage the created container(s).
 
 .PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|name|go\-template|go\-template\-file|templatefile|template|jsonpath|jsonpath\-file.
+    Output format. One of: json|yaml|name|templatefile|template|go\-template|go\-template\-file|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-\-overrides\fP=""
@@ -316,7 +316,7 @@ Creates a deployment or job to manage the created container(s).
   kubectl run hazelcast \-\-image=hazelcast \-\-env="DNS\_DOMAIN=cluster" \-\-env="POD\_NAMESPACE=default"
   
   # Start a single instance of hazelcast and set labels "app=hazelcast" and "env=prod" in the container.
-  kubectl run hazelcast \-\-image=nginx \-\-labels="app=hazelcast,env=prod"
+  kubectl run hazelcast \-\-image=hazelcast \-\-labels="app=hazelcast,env=prod"
   
   # Start a replicated instance of nginx.
   kubectl run nginx \-\-image=nginx \-\-replicas=5

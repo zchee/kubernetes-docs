@@ -5,8 +5,7 @@ Generates all PKI assets necessary to establish the control plane
 
 Generates a self-signed CA to provision identities for each component in the cluster (including nodes) and client certificates to be used by various components. 
 
-If a given certificate and private key pair both exist, kubeadm skips the generation step and
-existing files will be used. 
+If a given certificate and private key pair both exist, kubeadm skips the generation step and existing files will be used. 
 
 Alpha Disclaimer: this command is currently alpha.
 

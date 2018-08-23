@@ -1,11 +1,11 @@
 
-Generates an API server serving certificate and key
+Generates the certificate for serving the kubernetes API
 
 ### Synopsis
 
-Generates the API server serving certificate and key and saves them into apiserver.crt and apiserver.key files. 
+Generates the certificate for serving the kubernetes API, and saves them into apiserver.cert and apiserver.key files.
 
-The certificate includes default subject alternative names and additional SANs provided by the user; default SANs are: <node-name>, <apiserver-advertise-address>, kubernetes, kubernetes.default, kubernetes.default.svc, kubernetes.default.svc. <service-dns-domain>, <internalAPIServerVirtualIP>(that is the .10 address in <service-cidr>address space). 
+Default SANs are kubernetes, kubernetes.default, kubernetes.default.svc, kubernetes.default.svc.cluster.local, 10.96.0.1, 127.0.0.1 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

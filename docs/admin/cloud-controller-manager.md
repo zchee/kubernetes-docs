@@ -14,7 +14,6 @@ cloud-controller-manager [flags]
 ### Options
 
 ```
-      --address ip                               DEPRECATED: the IP address on which to listen for the --port port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). See --bind-address instead. (default 0.0.0.0)
       --allocate-node-cidrs                      Should CIDRs for Pods be allocated and set on the cloud provider.
       --azure-container-registry-config string   Path to the file containing Azure container registry configuration information.
       --bind-address ip                          The IP address on which to listen for the --secure-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank, all interfaces will be used (0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). (default 0.0.0.0)
@@ -46,6 +45,7 @@ cloud-controller-manager [flags]
                                                  CustomResourceValidation=true|false (BETA - default=true)
                                                  DebugContainers=true|false (ALPHA - default=false)
                                                  DevicePlugins=true|false (BETA - default=true)
+                                                 DryRun=true|false (ALPHA - default=false)
                                                  DynamicKubeletConfig=true|false (BETA - default=true)
                                                  DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                  EnableEquivalenceClassCache=true|false (ALPHA - default=false)
@@ -64,13 +64,13 @@ cloud-controller-manager [flags]
                                                  PersistentLocalVolumes=true|false (BETA - default=true)
                                                  PodPriority=true|false (BETA - default=true)
                                                  PodReadinessGates=true|false (BETA - default=false)
-                                                 PodShareProcessNamespace=true|false (ALPHA - default=false)
+                                                 PodShareProcessNamespace=true|false (BETA - default=true)
                                                  QOSReserved=true|false (ALPHA - default=false)
                                                  ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                  ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
-                                                 ResourceQuotaScopeSelectors=true|false (ALPHA - default=false)
+                                                 ResourceQuotaScopeSelectors=true|false (BETA - default=true)
                                                  RotateKubeletClientCertificate=true|false (BETA - default=true)
-                                                 RotateKubeletServerCertificate=true|false (ALPHA - default=false)
+                                                 RotateKubeletServerCertificate=true|false (BETA - default=true)
                                                  RunAsGroup=true|false (ALPHA - default=false)
                                                  ScheduleDaemonSetPods=true|false (ALPHA - default=false)
                                                  ServiceNodeExclusion=true|false (ALPHA - default=false)
@@ -81,7 +81,7 @@ cloud-controller-manager [flags]
                                                  SupportPodPidsLimit=true|false (ALPHA - default=false)
                                                  Sysctls=true|false (BETA - default=true)
                                                  TaintBasedEvictions=true|false (ALPHA - default=false)
-                                                 TaintNodesByCondition=true|false (ALPHA - default=false)
+                                                 TaintNodesByCondition=true|false (BETA - default=true)
                                                  TokenRequest=true|false (ALPHA - default=false)
                                                  TokenRequestProjection=true|false (ALPHA - default=false)
                                                  VolumeScheduling=true|false (BETA - default=true)
@@ -103,7 +103,6 @@ cloud-controller-manager [flags]
       --min-resync-period duration               The resync period in reflectors will be random between MinResyncPeriod and 2*MinResyncPeriod. (default 12h0m0s)
       --node-monitor-period duration             The period for syncing NodeStatus in NodeController. (default 5s)
       --node-status-update-frequency duration    Specifies how often the controller updates nodes' status. (default 5m0s)
-      --port int                                 DEPRECATED: the port on which to serve HTTP insecurely without authentication and authorization. If 0, don't serve HTTPS at all. See --secure-port instead. (default 10253)
       --profiling                                Enable profiling via web interface host:port/debug/pprof/
       --route-reconciliation-period duration     The period for reconciling routes created for Nodes by cloud provider. (default 10s)
       --secure-port int                          The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
@@ -116,4 +115,4 @@ cloud-controller-manager [flags]
       --version version[=true]                   Print version information and quit
 ```
 
-###### Auto generated by spf13/cobra on 10-Jul-2018
+###### Auto generated by spf13/cobra on 23-Aug-2018

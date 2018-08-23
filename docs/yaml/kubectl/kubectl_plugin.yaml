@@ -1,9 +1,9 @@
 name: plugin
-synopsis: Runs a command-line plugin
-description: "Runs a command-line plugin. \n\nPlugins are subcommands that are not
-  part of the major command-line distribution and can even be provided by third-parties.
-  Please refer to the documentation and examples for more information about how to
-  install and write your own plugins."
+synopsis: Provides utilities for interacting with plugins.
+description: "Provides utilities for interacting with plugins. \n\nPlugins provide
+  extended functionality that is not part of the major command-line distribution.
+  Please refer to the documentation and examples for more information about how write
+  your own plugins."
 inherited_options:
 - name: alsologtostderr
   default_value: "false"
@@ -70,13 +70,4 @@ inherited_options:
     comma-separated list of pattern=N settings for file-filtered logging
 see_also:
 - kubectl
-- ca-cert
-- extract-context
-- gke-ui
-- helm
-- mtail
-- refresh-tokens
-- rm-standalone-pods
-- ssh
-- svcat
-- view-secret
+- list

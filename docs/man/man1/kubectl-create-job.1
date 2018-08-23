@@ -30,8 +30,12 @@ Create a job with the specified name.
     The name of the resource to create a Job from (only cronjob is supported).
 
 .PP
+\fB\-\-image\fP=""
+    Image name to run.
+
+.PP
 \fB\-o\fP, \fB\-\-output\fP=""
-    Output format. One of: json|yaml|name|go\-template\-file|templatefile|template|go\-template|jsonpath\-file|jsonpath.
+    Output format. One of: json|yaml|name|templatefile|template|go\-template|go\-template\-file|jsonpath|jsonpath\-file.
 
 .PP
 \fB\-\-save\-config\fP=false
@@ -178,6 +182,12 @@ Create a job with the specified name.
 .RS
 
 .nf
+  # Create a job
+  kubectl create job my\-job \-\-image=busybox
+  
+  # Create a job with command
+  kubectl create job my\-job \-\-image=busybox \-\- date
+  
   # Create a job from a CronJob named "a\-cronjob"
   kubectl create job test\-job \-\-from=cronjob/a\-cronjob
 

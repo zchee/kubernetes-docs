@@ -22,6 +22,6 @@ kubeadm alpha phase bootstrap-token cluster-info [flags]
 ### Options inherited from parent commands
 
 ```
-      --kubeconfig string   The KubeConfig file to use when talking to the cluster (default "/etc/kubernetes/admin.conf")
+      --kubeconfig string   The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
 ```
 

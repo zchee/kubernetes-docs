@@ -3,7 +3,7 @@
 
 .SH NAME
 .PP
-kubeadm alpha phase certs apiserver\-etcd\-client \- Generates a client certificate for the API server to connect to etcd securely
+kubeadm alpha phase certs apiserver\-etcd\-client \- Generates the client apiserver uses to access etcd
 
 
 .SH SYNOPSIS
@@ -13,7 +13,7 @@ kubeadm alpha phase certs apiserver\-etcd\-client \- Generates a client certific
 
 .SH DESCRIPTION
 .PP
-Generates the client certificate for the API server to connect to etcd securely and the respective key, and saves them into apiserver\-etcd\-client.crt and apiserver\-etcd\-client.key files.
+Generates the client apiserver uses to access etcd, and saves them into apiserver\-etcd\-client.cert and apiserver\-etcd\-client.key files.
 
 .PP
 If both files already exist, kubeadm skips the generation step and existing files will be used.

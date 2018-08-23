@@ -33,7 +33,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
+    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath|jsonpath-file.
 - name: output-patch
   default_value: "false"
   usage: Output the patch if the resource is edited.

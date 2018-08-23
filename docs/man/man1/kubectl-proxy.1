@@ -38,6 +38,10 @@ Creates a proxy server or application\-level gateway between localhost and the K
     If true, disable request filtering in the proxy. This is dangerous, and can leave you vulnerable to XSRF attacks, when used with an accessible port.
 
 .PP
+\fB\-\-keepalive\fP=0s
+    keepalive specifies the keep\-alive period for an active network connection. Set to 0 to disable keepalive.
+
+.PP
 \fB\-p\fP, \fB\-\-port\fP=8001
     The port on which to run the proxy. Set to 0 to pick a random port.
 

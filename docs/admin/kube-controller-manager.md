@@ -20,7 +20,6 @@ kube-controller-manager [flags]
 ### Options
 
 ```
-      --address ip                                                        DEPRECATED: the IP address on which to listen for the --port port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). See --bind-address instead. (default 0.0.0.0)
       --allocate-node-cidrs                                               Should CIDRs for Pods be allocated and set on the cloud provider.
       --attach-detach-reconcile-sync-period duration                      The reconciler sync wait time between volume attach detach. This duration must be larger than one second, and increasing this value from the default may allow for volumes to be mismatched with pods. (default 1m0s)
       --azure-container-registry-config string                            Path to the file containing Azure container registry configuration information.
@@ -74,6 +73,7 @@ kube-controller-manager [flags]
                                                                           CustomResourceValidation=true|false (BETA - default=true)
                                                                           DebugContainers=true|false (ALPHA - default=false)
                                                                           DevicePlugins=true|false (BETA - default=true)
+                                                                          DryRun=true|false (ALPHA - default=false)
                                                                           DynamicKubeletConfig=true|false (BETA - default=true)
                                                                           DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                                           EnableEquivalenceClassCache=true|false (ALPHA - default=false)
@@ -92,13 +92,13 @@ kube-controller-manager [flags]
                                                                           PersistentLocalVolumes=true|false (BETA - default=true)
                                                                           PodPriority=true|false (BETA - default=true)
                                                                           PodReadinessGates=true|false (BETA - default=false)
-                                                                          PodShareProcessNamespace=true|false (ALPHA - default=false)
+                                                                          PodShareProcessNamespace=true|false (BETA - default=true)
                                                                           QOSReserved=true|false (ALPHA - default=false)
                                                                           ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                                           ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
-                                                                          ResourceQuotaScopeSelectors=true|false (ALPHA - default=false)
+                                                                          ResourceQuotaScopeSelectors=true|false (BETA - default=true)
                                                                           RotateKubeletClientCertificate=true|false (BETA - default=true)
-                                                                          RotateKubeletServerCertificate=true|false (ALPHA - default=false)
+                                                                          RotateKubeletServerCertificate=true|false (BETA - default=true)
                                                                           RunAsGroup=true|false (ALPHA - default=false)
                                                                           ScheduleDaemonSetPods=true|false (ALPHA - default=false)
                                                                           ServiceNodeExclusion=true|false (ALPHA - default=false)
@@ -109,7 +109,7 @@ kube-controller-manager [flags]
                                                                           SupportPodPidsLimit=true|false (ALPHA - default=false)
                                                                           Sysctls=true|false (BETA - default=true)
                                                                           TaintBasedEvictions=true|false (ALPHA - default=false)
-                                                                          TaintNodesByCondition=true|false (ALPHA - default=false)
+                                                                          TaintNodesByCondition=true|false (BETA - default=true)
                                                                           TokenRequest=true|false (ALPHA - default=false)
                                                                           TokenRequestProjection=true|false (ALPHA - default=false)
                                                                           VolumeScheduling=true|false (BETA - default=true)
@@ -120,7 +120,6 @@ kube-controller-manager [flags]
       --horizontal-pod-autoscaler-downscale-delay duration                The period since last downscale, before another downscale can be performed in horizontal pod autoscaler. (default 5m0s)
       --horizontal-pod-autoscaler-sync-period duration                    The period for syncing the number of pods in horizontal pod autoscaler. (default 30s)
       --horizontal-pod-autoscaler-tolerance float                         The minimum change (from 1.0) in the desired-to-actual metrics ratio for the horizontal pod autoscaler to consider scaling. (default 0.1)
-      --horizontal-pod-autoscaler-upscale-delay duration                  The period since last upscale, before another upscale can be performed in horizontal pod autoscaler. (default 3m0s)
       --horizontal-pod-autoscaler-use-rest-clients                        If set to true, causes the horizontal pod autoscaler controller to use REST clients through the kube-aggregator, instead of using the legacy metrics client through the API server proxy.  This is required for custom metrics support in the horizontal pod autoscaler. (default true)
       --http2-max-streams-per-connection int                              The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
       --insecure-experimental-approve-all-kubelet-csrs-for-group string   This flag does nothing.
@@ -144,7 +143,6 @@ kube-controller-manager [flags]
       --node-monitor-period duration                                      The period for syncing NodeStatus in NodeController. (default 5s)
       --node-startup-grace-period duration                                Amount of time which we allow starting Node to be unresponsive before marking it unhealthy. (default 1m0s)
       --pod-eviction-timeout duration                                     The grace period for deleting pods on failed nodes. (default 5m0s)
-      --port int                                                          DEPRECATED: the port on which to serve HTTP insecurely without authentication and authorization. If 0, don't serve HTTPS at all. See --secure-port instead. (default 10252)
       --profiling                                                         Enable profiling via web interface host:port/debug/pprof/
       --pv-recycler-increment-timeout-nfs int32                           the increment of time added per Gi to ActiveDeadlineSeconds for an NFS scrubber pod (default 30)
       --pv-recycler-minimum-timeout-hostpath int32                        The minimum ActiveDeadlineSeconds to use for a HostPath Recycler pod.  This is for development and testing only and will not work in a multi-node cluster. (default 60)
@@ -171,4 +169,4 @@ kube-controller-manager [flags]
       --version version[=true]                                            Print version information and quit
 ```
 
-###### Auto generated by spf13/cobra on 10-Jul-2018
+###### Auto generated by spf13/cobra on 23-Aug-2018

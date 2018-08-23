@@ -22,7 +22,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath|jsonpath-file.
+    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
 - name: raw
   usage: |
     Raw URI to POST to the server.  Uses the transport specified by the kubeconfig file.

@@ -77,13 +77,14 @@ example: "  # Installing bash completion on macOS using homebrew\n  ## If runnin
   this should start working immediately.\n  ## If you've installed via other means,
   you may need add the completion to your completion directory\n  kubectl completion
   bash > $(brew --prefix)/etc/bash_completion.d/kubectl\n  \n  \n  # Installing bash
-  completion on Linux\n  ## Load the kubectl completion code for bash into the current
-  shell\n  source <(kubectl completion bash)\n  ## Write bash completion code to a
-  file and source if from .bash_profile\n  kubectl completion bash > ~/.kube/completion.bash.inc\n
-  \ printf \"\n  # Kubectl shell completion\n  source '$HOME/.kube/completion.bash.inc'\n
-  \ \" >> $HOME/.bash_profile\n  source $HOME/.bash_profile\n  \n  # Load the kubectl
-  completion code for zsh[1] into the current shell\n  source <(kubectl completion
-  zsh)\n  # Set the kubectl completion code for zsh[1] to autoload on startup\n  kubectl
-  completion zsh > \"${fpath[1]}/_kubectl\""
+  completion on Linux\n  ## If bash-completion is not installed on Linux, please install
+  the 'bash-completion' package\n  ## via your distribution's package manager.\n  ##
+  Load the kubectl completion code for bash into the current shell\n  source <(kubectl
+  completion bash)\n  ## Write bash completion code to a file and source if from .bash_profile\n
+  \ kubectl completion bash > ~/.kube/completion.bash.inc\n  printf \"\n  # Kubectl
+  shell completion\n  source '$HOME/.kube/completion.bash.inc'\n  \" >> $HOME/.bash_profile\n
+  \ source $HOME/.bash_profile\n  \n  # Load the kubectl completion code for zsh[1]
+  into the current shell\n  source <(kubectl completion zsh)\n  # Set the kubectl
+  completion code for zsh[1] to autoload on startup\n  kubectl completion zsh > \"${fpath[1]}/_kubectl\""
 see_also:
 - kubectl

@@ -23,6 +23,6 @@ kubeadm alpha phase kubelet config upload [flags]
 ```
       --config string       Path to kubeadm config file (WARNING: Usage of a configuration file is experimental)
   -h, --help                help for upload
-      --kubeconfig string   The KubeConfig file to use when talking to the cluster (default "/etc/kubernetes/admin.conf")
+      --kubeconfig string   The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
 ```
 

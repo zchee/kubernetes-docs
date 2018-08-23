@@ -27,7 +27,7 @@ kubeadm alpha phase kubelet config enable-dynamic [flags]
 
 ```
   -h, --help                     help for enable-dynamic
-      --kubeconfig string        The KubeConfig file to use when talking to the cluster (default "/etc/kubernetes/admin.conf")
+      --kubeconfig string        The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
       --kubelet-version string   The desired version for the kubelet
       --node-name string         Name of the node that should enable the dynamic kubelet configuration
 ```

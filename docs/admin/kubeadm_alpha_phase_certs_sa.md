@@ -3,9 +3,7 @@ Generates a private key for signing service account tokens along with its public
 
 ### Synopsis
 
-Generates the private key for signing service account tokens along with its public key, and saves them into sa.key and sa.pub files. 
-
-If both files already exist, kubeadm skips the generation step and existing files will be used. 
+Generates the private key for signing service account tokens along with its public key, and saves them into sa.key and sa.pub files. If both files already exist, kubeadm skips the generation step and existing files will be used. 
 
 Alpha Disclaimer: this command is currently alpha.
 

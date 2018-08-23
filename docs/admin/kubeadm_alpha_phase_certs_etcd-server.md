@@ -1,11 +1,11 @@
 
-Generates an etcd serving certificate and key
+Generates the certificate for serving etcd
 
 ### Synopsis
 
-Generates the etcd serving certificate and key and saves them into etcd/server.crt and etcd/server.key files. 
+Generates the certificate for serving etcd, and saves them into etcd/server.cert and etcd/server.key files.
 
-The certificate includes default subject alternative names and additional SANs provided by the user; default SANs are: localhost, 127.0.0.1. 
+Default SANs are localhost, 127.0.0.1, ::1 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

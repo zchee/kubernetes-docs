@@ -30,6 +30,10 @@ In the event an error occurs while updating, a temporary file will be created on
 
 .SH OPTIONS
 .PP
+\fB\-\-allow\-missing\-template\-keys\fP=true
+    If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+
+.PP
 \fB\-f\fP, \fB\-\-filename\fP=[]
     Filename, directory, or URL to files to use to edit the resource
 
@@ -38,8 +42,8 @@ In the event an error occurs while updating, a temporary file will be created on
     If true, the kubectl command applies to uninitialized objects. If explicitly set to false, this flag overrides other flags that make the kubectl commands apply to uninitialized objects, e.g., "\-\-all". Objects with empty metadata.initializers are regarded as initialized.
 
 .PP
-\fB\-o\fP, \fB\-\-output\fP="yaml"
-    Output format. One of: yaml|json.
+\fB\-o\fP, \fB\-\-output\fP=""
+    Output format. One of: json|yaml|name|template|go\-template|go\-template\-file|templatefile|jsonpath\-file|jsonpath.
 
 .PP
 \fB\-\-record\fP=false
@@ -48,6 +52,11 @@ In the event an error occurs while updating, a temporary file will be created on
 .PP
 \fB\-R\fP, \fB\-\-recursive\fP=false
     Process the directory used in \-f, \-\-filename recursively. Useful when you want to manage related manifests organized within the same directory.
+
+.PP
+\fB\-\-template\fP=""
+    Template string or path to template file to use when \-o=go\-template, \-o=go\-template\-file. The template format is golang templates [
+\[la]http://golang.org/pkg/text/template/#pkg-overview\[ra]].
 
 .PP
 \fB\-\-windows\-line\-endings\fP=false

@@ -1,9 +1,9 @@
 
-Generates a client certificate for the API server to connect to etcd securely
+Generates the client apiserver uses to access etcd
 
 ### Synopsis
 
-Generates the client certificate for the API server to connect to etcd securely and the respective key, and saves them into apiserver-etcd-client.crt and apiserver-etcd-client.key files. 
+Generates the client apiserver uses to access etcd, and saves them into apiserver-etcd-client.cert and apiserver-etcd-client.key files. 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

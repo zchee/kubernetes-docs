@@ -1,9 +1,9 @@
 
-Generates a front proxy CA certificate and key for a Kubernetes cluster
+Generates the self-signed CA to provision identities for front proxy
 
 ### Synopsis
 
-Generates the front proxy CA certificate and key and saves them into front-proxy-ca.crt and front-proxy-ca.key files. 
+Generates the self-signed CA to provision identities for front proxy, and saves them into front-proxy-ca.cert and front-proxy-ca.key files. 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

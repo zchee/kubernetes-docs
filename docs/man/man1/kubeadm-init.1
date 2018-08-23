@@ -50,7 +50,7 @@ Run this command in order to set up the Kubernetes master.
     A set of key=value pairs that describe feature gates for various features. Options are:
 Auditing=true|false (ALPHA \- default=false)
 CoreDNS=true|false (default=true)
-DynamicKubeletConfig=true|false (ALPHA \- default=false)
+DynamicKubeletConfig=true|false (BETA \- default=false)
 SelfHosting=true|false (ALPHA \- default=false)
 StoreCertsInSecrets=true|false (ALPHA \- default=false)
 
@@ -77,10 +77,6 @@ StoreCertsInSecrets=true|false (ALPHA \- default=false)
 .PP
 \fB\-\-service\-dns\-domain\fP="cluster.local"
     Use alternative domain for services, e.g. "myorg.internal".
-
-.PP
-\fB\-\-skip\-preflight\-checks\fP=false
-    Skip preflight checks which normally run before modifying the system.
 
 .PP
 \fB\-\-skip\-token\-print\fP=false

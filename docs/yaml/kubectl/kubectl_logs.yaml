@@ -13,9 +13,6 @@ options:
   shorthand: f
   default_value: "false"
   usage: Specify if the logs should be streamed.
-- name: interactive
-  default_value: "false"
-  usage: If true, prompt the user for input when required.
 - name: limit-bytes
   default_value: "0"
   usage: Maximum bytes of logs to return. Defaults to no limit.

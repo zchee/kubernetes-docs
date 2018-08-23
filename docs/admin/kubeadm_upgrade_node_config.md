@@ -25,7 +25,7 @@ kubeadm upgrade node config [flags]
 ```
       --dry-run                  Do not change any state, just output the actions that would be performed.
   -h, --help                     help for config
-      --kubeconfig string        The KubeConfig file to use when talking to the cluster. (default "/etc/kubernetes/kubelet.conf")
+      --kubeconfig string        The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/kubelet.conf")
       --kubelet-version string   The *desired* version for the kubelet after the upgrade.
 ```
 

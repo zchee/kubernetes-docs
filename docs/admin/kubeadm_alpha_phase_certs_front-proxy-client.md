@@ -1,9 +1,9 @@
 
-Generates a front proxy CA client certificate and key for a Kubernetes cluster
+Generates the client for the front proxy
 
 ### Synopsis
 
-Generates the front proxy client certificate and key and saves them into front-proxy-client.crt and front-proxy-client.key files. 
+Generates the client for the front proxy, and saves them into front-proxy-client.cert and front-proxy-client.key files. 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

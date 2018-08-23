@@ -3,7 +3,7 @@
 
 .SH NAME
 .PP
-kubeadm alpha phase certs etcd\-ca \- Generates a self\-signed CA to provision identities for etcd
+kubeadm alpha phase certs etcd\-ca \- Generates the self\-signed CA to provision identities for etcd
 
 
 .SH SYNOPSIS
@@ -13,7 +13,7 @@ kubeadm alpha phase certs etcd\-ca \- Generates a self\-signed CA to provision i
 
 .SH DESCRIPTION
 .PP
-Generates the self\-signed etcd certificate authority and related key and saves them into etcd/ca.crt and etcd/ca.key files.
+Generates the self\-signed CA to provision identities for etcd, and saves them into etcd/ca.cert and etcd/ca.key files.
 
 .PP
 If both files already exist, kubeadm skips the generation step and existing files will be used.

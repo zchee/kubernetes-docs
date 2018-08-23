@@ -16,7 +16,7 @@ kubeadm config images list [flags]
       --feature-gates string        A set of key=value pairs that describe feature gates for various features. Options are:
                                     Auditing=true|false (ALPHA - default=false)
                                     CoreDNS=true|false (default=true)
-                                    DynamicKubeletConfig=true|false (ALPHA - default=false)
+                                    DynamicKubeletConfig=true|false (BETA - default=false)
                                     SelfHosting=true|false (ALPHA - default=false)
                                     StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                        help for list
@@ -26,6 +26,6 @@ kubeadm config images list [flags]
 ### Options inherited from parent commands
 
 ```
-      --kubeconfig string   The KubeConfig file to use when talking to the cluster. (default "/etc/kubernetes/admin.conf")
+      --kubeconfig string   The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
 ```
 

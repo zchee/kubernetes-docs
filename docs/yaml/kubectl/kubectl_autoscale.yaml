@@ -42,7 +42,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath-file|jsonpath.
+    Output format. One of: json|yaml|name|go-template|go-template-file|templatefile|template|jsonpath-file|jsonpath.
 - name: record
   default_value: "false"
   usage: |

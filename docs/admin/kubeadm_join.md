@@ -27,7 +27,7 @@ value of this flag is specified as "<hash-type>:<hex-encoded-value>",
 where the supported hash type is "sha256". The hash is calculated over
 the bytes of the Subject Public Key Info (SPKI) object (as in RFC7469).
 This value is available in the output of "kubeadm init" or can be
-calcuated using standard tools. The --discovery-token-ca-cert-hash flag
+calculated using standard tools. The --discovery-token-ca-cert-hash flag
 may be repeated multiple times to allow more than one public key.
 
 If you cannot know the CA public key hash ahead of time, you can pass
@@ -53,16 +53,18 @@ kubeadm join [flags]
 ### Options
 
 ```
+      --apiserver-advertise-address string            If the node should host a new control plane instance, the IP address the API Server will advertise it's listening on.
       --config string                                 Path to kubeadm config file.
       --cri-socket string                             Specify the CRI socket to connect to. (default "/var/run/dockershim.sock")
       --discovery-file string                         A file or url from which to load cluster information.
-      --discovery-token string                        A token used to validate cluster information fetched from the master.
+      --discovery-token string                        A token used to validate cluster information fetched from the api server.
       --discovery-token-ca-cert-hash strings          For token-based discovery, validate that the root CA public key matches this hash (format: "<type>:<value>").
       --discovery-token-unsafe-skip-ca-verification   For token-based discovery, allow joining without --discovery-token-ca-cert-hash pinning.
+      --experimental-control-plane                    Create a new control plane instance on this node
       --feature-gates string                          A set of key=value pairs that describe feature gates for various features. Options are:
                                                       Auditing=true|false (ALPHA - default=false)
                                                       CoreDNS=true|false (default=true)
-                                                      DynamicKubeletConfig=true|false (ALPHA - default=false)
+                                                      DynamicKubeletConfig=true|false (BETA - default=false)
                                                       SelfHosting=true|false (ALPHA - default=false)
                                                       StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                          help for join

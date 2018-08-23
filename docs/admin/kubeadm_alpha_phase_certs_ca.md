@@ -1,9 +1,9 @@
 
-Generates a self-signed kubernetes CA to provision identities for components of the cluster
+Generates the self-signed kubernetes CA to provision identities for other kuberenets components
 
 ### Synopsis
 
-Generates the self-signed kubernetes certificate authority and related key, and saves them into ca.crt and ca.key files. 
+Generates the self-signed kubernetes CA to provision identities for other kuberenets components, and saves them into ca.cert and ca.key files. 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

@@ -26,15 +26,15 @@ kubeadm alpha phase addon all [flags]
       --apiserver-advertise-address string   The IP address the API server is accessible on
       --apiserver-bind-port int32            The port the API server is accessible on (default 6443)
       --config string                        Path to a kubeadm config file. WARNING: Usage of a configuration file is experimental
-      --feature-gates string                 A set of key=value pairs that describe feature gates for various features.Options are:
+      --feature-gates string                 A set of key=value pairs that describe feature gates for various features. Options are:
                                              Auditing=true|false (ALPHA - default=false)
                                              CoreDNS=true|false (default=true)
-                                             DynamicKubeletConfig=true|false (ALPHA - default=false)
+                                             DynamicKubeletConfig=true|false (BETA - default=false)
                                              SelfHosting=true|false (ALPHA - default=false)
                                              StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                 help for all
       --image-repository string              Choose a container registry to pull control plane images from (default "k8s.gcr.io")
-      --kubeconfig string                    The KubeConfig file to use when talking to the cluster (default "/etc/kubernetes/admin.conf")
+      --kubeconfig string                    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
       --kubernetes-version string            Choose a specific Kubernetes version for the control plane (default "stable-1.11")
       --pod-network-cidr string              The range of IP addresses used for the Pod network
       --service-cidr string                  The range of IP address used for service VIPs (default "10.96.0.0/12")

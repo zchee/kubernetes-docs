@@ -24,10 +24,10 @@ options:
   shorthand: o
   default_value: yaml
   usage: |
-    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath-file|jsonpath.
+    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath|jsonpath-file.
 - name: output-version
   usage: |
-    Output the formatted object with the given group version (for ex: 'extensions/v1beta1').)
+    Output the formatted object with the given group version (for ex: 'extensions/v1beta1').
 - name: recursive
   shorthand: R
   default_value: "false"

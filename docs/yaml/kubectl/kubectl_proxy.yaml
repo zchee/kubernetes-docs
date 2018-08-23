@@ -19,6 +19,10 @@ options:
   default_value: "false"
   usage: |
     If true, disable request filtering in the proxy. This is dangerous, and can leave you vulnerable to XSRF attacks, when used with an accessible port.
+- name: keepalive
+  default_value: 0s
+  usage: |
+    keepalive specifies the keep-alive period for an active network connection. Set to 0 to disable keepalive.
 - name: port
   shorthand: p
   default_value: "8001"

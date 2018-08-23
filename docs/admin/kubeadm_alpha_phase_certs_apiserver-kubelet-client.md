@@ -1,9 +1,9 @@
 
-Generates a client certificate for the API server to connect to the kubelets securely
+Generates the Client certificate for the API server to connect to kubelet
 
 ### Synopsis
 
-Generates the client certificate for the API server to connect to the kubelet securely and the respective key, and saves them into apiserver-kubelet-client.crt and apiserver-kubelet-client.key files. 
+Generates the Client certificate for the API server to connect to kubelet, and saves them into apiserver-kubelet-client.cert and apiserver-kubelet-client.key files. 
 
 If both files already exist, kubeadm skips the generation step and existing files will be used. 
 

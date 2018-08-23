@@ -25,7 +25,7 @@ kubeadm alpha phase kubelet config download [flags]
 
 ```
   -h, --help                     help for download
-      --kubeconfig string        The KubeConfig file to use when talking to the cluster (default "/etc/kubernetes/kubelet.conf")
+      --kubeconfig string        The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/kubelet.conf")
       --kubelet-version string   The desired version for the kubelet. Defaults to being autodetected from 'kubelet --version'.
 ```
 
