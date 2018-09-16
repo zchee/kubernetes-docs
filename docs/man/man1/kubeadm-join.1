@@ -67,6 +67,10 @@ Often times the same token is used for both parts. In this case, the
     If the node should host a new control plane instance, the IP address the API Server will advertise it's listening on.
 
 .PP
+\fB\-\-apiserver\-bind\-port\fP=6443
+    If the node should host a new control plane instance, the port for the API Server to bind to.
+
+.PP
 \fB\-\-config\fP=""
     Path to kubeadm config file.
 
@@ -100,8 +104,6 @@ Often times the same token is used for both parts. In this case, the
 Auditing=true|false (ALPHA \- default=false)
 CoreDNS=true|false (default=true)
 DynamicKubeletConfig=true|false (BETA \- default=false)
-SelfHosting=true|false (ALPHA \- default=false)
-StoreCertsInSecrets=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-ignore\-preflight\-errors\fP=[]
@@ -132,6 +134,10 @@ StoreCertsInSecrets=true|false (ALPHA \- default=false)
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s
     Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
 
 .PP
 \fB\-\-version\fP=false

@@ -74,7 +74,7 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-audit\-log\-format\fP="json"
-    Format of saved audits. "legacy" indicates 1\-line text format for each event. "json" indicates structured json format. Requires the 'AdvancedAuditing' feature gate. Known formats are legacy,json.
+    Format of saved audits. "legacy" indicates 1\-line text format for each event. "json" indicates structured json format. Known formats are legacy,json.
 
 .PP
 \fB\-\-audit\-log\-maxage\fP=0
@@ -114,7 +114,7 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-audit\-policy\-file\fP=""
-    Path to the file that defines the audit policy configuration. Requires the 'AdvancedAuditing' feature gate. With AdvancedAuditing, a profile is required to enable auditing.
+    Path to the file that defines the audit policy configuration.
 
 .PP
 \fB\-\-audit\-webhook\-batch\-buffer\-size\fP=10000
@@ -146,7 +146,7 @@ cluster's shared state through which all other components interact.
 
 .PP
 \fB\-\-audit\-webhook\-config\-file\fP=""
-    Path to a kubeconfig formatted file that defines the audit webhook configuration. Requires the 'AdvancedAuditing' feature gate.
+    Path to a kubeconfig formatted file that defines the audit webhook configuration.
 
 .PP
 \fB\-\-audit\-webhook\-initial\-backoff\fP=10s
@@ -333,16 +333,18 @@ cluster's shared state through which all other components interact.
     A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
 APIListChunking=true|false (BETA \- default=true)
 APIResponseCompression=true|false (ALPHA \- default=false)
-AdvancedAuditing=true|false (BETA \- default=true)
 AllAlpha=true|false (ALPHA \- default=false)
 AppArmor=true|false (BETA \- default=true)
-AttachVolumeLimit=true|false (ALPHA \- default=false)
+AttachVolumeLimit=true|false (BETA \- default=false)
 BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
 BlockVolume=true|false (ALPHA \- default=false)
 CPUManager=true|false (BETA \- default=true)
 CRIContainerLogRotation=true|false (BETA \- default=true)
 CSIBlockVolume=true|false (ALPHA \- default=false)
+CSIDriverRegistry=true|false (ALPHA \- default=false)
+CSINodeInfo=true|false (ALPHA \- default=false)
 CSIPersistentVolume=true|false (BETA \- default=true)
+CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
 CustomPodDNS=true|false (BETA \- default=true)
 CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
@@ -350,7 +352,6 @@ DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
 DryRun=true|false (ALPHA \- default=false)
 DynamicKubeletConfig=true|false (BETA \- default=true)
-DynamicProvisioningScheduling=true|false (ALPHA \- default=false)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
 ExpandInUsePersistentVolumes=true|false (ALPHA \- default=false)
 ExpandPersistentVolumes=true|false (BETA \- default=true)
@@ -360,35 +361,35 @@ GCERegionalPersistentDisk=true|false (BETA \- default=true)
 HugePages=true|false (BETA \- default=true)
 HyperVContainer=true|false (ALPHA \- default=false)
 Initializers=true|false (ALPHA \- default=false)
-KubeletPluginsWatcher=true|false (ALPHA \- default=false)
+KubeletPluginsWatcher=true|false (BETA \- default=true)
 LocalStorageCapacityIsolation=true|false (BETA \- default=true)
 MountContainers=true|false (ALPHA \- default=false)
-MountPropagation=true|false (BETA \- default=true)
+NodeLease=true|false (ALPHA \- default=false)
 PersistentLocalVolumes=true|false (BETA \- default=true)
 PodPriority=true|false (BETA \- default=true)
-PodReadinessGates=true|false (BETA \- default=false)
+PodReadinessGates=true|false (BETA \- default=true)
 PodShareProcessNamespace=true|false (BETA \- default=true)
+ProcMountType=true|false (ALPHA \- default=false)
 QOSReserved=true|false (ALPHA \- default=false)
-ReadOnlyAPIDataVolumes=true|false (DEPRECATED \- default=true)
 ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
 ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
 RotateKubeletClientCertificate=true|false (BETA \- default=true)
 RotateKubeletServerCertificate=true|false (BETA \- default=true)
 RunAsGroup=true|false (ALPHA \- default=false)
-ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
+RuntimeClass=true|false (ALPHA \- default=false)
+SCTPSupport=true|false (ALPHA \- default=false)
+ScheduleDaemonSetPods=true|false (BETA \- default=true)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
-ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
-StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
-SupportIPVSProxyMode=true|false (default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
 Sysctls=true|false (BETA \- default=true)
+TTLAfterFinished=true|false (ALPHA \- default=false)
 TaintBasedEvictions=true|false (ALPHA \- default=false)
 TaintNodesByCondition=true|false (BETA \- default=true)
-TokenRequest=true|false (ALPHA \- default=false)
-TokenRequestProjection=true|false (ALPHA \- default=false)
+TokenRequest=true|false (BETA \- default=true)
+TokenRequestProjection=true|false (BETA \- default=true)
 VolumeScheduling=true|false (BETA \- default=true)
-VolumeSubpath=true|false (default=true)
+VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
 VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
@@ -554,7 +555,7 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-secure\-port\fP=6443
-    The port on which to serve HTTPS with authentication and authorization.It cannot switched off with 0.
+    The port on which to serve HTTPS with authentication and authorization.It cannot be switched off with 0.
 
 .PP
 \fB\-\-service\-account\-api\-audiences\fP=[]

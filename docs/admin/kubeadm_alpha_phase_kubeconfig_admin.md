@@ -22,3 +22,9 @@ kubeadm alpha phase kubeconfig admin [flags]
       --kubeconfig-dir string                The path where to save the kubeconfig file (default "/etc/kubernetes")
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

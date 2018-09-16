@@ -31,3 +31,9 @@ kubeadm alpha phase kubeconfig user [flags]
       --token string                         The token that should be used as the authentication mechanism for this kubeconfig, instead of client certificates
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

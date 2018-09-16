@@ -28,7 +28,7 @@ kube-apiserver [flags]
       --audit-log-batch-throttle-burst int                      Maximum number of requests sent at the same moment if ThrottleQPS was not utilized before. Only used in batch mode.
       --audit-log-batch-throttle-enable                         Whether batching throttling is enabled. Only used in batch mode.
       --audit-log-batch-throttle-qps float32                    Maximum average number of batches per second. Only used in batch mode.
-      --audit-log-format string                                 Format of saved audits. "legacy" indicates 1-line text format for each event. "json" indicates structured json format. Requires the 'AdvancedAuditing' feature gate. Known formats are legacy,json. (default "json")
+      --audit-log-format string                                 Format of saved audits. "legacy" indicates 1-line text format for each event. "json" indicates structured json format. Known formats are legacy,json. (default "json")
       --audit-log-maxage int                                    The maximum number of days to retain old audit log files based on the timestamp encoded in their filename.
       --audit-log-maxbackup int                                 The maximum number of old audit log files to retain.
       --audit-log-maxsize int                                   The maximum size in megabytes of the audit log file before it gets rotated.
@@ -38,14 +38,14 @@ kube-apiserver [flags]
       --audit-log-truncate-max-batch-size int                   Maximum size of the batch sent to the underlying backend. Actual serialized size can be several hundreds of bytes greater. If a batch exceeds this limit, it is split into several batches of smaller size. (default 10485760)
       --audit-log-truncate-max-event-size int                   Maximum size of the audit event sent to the underlying backend. If the size of an event is greater than this number, first request and response are removed, and if this doesn't reduce the size enough, event is discarded. (default 102400)
       --audit-log-version string                                API group and version used for serializing audit events written to log. (default "audit.k8s.io/v1beta1")
-      --audit-policy-file string                                Path to the file that defines the audit policy configuration. Requires the 'AdvancedAuditing' feature gate. With AdvancedAuditing, a profile is required to enable auditing.
+      --audit-policy-file string                                Path to the file that defines the audit policy configuration.
       --audit-webhook-batch-buffer-size int                     The size of the buffer to store events before batching and writing. Only used in batch mode. (default 10000)
       --audit-webhook-batch-max-size int                        The maximum size of a batch. Only used in batch mode. (default 400)
       --audit-webhook-batch-max-wait duration                   The amount of time to wait before force writing the batch that hadn't reached the max size. Only used in batch mode. (default 30s)
       --audit-webhook-batch-throttle-burst int                  Maximum number of requests sent at the same moment if ThrottleQPS was not utilized before. Only used in batch mode. (default 15)
       --audit-webhook-batch-throttle-enable                     Whether batching throttling is enabled. Only used in batch mode. (default true)
       --audit-webhook-batch-throttle-qps float32                Maximum average number of batches per second. Only used in batch mode. (default 10)
-      --audit-webhook-config-file string                        Path to a kubeconfig formatted file that defines the audit webhook configuration. Requires the 'AdvancedAuditing' feature gate.
+      --audit-webhook-config-file string                        Path to a kubeconfig formatted file that defines the audit webhook configuration.
       --audit-webhook-initial-backoff duration                  The amount of time to wait before retrying the first failed request. (default 10s)
       --audit-webhook-mode string                               Strategy for sending audit events. Blocking indicates sending events should block server responses. Batch causes the backend to buffer and write events asynchronously. Known modes are batch,blocking. (default "batch")
       --audit-webhook-truncate-enabled                          Whether event and batch truncating is enabled.
@@ -93,16 +93,18 @@ kube-apiserver [flags]
       --feature-gates mapStringBool                             A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                                 APIListChunking=true|false (BETA - default=true)
                                                                 APIResponseCompression=true|false (ALPHA - default=false)
-                                                                AdvancedAuditing=true|false (BETA - default=true)
                                                                 AllAlpha=true|false (ALPHA - default=false)
                                                                 AppArmor=true|false (BETA - default=true)
-                                                                AttachVolumeLimit=true|false (ALPHA - default=false)
+                                                                AttachVolumeLimit=true|false (BETA - default=false)
                                                                 BalanceAttachedNodeVolumes=true|false (ALPHA - default=false)
                                                                 BlockVolume=true|false (ALPHA - default=false)
                                                                 CPUManager=true|false (BETA - default=true)
                                                                 CRIContainerLogRotation=true|false (BETA - default=true)
                                                                 CSIBlockVolume=true|false (ALPHA - default=false)
+                                                                CSIDriverRegistry=true|false (ALPHA - default=false)
+                                                                CSINodeInfo=true|false (ALPHA - default=false)
                                                                 CSIPersistentVolume=true|false (BETA - default=true)
+                                                                CustomCPUCFSQuotaPeriod=true|false (ALPHA - default=false)
                                                                 CustomPodDNS=true|false (BETA - default=true)
                                                                 CustomResourceSubresources=true|false (BETA - default=true)
                                                                 CustomResourceValidation=true|false (BETA - default=true)
@@ -110,7 +112,6 @@ kube-apiserver [flags]
                                                                 DevicePlugins=true|false (BETA - default=true)
                                                                 DryRun=true|false (ALPHA - default=false)
                                                                 DynamicKubeletConfig=true|false (BETA - default=true)
-                                                                DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                                 EnableEquivalenceClassCache=true|false (ALPHA - default=false)
                                                                 ExpandInUsePersistentVolumes=true|false (ALPHA - default=false)
                                                                 ExpandPersistentVolumes=true|false (BETA - default=true)
@@ -120,35 +121,35 @@ kube-apiserver [flags]
                                                                 HugePages=true|false (BETA - default=true)
                                                                 HyperVContainer=true|false (ALPHA - default=false)
                                                                 Initializers=true|false (ALPHA - default=false)
-                                                                KubeletPluginsWatcher=true|false (ALPHA - default=false)
+                                                                KubeletPluginsWatcher=true|false (BETA - default=true)
                                                                 LocalStorageCapacityIsolation=true|false (BETA - default=true)
                                                                 MountContainers=true|false (ALPHA - default=false)
-                                                                MountPropagation=true|false (BETA - default=true)
+                                                                NodeLease=true|false (ALPHA - default=false)
                                                                 PersistentLocalVolumes=true|false (BETA - default=true)
                                                                 PodPriority=true|false (BETA - default=true)
-                                                                PodReadinessGates=true|false (BETA - default=false)
+                                                                PodReadinessGates=true|false (BETA - default=true)
                                                                 PodShareProcessNamespace=true|false (BETA - default=true)
+                                                                ProcMountType=true|false (ALPHA - default=false)
                                                                 QOSReserved=true|false (ALPHA - default=false)
-                                                                ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                                 ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
                                                                 ResourceQuotaScopeSelectors=true|false (BETA - default=true)
                                                                 RotateKubeletClientCertificate=true|false (BETA - default=true)
                                                                 RotateKubeletServerCertificate=true|false (BETA - default=true)
                                                                 RunAsGroup=true|false (ALPHA - default=false)
-                                                                ScheduleDaemonSetPods=true|false (ALPHA - default=false)
+                                                                RuntimeClass=true|false (ALPHA - default=false)
+                                                                SCTPSupport=true|false (ALPHA - default=false)
+                                                                ScheduleDaemonSetPods=true|false (BETA - default=true)
                                                                 ServiceNodeExclusion=true|false (ALPHA - default=false)
-                                                                ServiceProxyAllowExternalIPs=true|false (DEPRECATED - default=false)
-                                                                StorageObjectInUseProtection=true|false (default=true)
                                                                 StreamingProxyRedirects=true|false (BETA - default=true)
-                                                                SupportIPVSProxyMode=true|false (default=true)
                                                                 SupportPodPidsLimit=true|false (ALPHA - default=false)
                                                                 Sysctls=true|false (BETA - default=true)
+                                                                TTLAfterFinished=true|false (ALPHA - default=false)
                                                                 TaintBasedEvictions=true|false (ALPHA - default=false)
                                                                 TaintNodesByCondition=true|false (BETA - default=true)
-                                                                TokenRequest=true|false (ALPHA - default=false)
-                                                                TokenRequestProjection=true|false (ALPHA - default=false)
+                                                                TokenRequest=true|false (BETA - default=true)
+                                                                TokenRequestProjection=true|false (BETA - default=true)
                                                                 VolumeScheduling=true|false (BETA - default=true)
-                                                                VolumeSubpath=true|false (default=true)
+                                                                VolumeSnapshotDataSource=true|false (ALPHA - default=false)
                                                                 VolumeSubpathEnvExpansion=true|false (ALPHA - default=false)
   -h, --help                                                    help for kube-apiserver
       --http2-max-streams-per-connection int                    The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
@@ -187,7 +188,7 @@ kube-apiserver [flags]
       --requestheader-group-headers strings                     List of request headers to inspect for groups. X-Remote-Group is suggested.
       --requestheader-username-headers strings                  List of request headers to inspect for usernames. X-Remote-User is common.
       --runtime-config mapStringString                          A set of key=value pairs that describe runtime configuration that may be passed to apiserver. <group>/<version> (or <version> for the core group) key can be used to turn on/off specific api versions. api/all is special key to control all api versions, be careful setting it false, unless you know what you do. api/legacy is deprecated, we will remove it in the future, so stop using it.
-      --secure-port int                                         The port on which to serve HTTPS with authentication and authorization.It cannot switched off with 0. (default 6443)
+      --secure-port int                                         The port on which to serve HTTPS with authentication and authorization.It cannot be switched off with 0. (default 6443)
       --service-account-api-audiences strings                   Identifiers of the API. The service account token authenticator will validate that tokens used against the API are bound to at least one of these audiences.
       --service-account-issuer string                           Identifier of the service account token issuer. The issuer will assert this identifier in "iss" claim of issued tokens. This value is a string or URI.
       --service-account-key-file stringArray                    File containing PEM-encoded x509 RSA or ECDSA private or public keys, used to verify ServiceAccount tokens. The specified file can contain multiple keys, and the flag can be specified multiple times with different files. If unspecified, --tls-private-key-file is used. Must be specified when --service-account-signing-key is provided
@@ -198,7 +199,6 @@ kube-apiserver [flags]
       --service-node-port-range portRange                       A port range to reserve for services with NodePort visibility. Example: '30000-32767'. Inclusive at both ends of the range. (default 30000-32767)
       --storage-backend string                                  The storage backend for persistence. Options: 'etcd3' (default), 'etcd2'.
       --storage-media-type string                               The media type to use to store objects in storage. Some resources or storage backends may only support a specific media type and will ignore this setting. (default "application/vnd.kubernetes.protobuf")
-      --storage-versions string                                 The per-group version to store resources in. Specified in the format "group1/version1,group2/version2,...". In the case where objects are moved from one group to the other, you may specify the format "group1=group2/v1beta1,group3/v1beta1,...". You only need to pass the groups you wish to change from the defaults. It defaults to a list of preferred versions of all known groups. (default "admission.k8s.io/v1beta1,admissionregistration.k8s.io/v1beta1,apps/v1,authentication.k8s.io/v1,authorization.k8s.io/v1,autoscaling/v1,batch/v1,certificates.k8s.io/v1beta1,coordination.k8s.io/v1beta1,events.k8s.io/v1beta1,extensions/v1beta1,imagepolicy.k8s.io/v1alpha1,networking.k8s.io/v1,policy/v1beta1,rbac.authorization.k8s.io/v1,scheduling.k8s.io/v1beta1,settings.k8s.io/v1alpha1,storage.k8s.io/v1,v1")
       --target-ram-mb int                                       Memory limit for apiserver in MB (used to configure sizes of caches, etc.)
       --tls-cert-file string                                    File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and --tls-cert-file and --tls-private-key-file are not provided, a self-signed certificate and key are generated for the public address and saved to the directory specified by --cert-dir.
       --tls-cipher-suites strings                               Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_3DES_EDE_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_RC4_128_SHA
@@ -211,4 +211,4 @@ kube-apiserver [flags]
       --watch-cache-sizes strings                               List of watch cache sizes for every resource (pods, nodes, etc.), comma separated. The individual override format: resource[.group]#size, where resource is lowercase plural (no version), group is optional, and size is a number. It takes effect when watch-cache is enabled. Some resources (replicationcontrollers, endpoints, nodes, pods, services, apiservices.apiregistration.k8s.io) have system defaults set by heuristics, others default to default-watch-cache-size
 ```
 
-###### Auto generated by spf13/cobra on 23-Aug-2018
+###### Auto generated by spf13/cobra on 16-Sep-2018

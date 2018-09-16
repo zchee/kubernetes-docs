@@ -22,10 +22,18 @@ kube-controller-manager [flags]
 ```
       --allocate-node-cidrs                                               Should CIDRs for Pods be allocated and set on the cloud provider.
       --attach-detach-reconcile-sync-period duration                      The reconciler sync wait time between volume attach detach. This duration must be larger than one second, and increasing this value from the default may allow for volumes to be mismatched with pods. (default 1m0s)
+      --authentication-kubeconfig string                                  kubeconfig file pointing at the 'core' kubernetes server with enough rights to create tokenaccessreviews.authentication.k8s.io. This is optional. If empty, all token requests are considered to be anonymous and no client CA is looked up in the cluster.
+      --authentication-skip-lookup                                        If false, the authentication-kubeconfig will be used to lookup missing authentication configuration from the cluster.
+      --authentication-token-webhook-cache-ttl duration                   The duration to cache responses from the webhook token authenticator. (default 10s)
+      --authorization-always-allow-paths strings                          A list of HTTP paths to skip during authorization, i.e. these are authorized without contacting the 'core' kubernetes server. (default [/healthz])
+      --authorization-kubeconfig string                                   kubeconfig file pointing at the 'core' kubernetes server with enough rights to create subjectaccessreviews.authorization.k8s.io. This is optional. If empty, all requests not skipped by authorization are forbidden.
+      --authorization-webhook-cache-authorized-ttl duration               The duration to cache 'authorized' responses from the webhook authorizer. (default 10s)
+      --authorization-webhook-cache-unauthorized-ttl duration             The duration to cache 'unauthorized' responses from the webhook authorizer. (default 10s)
       --azure-container-registry-config string                            Path to the file containing Azure container registry configuration information.
       --bind-address ip                                                   The IP address on which to listen for the --secure-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank, all interfaces will be used (0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces). (default 0.0.0.0)
       --cert-dir string                                                   The directory where the TLS certs are located. If --tls-cert-file and --tls-private-key-file are provided, this flag will be ignored. (default "/var/run/kubernetes")
       --cidr-allocator-type string                                        Type of CIDR allocator to use (default "RangeAllocator")
+      --client-ca-file string                                             If set, any request presenting a client certificate signed by one of the authorities in the client-ca-file is authenticated with an identity corresponding to the CommonName of the client certificate.
       --cloud-config string                                               The path to the cloud provider configuration file. Empty string for no configuration file.
       --cloud-provider string                                             The provider for cloud services. Empty string for no provider.
       --cluster-cidr string                                               CIDR Range for Pods in cluster. Requires --allocate-node-cidrs to be true
@@ -40,12 +48,13 @@ kube-controller-manager [flags]
       --concurrent-resource-quota-syncs int32                             The number of resource quotas that are allowed to sync concurrently. Larger number = more responsive quota management, but more CPU (and network) load (default 5)
       --concurrent-service-syncs int32                                    The number of services that are allowed to sync concurrently. Larger number = more responsive service management, but more CPU (and network) load (default 1)
       --concurrent-serviceaccount-token-syncs int32                       The number of service account token objects that are allowed to sync concurrently. Larger number = more responsive token generation, but more CPU (and network) load (default 5)
+      --concurrent-ttl-after-finished-syncs int32                         The number of TTL-after-finished controller workers that are allowed to sync concurrently. (default 5)
       --concurrent_rc_syncs int32                                         The number of replication controllers that are allowed to sync concurrently. Larger number = more responsive replica management, but more CPU (and network) load (default 5)
       --configure-cloud-routes                                            Should CIDRs allocated by allocate-node-cidrs be configured on the cloud provider. (default true)
       --contention-profiling                                              Enable lock contention profiling, if profiling is enabled
       --controller-start-interval duration                                Interval between starting controller managers.
-      --controllers strings                                               A list of controllers to enable.  '*' enables all on-by-default controllers, 'foo' enables the controller named 'foo', '-foo' disables the controller named 'foo'.
-                                                                          All controllers: attachdetach, bootstrapsigner, clusterrole-aggregation, cronjob, csrapproving, csrcleaner, csrsigning, daemonset, deployment, disruption, endpoint, garbagecollector, horizontalpodautoscaling, job, namespace, nodeipam, nodelifecycle, persistentvolume-binder, persistentvolume-expander, podgc, pv-protection, pvc-protection, replicaset, replicationcontroller, resourcequota, route, service, serviceaccount, serviceaccount-token, statefulset, tokencleaner, ttl
+      --controllers strings                                               A list of controllers to enable. '*' enables all on-by-default controllers, 'foo' enables the controller named 'foo', '-foo' disables the controller named 'foo'.
+                                                                          All controllers: attachdetach, bootstrapsigner, clusterrole-aggregation, cronjob, csrapproving, csrcleaner, csrsigning, daemonset, deployment, disruption, endpoint, garbagecollector, horizontalpodautoscaling, job, namespace, nodeipam, nodelifecycle, persistentvolume-binder, persistentvolume-expander, podgc, pv-protection, pvc-protection, replicaset, replicationcontroller, resourcequota, route, service, serviceaccount, serviceaccount-token, statefulset, tokencleaner, ttl, ttl-after-finished
                                                                           Disabled-by-default controllers: bootstrapsigner, tokencleaner (default [*])
       --deployment-controller-sync-period duration                        Period for syncing the deployments. (default 30s)
       --disable-attach-detach-reconcile-sync                              Disable volume attach detach reconciler sync. Disabling this may cause volumes to be mismatched with pods. Use wisely.
@@ -58,16 +67,18 @@ kube-controller-manager [flags]
       --feature-gates mapStringBool                                       A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                                           APIListChunking=true|false (BETA - default=true)
                                                                           APIResponseCompression=true|false (ALPHA - default=false)
-                                                                          AdvancedAuditing=true|false (BETA - default=true)
                                                                           AllAlpha=true|false (ALPHA - default=false)
                                                                           AppArmor=true|false (BETA - default=true)
-                                                                          AttachVolumeLimit=true|false (ALPHA - default=false)
+                                                                          AttachVolumeLimit=true|false (BETA - default=false)
                                                                           BalanceAttachedNodeVolumes=true|false (ALPHA - default=false)
                                                                           BlockVolume=true|false (ALPHA - default=false)
                                                                           CPUManager=true|false (BETA - default=true)
                                                                           CRIContainerLogRotation=true|false (BETA - default=true)
                                                                           CSIBlockVolume=true|false (ALPHA - default=false)
+                                                                          CSIDriverRegistry=true|false (ALPHA - default=false)
+                                                                          CSINodeInfo=true|false (ALPHA - default=false)
                                                                           CSIPersistentVolume=true|false (BETA - default=true)
+                                                                          CustomCPUCFSQuotaPeriod=true|false (ALPHA - default=false)
                                                                           CustomPodDNS=true|false (BETA - default=true)
                                                                           CustomResourceSubresources=true|false (BETA - default=true)
                                                                           CustomResourceValidation=true|false (BETA - default=true)
@@ -75,7 +86,6 @@ kube-controller-manager [flags]
                                                                           DevicePlugins=true|false (BETA - default=true)
                                                                           DryRun=true|false (ALPHA - default=false)
                                                                           DynamicKubeletConfig=true|false (BETA - default=true)
-                                                                          DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                                           EnableEquivalenceClassCache=true|false (ALPHA - default=false)
                                                                           ExpandInUsePersistentVolumes=true|false (ALPHA - default=false)
                                                                           ExpandPersistentVolumes=true|false (BETA - default=true)
@@ -85,42 +95,43 @@ kube-controller-manager [flags]
                                                                           HugePages=true|false (BETA - default=true)
                                                                           HyperVContainer=true|false (ALPHA - default=false)
                                                                           Initializers=true|false (ALPHA - default=false)
-                                                                          KubeletPluginsWatcher=true|false (ALPHA - default=false)
+                                                                          KubeletPluginsWatcher=true|false (BETA - default=true)
                                                                           LocalStorageCapacityIsolation=true|false (BETA - default=true)
                                                                           MountContainers=true|false (ALPHA - default=false)
-                                                                          MountPropagation=true|false (BETA - default=true)
+                                                                          NodeLease=true|false (ALPHA - default=false)
                                                                           PersistentLocalVolumes=true|false (BETA - default=true)
                                                                           PodPriority=true|false (BETA - default=true)
-                                                                          PodReadinessGates=true|false (BETA - default=false)
+                                                                          PodReadinessGates=true|false (BETA - default=true)
                                                                           PodShareProcessNamespace=true|false (BETA - default=true)
+                                                                          ProcMountType=true|false (ALPHA - default=false)
                                                                           QOSReserved=true|false (ALPHA - default=false)
-                                                                          ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                                           ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
                                                                           ResourceQuotaScopeSelectors=true|false (BETA - default=true)
                                                                           RotateKubeletClientCertificate=true|false (BETA - default=true)
                                                                           RotateKubeletServerCertificate=true|false (BETA - default=true)
                                                                           RunAsGroup=true|false (ALPHA - default=false)
-                                                                          ScheduleDaemonSetPods=true|false (ALPHA - default=false)
+                                                                          RuntimeClass=true|false (ALPHA - default=false)
+                                                                          SCTPSupport=true|false (ALPHA - default=false)
+                                                                          ScheduleDaemonSetPods=true|false (BETA - default=true)
                                                                           ServiceNodeExclusion=true|false (ALPHA - default=false)
-                                                                          ServiceProxyAllowExternalIPs=true|false (DEPRECATED - default=false)
-                                                                          StorageObjectInUseProtection=true|false (default=true)
                                                                           StreamingProxyRedirects=true|false (BETA - default=true)
-                                                                          SupportIPVSProxyMode=true|false (default=true)
                                                                           SupportPodPidsLimit=true|false (ALPHA - default=false)
                                                                           Sysctls=true|false (BETA - default=true)
+                                                                          TTLAfterFinished=true|false (ALPHA - default=false)
                                                                           TaintBasedEvictions=true|false (ALPHA - default=false)
                                                                           TaintNodesByCondition=true|false (BETA - default=true)
-                                                                          TokenRequest=true|false (ALPHA - default=false)
-                                                                          TokenRequestProjection=true|false (ALPHA - default=false)
+                                                                          TokenRequest=true|false (BETA - default=true)
+                                                                          TokenRequestProjection=true|false (BETA - default=true)
                                                                           VolumeScheduling=true|false (BETA - default=true)
-                                                                          VolumeSubpath=true|false (default=true)
+                                                                          VolumeSnapshotDataSource=true|false (ALPHA - default=false)
                                                                           VolumeSubpathEnvExpansion=true|false (ALPHA - default=false)
       --flex-volume-plugin-dir string                                     Full path of the directory in which the flex volume plugin should search for additional third party volume plugins. (default "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/")
   -h, --help                                                              help for kube-controller-manager
-      --horizontal-pod-autoscaler-downscale-delay duration                The period since last downscale, before another downscale can be performed in horizontal pod autoscaler. (default 5m0s)
-      --horizontal-pod-autoscaler-sync-period duration                    The period for syncing the number of pods in horizontal pod autoscaler. (default 30s)
+      --horizontal-pod-autoscaler-cpu-initialization-period duration      The period after pod start when CPU samples might be skipped. (default 5m0s)
+      --horizontal-pod-autoscaler-downscale-stabilization duration        The period for which autoscaler will look backwards and not scale down below any recommendation it made during that period. (default 5m0s)
+      --horizontal-pod-autoscaler-initial-readiness-delay duration        The period after pod start during which readiness changes will be treated as initial readiness. (default 30s)
+      --horizontal-pod-autoscaler-sync-period duration                    The period for syncing the number of pods in horizontal pod autoscaler. (default 15s)
       --horizontal-pod-autoscaler-tolerance float                         The minimum change (from 1.0) in the desired-to-actual metrics ratio for the horizontal pod autoscaler to consider scaling. (default 0.1)
-      --horizontal-pod-autoscaler-use-rest-clients                        If set to true, causes the horizontal pod autoscaler controller to use REST clients through the kube-aggregator, instead of using the legacy metrics client through the API server proxy.  This is required for custom metrics support in the horizontal pod autoscaler. (default true)
       --http2-max-streams-per-connection int                              The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
       --insecure-experimental-approve-all-kubelet-csrs-for-group string   This flag does nothing.
       --kube-api-burst int32                                              Burst to use while talking with kubernetes apiserver. (default 30)
@@ -151,11 +162,16 @@ kube-controller-manager [flags]
       --pv-recycler-pod-template-filepath-nfs string                      The file path to a pod definition used as a template for NFS persistent volume recycling
       --pv-recycler-timeout-increment-hostpath int32                      the increment of time added per Gi to ActiveDeadlineSeconds for a HostPath scrubber pod.  This is for development and testing only and will not work in a multi-node cluster. (default 30)
       --pvclaimbinder-sync-period duration                                The period for syncing persistent volumes and persistent volume claims (default 15s)
+      --requestheader-allowed-names strings                               List of client certificate common names to allow to provide usernames in headers specified by --requestheader-username-headers. If empty, any client certificate validated by the authorities in --requestheader-client-ca-file is allowed.
+      --requestheader-client-ca-file string                               Root certificate bundle to use to verify client certificates on incoming requests before trusting usernames in headers specified by --requestheader-username-headers. WARNING: generally do not depend on authorization being already done for incoming requests.
+      --requestheader-extra-headers-prefix strings                        List of request header prefixes to inspect. X-Remote-Extra- is suggested. (default [x-remote-extra-])
+      --requestheader-group-headers strings                               List of request headers to inspect for groups. X-Remote-Group is suggested. (default [x-remote-group])
+      --requestheader-username-headers strings                            List of request headers to inspect for usernames. X-Remote-User is common. (default [x-remote-user])
       --resource-quota-sync-period duration                               The period for syncing quota usage status in the system (default 5m0s)
       --root-ca-file string                                               If set, this root certificate authority will be included in service account's token secret. This must be a valid PEM-encoded CA bundle.
       --route-reconciliation-period duration                              The period for reconciling routes created for Nodes by cloud provider. (default 10s)
       --secondary-node-eviction-rate float32                              Number of nodes per second on which pods are deleted in case of node failure when a zone is unhealthy (see --unhealthy-zone-threshold for definition of healthy/unhealthy). Zone refers to entire cluster in non-multizone clusters. This value is implicitly overridden to 0 if the cluster size is smaller than --large-cluster-size-threshold. (default 0.01)
-      --secure-port int                                                   The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
+      --secure-port int                                                   The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all. (default 10257)
       --service-account-private-key-file string                           Filename containing a PEM-encoded private RSA or ECDSA key used to sign service account tokens.
       --service-cluster-ip-range string                                   CIDR Range for Services in cluster. Requires --allocate-node-cidrs to be true
       --terminated-pod-gc-threshold int32                                 Number of terminated pods that can exist before the terminated pod garbage collector starts deleting terminated pods. If <= 0, the terminated pod garbage collector is disabled. (default 12500)
@@ -169,4 +185,4 @@ kube-controller-manager [flags]
       --version version[=true]                                            Print version information and quit
 ```
 
-###### Auto generated by spf13/cobra on 23-Aug-2018
+###### Auto generated by spf13/cobra on 16-Sep-2018

@@ -30,3 +30,9 @@ kubeadm alpha phase etcd local [flags]
   -h, --help              help for local
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

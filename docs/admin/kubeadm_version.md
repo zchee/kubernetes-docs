@@ -16,3 +16,9 @@ kubeadm version [flags]
   -o, --output string   Output format; available options are 'yaml', 'json' and 'short'
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

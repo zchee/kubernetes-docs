@@ -21,3 +21,9 @@ kubeadm alpha phase controlplane scheduler [flags]
       --scheduler-extra-args mapStringString   A set of extra flags to pass to the Scheduler or override default ones in form of <flagname>=<value>
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

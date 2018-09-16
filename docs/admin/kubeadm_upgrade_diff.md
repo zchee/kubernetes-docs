@@ -20,3 +20,9 @@ kubeadm upgrade diff [version] [flags]
       --scheduler-manifest string            path to scheduler manifest (default "/etc/kubernetes/manifests/kube-scheduler.yaml")
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

@@ -39,6 +39,7 @@ Example usage:
 ### Options
 
 ```
-  -h, --help   help for kubeadm
+  -h, --help            help for kubeadm
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

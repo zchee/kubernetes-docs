@@ -29,3 +29,9 @@ kubeadm alpha phase kubelet config download [flags]
       --kubelet-version string   The desired version for the kubelet. Defaults to being autodetected from 'kubelet --version'.
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

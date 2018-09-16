@@ -17,7 +17,13 @@ kubeadm alpha phase certs apiserver-etcd-client [flags]
 
 ```
       --cert-dir string   The path where to save the certificates (default "/etc/kubernetes/pki")
-      --config string     Path to kubeadm config file. WARNING: Usage of a configuration file is experimental
+      --config string     Path to kubeadm config file (WARNING: Usage of a configuration file is experimental)
   -h, --help              help for apiserver-etcd-client
+```
+
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

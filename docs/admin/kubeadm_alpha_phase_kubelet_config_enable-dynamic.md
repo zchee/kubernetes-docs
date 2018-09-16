@@ -32,3 +32,9 @@ kubeadm alpha phase kubelet config enable-dynamic [flags]
       --node-name string         Name of the node that should enable the dynamic kubelet configuration
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

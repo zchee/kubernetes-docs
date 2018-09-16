@@ -30,3 +30,9 @@ kubeadm alpha phase mark-master [flags]
       --node-name string    The node name to which label and taints should apply
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

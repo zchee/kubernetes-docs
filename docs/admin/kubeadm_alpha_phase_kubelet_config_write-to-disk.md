@@ -25,3 +25,9 @@ kubeadm alpha phase kubelet config write-to-disk [flags]
   -h, --help            help for write-to-disk
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

@@ -25,12 +25,24 @@ Alpha Disclaimer: this command is currently alpha.
     Path to the file containing Azure container registry configuration information.
 
 .PP
+\fB\-\-config\fP=""
+    Path to kubeadm config file (WARNING: Usage of a configuration file is experimental)
+
+.PP
 \fB\-\-google\-json\-key\fP=""
     The Google Cloud Platform Service Account JSON Key to use for authentication.
 
 .PP
+\fB\-\-ignore\-preflight\-errors\fP=[]
+    A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
+
+.PP
 \fB\-\-log\-flush\-frequency\fP=5s
     Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
 
 .PP
 \fB\-\-version\fP=false

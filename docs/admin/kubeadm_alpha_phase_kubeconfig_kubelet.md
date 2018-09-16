@@ -25,3 +25,9 @@ kubeadm alpha phase kubeconfig kubelet [flags]
       --node-name string                     The node name that should be used for the kubelet client certificate
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

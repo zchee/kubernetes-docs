@@ -37,8 +37,6 @@ Alpha Disclaimer: this command is currently alpha.
 Auditing=true|false (ALPHA \- default=false)
 CoreDNS=true|false (default=true)
 DynamicKubeletConfig=true|false (BETA \- default=false)
-SelfHosting=true|false (ALPHA \- default=false)
-StoreCertsInSecrets=true|false (ALPHA \- default=false)
 
 .PP
 \fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
@@ -57,6 +55,10 @@ StoreCertsInSecrets=true|false (ALPHA \- default=false)
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s
     Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-rootfs\fP=""
+    [EXPERIMENTAL] The path to the 'real' host root filesystem.
 
 .PP
 \fB\-\-version\fP=false

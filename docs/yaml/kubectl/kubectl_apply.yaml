@@ -46,7 +46,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
+    Output format. One of: json|yaml|name|go-template|go-template-file|templatefile|template|jsonpath|jsonpath-file.
 - name: overwrite
   default_value: "true"
   usage: |
@@ -72,6 +72,10 @@ options:
   shorthand: l
   usage: |
     Selector (label query) to filter on, supports '=', '==', and '!='.(e.g. -l key1=value1,key2=value2)
+- name: server-dry-run
+  default_value: "false"
+  usage: |
+    If true, request will be sent to server with dry-run flag, which means the modifications won't be persisted. This is an alpha feature and flag.
 - name: template
   usage: |
     Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].

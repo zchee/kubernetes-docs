@@ -22,8 +22,6 @@ kubeadm upgrade apply [version]
                                            Auditing=true|false (ALPHA - default=false)
                                            CoreDNS=true|false (default=true)
                                            DynamicKubeletConfig=true|false (BETA - default=false)
-                                           SelfHosting=true|false (ALPHA - default=false)
-                                           StoreCertsInSecrets=true|false (ALPHA - default=false)
   -f, --force                              Force upgrading although some requirements might not be met. This also implies non-interactive mode.
   -h, --help                               help for apply
       --ignore-preflight-errors strings    A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
@@ -31,5 +29,11 @@ kubeadm upgrade apply [version]
       --kubeconfig string                  The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/usr/local/share/kubectl/config")
       --print-config                       Specifies whether the configuration file that will be used in the upgrade should be printed or not.
   -y, --yes                                Perform the upgrade and do not prompt for confirmation (non-interactive mode).
+```
+
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

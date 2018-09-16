@@ -6,7 +6,7 @@
 
 The Kubernetes network proxy runs on each node. This
 reflects services as defined in the Kubernetes API on each node and can do simple
-TCP and UDP stream forwarding or round robin TCP and UDP forwarding across a set of backends.
+TCP, UDP, and SCTP stream forwarding or round robin TCP, UDP, and SCTP forwarding across a set of backends.
 Service cluster IPs and ports are currently found through Docker-links-compatible
 environment variables specifying ports opened by the service proxy. There is an optional
 addon that provides cluster DNS for these cluster IPs. The user must create a service
@@ -33,16 +33,18 @@ kube-proxy [flags]
       --feature-gates mapStringBool                  A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
                                                      APIListChunking=true|false (BETA - default=true)
                                                      APIResponseCompression=true|false (ALPHA - default=false)
-                                                     AdvancedAuditing=true|false (BETA - default=true)
                                                      AllAlpha=true|false (ALPHA - default=false)
                                                      AppArmor=true|false (BETA - default=true)
-                                                     AttachVolumeLimit=true|false (ALPHA - default=false)
+                                                     AttachVolumeLimit=true|false (BETA - default=false)
                                                      BalanceAttachedNodeVolumes=true|false (ALPHA - default=false)
                                                      BlockVolume=true|false (ALPHA - default=false)
                                                      CPUManager=true|false (BETA - default=true)
                                                      CRIContainerLogRotation=true|false (BETA - default=true)
                                                      CSIBlockVolume=true|false (ALPHA - default=false)
+                                                     CSIDriverRegistry=true|false (ALPHA - default=false)
+                                                     CSINodeInfo=true|false (ALPHA - default=false)
                                                      CSIPersistentVolume=true|false (BETA - default=true)
+                                                     CustomCPUCFSQuotaPeriod=true|false (ALPHA - default=false)
                                                      CustomPodDNS=true|false (BETA - default=true)
                                                      CustomResourceSubresources=true|false (BETA - default=true)
                                                      CustomResourceValidation=true|false (BETA - default=true)
@@ -50,7 +52,6 @@ kube-proxy [flags]
                                                      DevicePlugins=true|false (BETA - default=true)
                                                      DryRun=true|false (ALPHA - default=false)
                                                      DynamicKubeletConfig=true|false (BETA - default=true)
-                                                     DynamicProvisioningScheduling=true|false (ALPHA - default=false)
                                                      EnableEquivalenceClassCache=true|false (ALPHA - default=false)
                                                      ExpandInUsePersistentVolumes=true|false (ALPHA - default=false)
                                                      ExpandPersistentVolumes=true|false (BETA - default=true)
@@ -60,35 +61,35 @@ kube-proxy [flags]
                                                      HugePages=true|false (BETA - default=true)
                                                      HyperVContainer=true|false (ALPHA - default=false)
                                                      Initializers=true|false (ALPHA - default=false)
-                                                     KubeletPluginsWatcher=true|false (ALPHA - default=false)
+                                                     KubeletPluginsWatcher=true|false (BETA - default=true)
                                                      LocalStorageCapacityIsolation=true|false (BETA - default=true)
                                                      MountContainers=true|false (ALPHA - default=false)
-                                                     MountPropagation=true|false (BETA - default=true)
+                                                     NodeLease=true|false (ALPHA - default=false)
                                                      PersistentLocalVolumes=true|false (BETA - default=true)
                                                      PodPriority=true|false (BETA - default=true)
-                                                     PodReadinessGates=true|false (BETA - default=false)
+                                                     PodReadinessGates=true|false (BETA - default=true)
                                                      PodShareProcessNamespace=true|false (BETA - default=true)
+                                                     ProcMountType=true|false (ALPHA - default=false)
                                                      QOSReserved=true|false (ALPHA - default=false)
-                                                     ReadOnlyAPIDataVolumes=true|false (DEPRECATED - default=true)
                                                      ResourceLimitsPriorityFunction=true|false (ALPHA - default=false)
                                                      ResourceQuotaScopeSelectors=true|false (BETA - default=true)
                                                      RotateKubeletClientCertificate=true|false (BETA - default=true)
                                                      RotateKubeletServerCertificate=true|false (BETA - default=true)
                                                      RunAsGroup=true|false (ALPHA - default=false)
-                                                     ScheduleDaemonSetPods=true|false (ALPHA - default=false)
+                                                     RuntimeClass=true|false (ALPHA - default=false)
+                                                     SCTPSupport=true|false (ALPHA - default=false)
+                                                     ScheduleDaemonSetPods=true|false (BETA - default=true)
                                                      ServiceNodeExclusion=true|false (ALPHA - default=false)
-                                                     ServiceProxyAllowExternalIPs=true|false (DEPRECATED - default=false)
-                                                     StorageObjectInUseProtection=true|false (default=true)
                                                      StreamingProxyRedirects=true|false (BETA - default=true)
-                                                     SupportIPVSProxyMode=true|false (default=true)
                                                      SupportPodPidsLimit=true|false (ALPHA - default=false)
                                                      Sysctls=true|false (BETA - default=true)
+                                                     TTLAfterFinished=true|false (ALPHA - default=false)
                                                      TaintBasedEvictions=true|false (ALPHA - default=false)
                                                      TaintNodesByCondition=true|false (BETA - default=true)
-                                                     TokenRequest=true|false (ALPHA - default=false)
-                                                     TokenRequestProjection=true|false (ALPHA - default=false)
+                                                     TokenRequest=true|false (BETA - default=true)
+                                                     TokenRequestProjection=true|false (BETA - default=true)
                                                      VolumeScheduling=true|false (BETA - default=true)
-                                                     VolumeSubpath=true|false (default=true)
+                                                     VolumeSnapshotDataSource=true|false (ALPHA - default=false)
                                                      VolumeSubpathEnvExpansion=true|false (ALPHA - default=false)
       --healthz-bind-address 0.0.0.0                 The IP address and port for the health check server to serve on (set to 0.0.0.0 for all IPv4 interfaces and `::` for all IPv6 interfaces) (default 0.0.0.0:10256)
       --healthz-port int32                           The port to bind the health check server. Use 0 to disable. (default 10256)
@@ -119,4 +120,4 @@ kube-proxy [flags]
       --write-config-to string                       If set, write the default configuration values to this file and exit.
 ```
 
-###### Auto generated by spf13/cobra on 23-Aug-2018
+###### Auto generated by spf13/cobra on 16-Sep-2018

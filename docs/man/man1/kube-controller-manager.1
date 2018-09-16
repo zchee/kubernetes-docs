@@ -41,6 +41,34 @@ controller, and serviceaccounts controller.
     The reconciler sync wait time between volume attach detach. This duration must be larger than one second, and increasing this value from the default may allow for volumes to be mismatched with pods.
 
 .PP
+\fB\-\-authentication\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create tokenaccessreviews.authentication.k8s.io. This is optional. If empty, all token requests are considered to be anonymous and no client CA is looked up in the cluster.
+
+.PP
+\fB\-\-authentication\-skip\-lookup\fP=false
+    If false, the authentication\-kubeconfig will be used to lookup missing authentication configuration from the cluster.
+
+.PP
+\fB\-\-authentication\-token\-webhook\-cache\-ttl\fP=10s
+    The duration to cache responses from the webhook token authenticator.
+
+.PP
+\fB\-\-authorization\-always\-allow\-paths\fP=[/healthz]
+    A list of HTTP paths to skip during authorization, i.e. these are authorized without contacting the 'core' kubernetes server.
+
+.PP
+\fB\-\-authorization\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create subjectaccessreviews.authorization.k8s.io. This is optional. If empty, all requests not skipped by authorization are forbidden.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-authorized\-ttl\fP=10s
+    The duration to cache 'authorized' responses from the webhook authorizer.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-unauthorized\-ttl\fP=10s
+    The duration to cache 'unauthorized' responses from the webhook authorizer.
+
+.PP
 \fB\-\-azure\-container\-registry\-config\fP=""
     Path to the file containing Azure container registry configuration information.
 
@@ -55,6 +83,10 @@ controller, and serviceaccounts controller.
 .PP
 \fB\-\-cidr\-allocator\-type\fP="RangeAllocator"
     Type of CIDR allocator to use
+
+.PP
+\fB\-\-client\-ca\-file\fP=""
+    If set, any request presenting a client certificate signed by one of the authorities in the client\-ca\-file is authenticated with an identity corresponding to the CommonName of the client certificate.
 
 .PP
 \fB\-\-cloud\-config\fP=""
@@ -113,6 +145,10 @@ controller, and serviceaccounts controller.
     The number of service account token objects that are allowed to sync concurrently. Larger number = more responsive token generation, but more CPU (and network) load
 
 .PP
+\fB\-\-concurrent\-ttl\-after\-finished\-syncs\fP=5
+    The number of TTL\-after\-finished controller workers that are allowed to sync concurrently.
+
+.PP
 \fB\-\-concurrent\_rc\_syncs\fP=5
     The number of replication controllers that are allowed to sync concurrently. Larger number = more responsive replica management, but more CPU (and network) load
 
@@ -130,8 +166,8 @@ controller, and serviceaccounts controller.
 
 .PP
 \fB\-\-controllers\fP=[\fI]
-    A list of controllers to enable.  '\fP' enables all on\-by\-default controllers, 'foo' enables the controller named 'foo', '\-foo' disables the controller named 'foo'.
-All controllers: attachdetach, bootstrapsigner, clusterrole\-aggregation, cronjob, csrapproving, csrcleaner, csrsigning, daemonset, deployment, disruption, endpoint, garbagecollector, horizontalpodautoscaling, job, namespace, nodeipam, nodelifecycle, persistentvolume\-binder, persistentvolume\-expander, podgc, pv\-protection, pvc\-protection, replicaset, replicationcontroller, resourcequota, route, service, serviceaccount, serviceaccount\-token, statefulset, tokencleaner, ttl
+    A list of controllers to enable. '\fP' enables all on\-by\-default controllers, 'foo' enables the controller named 'foo', '\-foo' disables the controller named 'foo'.
+All controllers: attachdetach, bootstrapsigner, clusterrole\-aggregation, cronjob, csrapproving, csrcleaner, csrsigning, daemonset, deployment, disruption, endpoint, garbagecollector, horizontalpodautoscaling, job, namespace, nodeipam, nodelifecycle, persistentvolume\-binder, persistentvolume\-expander, podgc, pv\-protection, pvc\-protection, replicaset, replicationcontroller, resourcequota, route, service, serviceaccount, serviceaccount\-token, statefulset, tokencleaner, ttl, ttl\-after\-finished
 Disabled\-by\-default controllers: bootstrapsigner, tokencleaner
 
 .PP
@@ -179,16 +215,18 @@ Disabled\-by\-default controllers: bootstrapsigner, tokencleaner
     A set of key=value pairs that describe feature gates for alpha/experimental features. Options are:
 APIListChunking=true|false (BETA \- default=true)
 APIResponseCompression=true|false (ALPHA \- default=false)
-AdvancedAuditing=true|false (BETA \- default=true)
 AllAlpha=true|false (ALPHA \- default=false)
 AppArmor=true|false (BETA \- default=true)
-AttachVolumeLimit=true|false (ALPHA \- default=false)
+AttachVolumeLimit=true|false (BETA \- default=false)
 BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
 BlockVolume=true|false (ALPHA \- default=false)
 CPUManager=true|false (BETA \- default=true)
 CRIContainerLogRotation=true|false (BETA \- default=true)
 CSIBlockVolume=true|false (ALPHA \- default=false)
+CSIDriverRegistry=true|false (ALPHA \- default=false)
+CSINodeInfo=true|false (ALPHA \- default=false)
 CSIPersistentVolume=true|false (BETA \- default=true)
+CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
 CustomPodDNS=true|false (BETA \- default=true)
 CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
@@ -196,7 +234,6 @@ DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
 DryRun=true|false (ALPHA \- default=false)
 DynamicKubeletConfig=true|false (BETA \- default=true)
-DynamicProvisioningScheduling=true|false (ALPHA \- default=false)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
 ExpandInUsePersistentVolumes=true|false (ALPHA \- default=false)
 ExpandPersistentVolumes=true|false (BETA \- default=true)
@@ -206,35 +243,35 @@ GCERegionalPersistentDisk=true|false (BETA \- default=true)
 HugePages=true|false (BETA \- default=true)
 HyperVContainer=true|false (ALPHA \- default=false)
 Initializers=true|false (ALPHA \- default=false)
-KubeletPluginsWatcher=true|false (ALPHA \- default=false)
+KubeletPluginsWatcher=true|false (BETA \- default=true)
 LocalStorageCapacityIsolation=true|false (BETA \- default=true)
 MountContainers=true|false (ALPHA \- default=false)
-MountPropagation=true|false (BETA \- default=true)
+NodeLease=true|false (ALPHA \- default=false)
 PersistentLocalVolumes=true|false (BETA \- default=true)
 PodPriority=true|false (BETA \- default=true)
-PodReadinessGates=true|false (BETA \- default=false)
+PodReadinessGates=true|false (BETA \- default=true)
 PodShareProcessNamespace=true|false (BETA \- default=true)
+ProcMountType=true|false (ALPHA \- default=false)
 QOSReserved=true|false (ALPHA \- default=false)
-ReadOnlyAPIDataVolumes=true|false (DEPRECATED \- default=true)
 ResourceLimitsPriorityFunction=true|false (ALPHA \- default=false)
 ResourceQuotaScopeSelectors=true|false (BETA \- default=true)
 RotateKubeletClientCertificate=true|false (BETA \- default=true)
 RotateKubeletServerCertificate=true|false (BETA \- default=true)
 RunAsGroup=true|false (ALPHA \- default=false)
-ScheduleDaemonSetPods=true|false (ALPHA \- default=false)
+RuntimeClass=true|false (ALPHA \- default=false)
+SCTPSupport=true|false (ALPHA \- default=false)
+ScheduleDaemonSetPods=true|false (BETA \- default=true)
 ServiceNodeExclusion=true|false (ALPHA \- default=false)
-ServiceProxyAllowExternalIPs=true|false (DEPRECATED \- default=false)
-StorageObjectInUseProtection=true|false (default=true)
 StreamingProxyRedirects=true|false (BETA \- default=true)
-SupportIPVSProxyMode=true|false (default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
 Sysctls=true|false (BETA \- default=true)
+TTLAfterFinished=true|false (ALPHA \- default=false)
 TaintBasedEvictions=true|false (ALPHA \- default=false)
 TaintNodesByCondition=true|false (BETA \- default=true)
-TokenRequest=true|false (ALPHA \- default=false)
-TokenRequestProjection=true|false (ALPHA \- default=false)
+TokenRequest=true|false (BETA \- default=true)
+TokenRequestProjection=true|false (BETA \- default=true)
 VolumeScheduling=true|false (BETA \- default=true)
-VolumeSubpath=true|false (default=true)
+VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
 VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
@@ -246,11 +283,23 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     The Google Cloud Platform Service Account JSON Key to use for authentication.
 
 .PP
+\fB\-\-horizontal\-pod\-autoscaler\-cpu\-initialization\-period\fP=5m0s
+    The period after pod start when CPU samples might be skipped.
+
+.PP
 \fB\-\-horizontal\-pod\-autoscaler\-downscale\-delay\fP=5m0s
     The period since last downscale, before another downscale can be performed in horizontal pod autoscaler.
 
 .PP
-\fB\-\-horizontal\-pod\-autoscaler\-sync\-period\fP=30s
+\fB\-\-horizontal\-pod\-autoscaler\-downscale\-stabilization\fP=5m0s
+    The period for which autoscaler will look backwards and not scale down below any recommendation it made during that period.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-initial\-readiness\-delay\fP=30s
+    The period after pod start during which readiness changes will be treated as initial readiness.
+
+.PP
+\fB\-\-horizontal\-pod\-autoscaler\-sync\-period\fP=15s
     The period for syncing the number of pods in horizontal pod autoscaler.
 
 .PP
@@ -398,6 +447,26 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     The number of retries for initial node registration.  Retry interval equals node\-sync\-period.
 
 .PP
+\fB\-\-requestheader\-allowed\-names\fP=[]
+    List of client certificate common names to allow to provide usernames in headers specified by \-\-requestheader\-username\-headers. If empty, any client certificate validated by the authorities in \-\-requestheader\-client\-ca\-file is allowed.
+
+.PP
+\fB\-\-requestheader\-client\-ca\-file\fP=""
+    Root certificate bundle to use to verify client certificates on incoming requests before trusting usernames in headers specified by \-\-requestheader\-username\-headers. WARNING: generally do not depend on authorization being already done for incoming requests.
+
+.PP
+\fB\-\-requestheader\-extra\-headers\-prefix\fP=[x\-remote\-extra\-]
+    List of request header prefixes to inspect. X\-Remote\-Extra\- is suggested.
+
+.PP
+\fB\-\-requestheader\-group\-headers\fP=[x\-remote\-group]
+    List of request headers to inspect for groups. X\-Remote\-Group is suggested.
+
+.PP
+\fB\-\-requestheader\-username\-headers\fP=[x\-remote\-user]
+    List of request headers to inspect for usernames. X\-Remote\-User is common.
+
+.PP
 \fB\-\-resource\-quota\-sync\-period\fP=5m0s
     The period for syncing quota usage status in the system
 
@@ -414,7 +483,7 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     Number of nodes per second on which pods are deleted in case of node failure when a zone is unhealthy (see \-\-unhealthy\-zone\-threshold for definition of healthy/unhealthy). Zone refers to entire cluster in non\-multizone clusters. This value is implicitly overridden to 0 if the cluster size is smaller than \-\-large\-cluster\-size\-threshold.
 
 .PP
-\fB\-\-secure\-port\fP=0
+\fB\-\-secure\-port\fP=10257
     The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
 
 .PP

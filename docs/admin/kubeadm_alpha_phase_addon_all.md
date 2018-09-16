@@ -30,8 +30,6 @@ kubeadm alpha phase addon all [flags]
                                              Auditing=true|false (ALPHA - default=false)
                                              CoreDNS=true|false (default=true)
                                              DynamicKubeletConfig=true|false (BETA - default=false)
-                                             SelfHosting=true|false (ALPHA - default=false)
-                                             StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                 help for all
       --image-repository string              Choose a container registry to pull control plane images from (default "k8s.gcr.io")
       --kubeconfig string                    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
@@ -39,5 +37,11 @@ kubeadm alpha phase addon all [flags]
       --pod-network-cidr string              The range of IP addresses used for the Pod network
       --service-cidr string                  The range of IP address used for service VIPs (default "10.96.0.0/12")
       --service-dns-domain string            Alternative domain for services (default "cluster.local")
+```
+
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

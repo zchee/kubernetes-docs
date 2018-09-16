@@ -26,7 +26,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath-file|jsonpath.
+    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
 - name: recursive
   shorthand: R
   default_value: "true"

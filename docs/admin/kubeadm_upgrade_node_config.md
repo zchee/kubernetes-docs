@@ -29,3 +29,9 @@ kubeadm upgrade node config [flags]
       --kubelet-version string   The *desired* version for the kubelet after the upgrade.
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

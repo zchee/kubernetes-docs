@@ -19,11 +19,15 @@ kubeadm upgrade plan [version] [flags]
                                            Auditing=true|false (ALPHA - default=false)
                                            CoreDNS=true|false (default=true)
                                            DynamicKubeletConfig=true|false (BETA - default=false)
-                                           SelfHosting=true|false (ALPHA - default=false)
-                                           StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                               help for plan
       --ignore-preflight-errors strings    A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
       --kubeconfig string                  The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/usr/local/share/kubectl/config")
       --print-config                       Specifies whether the configuration file that will be used in the upgrade should be printed or not.
+```
+
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

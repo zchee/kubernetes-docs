@@ -35,12 +35,16 @@ kubeadm alpha phase controlplane all [flags]
                                                         Auditing=true|false (ALPHA - default=false)
                                                         CoreDNS=true|false (default=true)
                                                         DynamicKubeletConfig=true|false (BETA - default=false)
-                                                        SelfHosting=true|false (ALPHA - default=false)
-                                                        StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                            help for all
       --kubernetes-version string                       Choose a specific Kubernetes version for the control plane (default "stable-1.11")
       --pod-network-cidr string                         The range of IP addresses used for the Pod network
       --scheduler-extra-args mapStringString            A set of extra flags to pass to the Scheduler or override default ones in form of <flagname>=<value>
       --service-cidr string                             The range of IP address used for service VIPs (default "10.96.0.0/12")
+```
+
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

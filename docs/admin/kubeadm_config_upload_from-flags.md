@@ -27,8 +27,6 @@ kubeadm config upload from-flags [flags]
                                              Auditing=true|false (ALPHA - default=false)
                                              CoreDNS=true|false (default=true)
                                              DynamicKubeletConfig=true|false (BETA - default=false)
-                                             SelfHosting=true|false (ALPHA - default=false)
-                                             StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                 help for from-flags
       --kubernetes-version string            Choose a specific Kubernetes version for the control plane. (default "stable-1.11")
       --node-name string                     Specify the node name.
@@ -41,5 +39,6 @@ kubeadm config upload from-flags [flags]
 
 ```
       --kubeconfig string   The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
+      --rootfs string       [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

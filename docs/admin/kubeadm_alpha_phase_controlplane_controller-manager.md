@@ -22,3 +22,9 @@ kubeadm alpha phase controlplane controller-manager [flags]
       --pod-network-cidr string                         The range of IP addresses used for the Pod network
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

@@ -54,6 +54,7 @@ kubeadm join [flags]
 
 ```
       --apiserver-advertise-address string            If the node should host a new control plane instance, the IP address the API Server will advertise it's listening on.
+      --apiserver-bind-port int32                     If the node should host a new control plane instance, the port for the API Server to bind to. (default 6443)
       --config string                                 Path to kubeadm config file.
       --cri-socket string                             Specify the CRI socket to connect to. (default "/var/run/dockershim.sock")
       --discovery-file string                         A file or url from which to load cluster information.
@@ -65,12 +66,16 @@ kubeadm join [flags]
                                                       Auditing=true|false (ALPHA - default=false)
                                                       CoreDNS=true|false (default=true)
                                                       DynamicKubeletConfig=true|false (BETA - default=false)
-                                                      SelfHosting=true|false (ALPHA - default=false)
-                                                      StoreCertsInSecrets=true|false (ALPHA - default=false)
   -h, --help                                          help for join
       --ignore-preflight-errors strings               A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
       --node-name string                              Specify the node name.
       --tls-bootstrap-token string                    A token used for TLS bootstrapping.
       --token string                                  Use this token for both discovery-token and tls-bootstrap-token.
+```
+
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

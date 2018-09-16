@@ -24,7 +24,7 @@ options:
   shorthand: o
   default_value: yaml
   usage: |
-    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath|jsonpath-file.
+    Output format. One of: json|yaml|name|templatefile|template|go-template|go-template-file|jsonpath|jsonpath-file.
 - name: output-version
   usage: |
     Output the formatted object with the given group version (for ex: 'extensions/v1beta1').

@@ -53,3 +53,9 @@ source <(kubeadm completion zsh)
   -h, --help   help for completion
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

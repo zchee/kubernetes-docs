@@ -28,3 +28,9 @@ kubeadm alpha phase kubelet write-env-file [flags]
   -h, --help            help for write-env-file
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

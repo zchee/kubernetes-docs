@@ -15,3 +15,9 @@ kubeadm upgrade [flags]
   -h, --help   help for upgrade
 ```
 
+### Options inherited from parent commands
+
+```
+      --rootfs string   [EXPERIMENTAL] The path to the 'real' host root filesystem.
+```
+

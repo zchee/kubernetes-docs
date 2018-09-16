@@ -33,6 +33,10 @@ By default 'rollout status' will watch the status of the latest rollout until it
     Pin to a specific revision for showing its status. Defaults to 0 (last revision).
 
 .PP
+\fB\-\-timeout\fP=0s
+    The length of time to wait before ending watch, zero means never. Any other values should contain a corresponding time unit (e.g. 1s, 2m, 3h).
+
+.PP
 \fB\-w\fP, \fB\-\-watch\fP=true
     Watch the status of the rollout until it's done.
 
