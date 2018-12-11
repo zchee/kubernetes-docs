@@ -32,8 +32,56 @@ through the API as necessary.
     DEPRECATED: the scheduling algorithm provider to use, one of: ClusterAutoscalerProvider | DefaultProvider
 
 .PP
+\fB\-\-alsologtostderr\fP=false
+    log to standard error as well as files
+
+.PP
+\fB\-\-authentication\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create tokenaccessreviews.authentication.k8s.io. This is optional. If empty, all token requests are considered to be anonymous and no client CA is looked up in the cluster.
+
+.PP
+\fB\-\-authentication\-skip\-lookup\fP=false
+    If false, the authentication\-kubeconfig will be used to lookup missing authentication configuration from the cluster.
+
+.PP
+\fB\-\-authentication\-token\-webhook\-cache\-ttl\fP=10s
+    The duration to cache responses from the webhook token authenticator.
+
+.PP
+\fB\-\-authentication\-tolerate\-lookup\-failure\fP=true
+    If true, failures to look up missing authentication configuration from the cluster are not considered fatal. Note that this can result in authentication that treats all requests as anonymous.
+
+.PP
+\fB\-\-authorization\-always\-allow\-paths\fP=[/healthz]
+    A list of HTTP paths to skip during authorization, i.e. these are authorized without contacting the 'core' kubernetes server.
+
+.PP
+\fB\-\-authorization\-kubeconfig\fP=""
+    kubeconfig file pointing at the 'core' kubernetes server with enough rights to create subjectaccessreviews.authorization.k8s.io. This is optional. If empty, all requests not skipped by authorization are forbidden.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-authorized\-ttl\fP=10s
+    The duration to cache 'authorized' responses from the webhook authorizer.
+
+.PP
+\fB\-\-authorization\-webhook\-cache\-unauthorized\-ttl\fP=10s
+    The duration to cache 'unauthorized' responses from the webhook authorizer.
+
+.PP
 \fB\-\-azure\-container\-registry\-config\fP=""
     Path to the file containing Azure container registry configuration information.
+
+.PP
+\fB\-\-bind\-address\fP=0.0.0.0
+    The IP address on which to listen for the \-\-secure\-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank, all interfaces will be used (0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
+
+.PP
+\fB\-\-cert\-dir\fP=""
+    The directory where the TLS certs are located. If \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are provided, this flag will be ignored.
+
+.PP
+\fB\-\-client\-ca\-file\fP=""
+    If set, any request presenting a client certificate signed by one of the authorities in the client\-ca\-file is authenticated with an identity corresponding to the CommonName of the client certificate.
 
 .PP
 \fB\-\-config\fP=""
@@ -54,33 +102,34 @@ APIListChunking=true|false (BETA \- default=true)
 APIResponseCompression=true|false (ALPHA \- default=false)
 AllAlpha=true|false (ALPHA \- default=false)
 AppArmor=true|false (BETA \- default=true)
-AttachVolumeLimit=true|false (BETA \- default=false)
+AttachVolumeLimit=true|false (BETA \- default=true)
 BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
-BlockVolume=true|false (ALPHA \- default=false)
+BlockVolume=true|false (BETA \- default=true)
+BoundServiceAccountTokenVolume=true|false (ALPHA \- default=false)
 CPUManager=true|false (BETA \- default=true)
 CRIContainerLogRotation=true|false (BETA \- default=true)
 CSIBlockVolume=true|false (ALPHA \- default=false)
 CSIDriverRegistry=true|false (ALPHA \- default=false)
 CSINodeInfo=true|false (ALPHA \- default=false)
-CSIPersistentVolume=true|false (BETA \- default=true)
 CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
 CustomPodDNS=true|false (BETA \- default=true)
 CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
+CustomResourceWebhookConversion=true|false (ALPHA \- default=false)
 DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
-DryRun=true|false (ALPHA \- default=false)
+DryRun=true|false (BETA \- default=true)
+DynamicAuditing=true|false (ALPHA \- default=false)
 DynamicKubeletConfig=true|false (BETA \- default=true)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
 ExpandInUsePersistentVolumes=true|false (ALPHA \- default=false)
 ExpandPersistentVolumes=true|false (BETA \- default=true)
 ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
 ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
-GCERegionalPersistentDisk=true|false (BETA \- default=true)
 HugePages=true|false (BETA \- default=true)
 HyperVContainer=true|false (ALPHA \- default=false)
 Initializers=true|false (ALPHA \- default=false)
-KubeletPluginsWatcher=true|false (BETA \- default=true)
+KubeletPodResources=true|false (ALPHA \- default=false)
 LocalStorageCapacityIsolation=true|false (BETA \- default=true)
 MountContainers=true|false (ALPHA \- default=false)
 NodeLease=true|false (ALPHA \- default=false)
@@ -103,21 +152,25 @@ StreamingProxyRedirects=true|false (BETA \- default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
 Sysctls=true|false (BETA \- default=true)
 TTLAfterFinished=true|false (ALPHA \- default=false)
-TaintBasedEvictions=true|false (ALPHA \- default=false)
+TaintBasedEvictions=true|false (BETA \- default=true)
 TaintNodesByCondition=true|false (BETA \- default=true)
 TokenRequest=true|false (BETA \- default=true)
 TokenRequestProjection=true|false (BETA \- default=true)
-VolumeScheduling=true|false (BETA \- default=true)
+ValidateProxyRedirects=true|false (ALPHA \- default=false)
 VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
 VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
-
-.PP
 \fB\-\-hard\-pod\-affinity\-symmetric\-weight\fP=1
     RequiredDuringScheduling affinity is not symmetric, but there is an implicit PreferredDuringScheduling affinity rule corresponding to every RequiredDuringScheduling affinity rule. \-\-hard\-pod\-affinity\-symmetric\-weight represents the weight of implicit PreferredDuringScheduling affinity rule. Must be in the range 0\-100.
+
+.PP
+\fB\-h\fP, \fB\-\-help\fP=false
+    help for kube\-scheduler
+
+.PP
+\fB\-\-http2\-max\-streams\-per\-connection\fP=0
+    The limit that the server gives to clients for the maximum number of streams in an HTTP/2 connection. Zero means to use golang's default.
 
 .PP
 \fB\-\-kube\-api\-burst\fP=100
@@ -164,8 +217,24 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     DEPRECATED: define the namespace of the lock object.
 
 .PP
+\fB\-\-log\-backtrace\-at\fP=:0
+    when logging hits line file:N, emit a stack trace
+
+.PP
+\fB\-\-log\-dir\fP=""
+    If non\-empty, write log files in this directory
+
+.PP
+\fB\-\-log\-file\fP=""
+    If non\-empty, use this log file
+
+.PP
 \fB\-\-log\-flush\-frequency\fP=5s
     Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-logtostderr\fP=true
+    log to standard error instead of files
 
 .PP
 \fB\-\-master\fP=""
@@ -192,16 +261,76 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     DEPRECATED: enable profiling via web interface host:port/debug/pprof/
 
 .PP
+\fB\-\-requestheader\-allowed\-names\fP=[]
+    List of client certificate common names to allow to provide usernames in headers specified by \-\-requestheader\-username\-headers. If empty, any client certificate validated by the authorities in \-\-requestheader\-client\-ca\-file is allowed.
+
+.PP
+\fB\-\-requestheader\-client\-ca\-file\fP=""
+    Root certificate bundle to use to verify client certificates on incoming requests before trusting usernames in headers specified by \-\-requestheader\-username\-headers. WARNING: generally do not depend on authorization being already done for incoming requests.
+
+.PP
+\fB\-\-requestheader\-extra\-headers\-prefix\fP=[x\-remote\-extra\-]
+    List of request header prefixes to inspect. X\-Remote\-Extra\- is suggested.
+
+.PP
+\fB\-\-requestheader\-group\-headers\fP=[x\-remote\-group]
+    List of request headers to inspect for groups. X\-Remote\-Group is suggested.
+
+.PP
+\fB\-\-requestheader\-username\-headers\fP=[x\-remote\-user]
+    List of request headers to inspect for usernames. X\-Remote\-User is common.
+
+.PP
 \fB\-\-scheduler\-name\fP="default\-scheduler"
     DEPRECATED: name of the scheduler, used to select which pods will be processed by this scheduler, based on pod's "spec.schedulerName".
+
+.PP
+\fB\-\-secure\-port\fP=10259
+    The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
+
+.PP
+\fB\-\-skip\-headers\fP=false
+    If true, avoid header prefixes in the log messages
+
+.PP
+\fB\-\-stderrthreshold\fP=2
+    logs at or above this threshold go to stderr
+
+.PP
+\fB\-\-tls\-cert\-file\fP=""
+    File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are not provided, a self\-signed certificate and key are generated for the public address and saved to the directory specified by \-\-cert\-dir.
+
+.PP
+\fB\-\-tls\-cipher\-suites\fP=[]
+    Comma\-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be use.  Possible values: TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_ECDSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_ECDSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_ECDSA\_WITH\_RC4\_128\_SHA,TLS\_ECDHE\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_ECDHE\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_ECDHE\_RSA\_WITH\_CHACHA20\_POLY1305,TLS\_ECDHE\_RSA\_WITH\_RC4\_128\_SHA,TLS\_RSA\_WITH\_3DES\_EDE\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_128\_CBC\_SHA256,TLS\_RSA\_WITH\_AES\_128\_GCM\_SHA256,TLS\_RSA\_WITH\_AES\_256\_CBC\_SHA,TLS\_RSA\_WITH\_AES\_256\_GCM\_SHA384,TLS\_RSA\_WITH\_RC4\_128\_SHA
+
+.PP
+\fB\-\-tls\-min\-version\fP=""
+    Minimum TLS version supported. Possible values: VersionTLS10, VersionTLS11, VersionTLS12
+
+.PP
+\fB\-\-tls\-private\-key\-file\fP=""
+    File containing the default x509 private key matching \-\-tls\-cert\-file.
+
+.PP
+\fB\-\-tls\-sni\-cert\-key\fP=[]
+    A pair of x509 certificate and private key file paths, optionally suffixed with a list of domain patterns which are fully qualified domain names, possibly with prefixed wildcard segments. If no domain patterns are provided, the names of the certificate are extracted. Non\-wildcard matches trump over wildcard matches, explicit domain patterns trump over extracted names. For multiple key/certificate pairs, use the \-\-tls\-sni\-cert\-key multiple times. Examples: "example.crt,example.key" or "foo.crt,foo.key:*.foo.com,foo.com".
 
 .PP
 \fB\-\-use\-legacy\-policy\-config\fP=false
     DEPRECATED: when set to true, scheduler will ignore policy ConfigMap and uses policy config file
 
 .PP
+\fB\-v\fP, \fB\-\-v\fP=0
+    log level for V logs
+
+.PP
 \fB\-\-version\fP=false
     Print version information and quit
+
+.PP
+\fB\-\-vmodule\fP=
+    comma\-separated list of pattern=N settings for file\-filtered logging
 
 .PP
 \fB\-\-write\-config\-to\fP=""

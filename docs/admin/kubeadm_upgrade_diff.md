@@ -13,7 +13,7 @@ kubeadm upgrade diff [version] [flags]
 
 ```
       --api-server-manifest string           path to API server manifest (default "/etc/kubernetes/manifests/kube-apiserver.yaml")
-      --config string                        Path to kubeadm config file (WARNING: Usage of a configuration file is experimental)
+      --config string                        Path to a kubeadm configuration file.
   -c, --context-lines int                    How many lines of context in the diff (default 3)
       --controller-manager-manifest string   path to controller manifest (default "/etc/kubernetes/manifests/kube-controller-manager.yaml")
   -h, --help                                 help for diff

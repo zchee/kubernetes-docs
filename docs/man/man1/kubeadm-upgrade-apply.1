@@ -27,7 +27,7 @@ Upgrade your Kubernetes cluster to the specified version.
 
 .PP
 \fB\-\-config\fP=""
-    Path to kubeadm config file (WARNING: Usage of a configuration file is experimental)
+    Path to a kubeadm configuration file.
 
 .PP
 \fB\-\-cri\-socket\fP="/var/run/dockershim.sock"
@@ -44,9 +44,6 @@ Upgrade your Kubernetes cluster to the specified version.
 .PP
 \fB\-\-feature\-gates\fP=""
     A set of key=value pairs that describe feature gates for various features. Options are:
-Auditing=true|false (ALPHA \- default=false)
-CoreDNS=true|false (default=true)
-DynamicKubeletConfig=true|false (BETA \- default=false)
 
 .PP
 \fB\-f\fP, \fB\-\-force\fP=false
@@ -61,8 +58,8 @@ DynamicKubeletConfig=true|false (BETA \- default=false)
     The maximum amount of time to wait for the control plane pods to be downloaded.
 
 .PP
-\fB\-\-kubeconfig\fP="/usr/local/share/kubectl/config"
-    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
+\fB\-\-kubeconfig\fP="/Users/zchee/.local/share/kube/config"
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
 
 .PP
 \fB\-\-print\-config\fP=false
@@ -77,10 +74,6 @@ DynamicKubeletConfig=true|false (BETA \- default=false)
 .PP
 \fB\-\-azure\-container\-registry\-config\fP=""
     Path to the file containing Azure container registry configuration information.
-
-.PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
 
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s

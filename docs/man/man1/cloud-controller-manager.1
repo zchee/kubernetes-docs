@@ -20,7 +20,7 @@ the cloud specific control loops shipped with Kubernetes.
 .SH OPTIONS
 .PP
 \fB\-\-address\fP=0.0.0.0
-    DEPRECATED: see \-\-bind\-address instead.
+    The IP address on which to serve the insecure \-\-port (set to 0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
 
 .PP
 \fB\-\-allocate\-node\-cidrs\fP=false
@@ -29,6 +29,10 @@ the cloud specific control loops shipped with Kubernetes.
 .PP
 \fB\-\-allow\-untagged\-cloud\fP=false
     Allow the cluster to run without the cluster\-id on cloud instances. This is a legacy mode of operation and a cluster\-id will be required in the future.
+
+.PP
+\fB\-\-alsologtostderr\fP=false
+    log to standard error as well as files
 
 .PP
 \fB\-\-authentication\-kubeconfig\fP=""
@@ -41,6 +45,10 @@ the cloud specific control loops shipped with Kubernetes.
 .PP
 \fB\-\-authentication\-token\-webhook\-cache\-ttl\fP=10s
     The duration to cache responses from the webhook token authenticator.
+
+.PP
+\fB\-\-authentication\-tolerate\-lookup\-failure\fP=false
+    If true, failures to look up missing authentication configuration from the cluster are not considered fatal. Note that this can result in authentication that treats all requests as anonymous.
 
 .PP
 \fB\-\-authorization\-always\-allow\-paths\fP=[/healthz]
@@ -67,7 +75,7 @@ the cloud specific control loops shipped with Kubernetes.
     The IP address on which to listen for the \-\-secure\-port port. The associated interface(s) must be reachable by the rest of the cluster, and by CLI/web clients. If blank, all interfaces will be used (0.0.0.0 for all IPv4 interfaces and :: for all IPv6 interfaces).
 
 .PP
-\fB\-\-cert\-dir\fP="/var/run/kubernetes"
+\fB\-\-cert\-dir\fP=""
     The directory where the TLS certs are located. If \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are provided, this flag will be ignored.
 
 .PP
@@ -85,6 +93,10 @@ the cloud specific control loops shipped with Kubernetes.
 .PP
 \fB\-\-cloud\-provider\fP=""
     The provider for cloud services. Empty string for no provider.
+
+.PP
+\fB\-\-cloud\-provider\-gce\-lb\-src\-cidrs\fP=130.211.0.0/22,209.85.152.0/22,209.85.204.0/22,35.191.0.0/16
+    CIDRs opened in GCE firewall for LB traffic proxy \& health checks
 
 .PP
 \fB\-\-cluster\-cidr\fP=""
@@ -127,33 +139,34 @@ APIListChunking=true|false (BETA \- default=true)
 APIResponseCompression=true|false (ALPHA \- default=false)
 AllAlpha=true|false (ALPHA \- default=false)
 AppArmor=true|false (BETA \- default=true)
-AttachVolumeLimit=true|false (BETA \- default=false)
+AttachVolumeLimit=true|false (BETA \- default=true)
 BalanceAttachedNodeVolumes=true|false (ALPHA \- default=false)
-BlockVolume=true|false (ALPHA \- default=false)
+BlockVolume=true|false (BETA \- default=true)
+BoundServiceAccountTokenVolume=true|false (ALPHA \- default=false)
 CPUManager=true|false (BETA \- default=true)
 CRIContainerLogRotation=true|false (BETA \- default=true)
 CSIBlockVolume=true|false (ALPHA \- default=false)
 CSIDriverRegistry=true|false (ALPHA \- default=false)
 CSINodeInfo=true|false (ALPHA \- default=false)
-CSIPersistentVolume=true|false (BETA \- default=true)
 CustomCPUCFSQuotaPeriod=true|false (ALPHA \- default=false)
 CustomPodDNS=true|false (BETA \- default=true)
 CustomResourceSubresources=true|false (BETA \- default=true)
 CustomResourceValidation=true|false (BETA \- default=true)
+CustomResourceWebhookConversion=true|false (ALPHA \- default=false)
 DebugContainers=true|false (ALPHA \- default=false)
 DevicePlugins=true|false (BETA \- default=true)
-DryRun=true|false (ALPHA \- default=false)
+DryRun=true|false (BETA \- default=true)
+DynamicAuditing=true|false (ALPHA \- default=false)
 DynamicKubeletConfig=true|false (BETA \- default=true)
 EnableEquivalenceClassCache=true|false (ALPHA \- default=false)
 ExpandInUsePersistentVolumes=true|false (ALPHA \- default=false)
 ExpandPersistentVolumes=true|false (BETA \- default=true)
 ExperimentalCriticalPodAnnotation=true|false (ALPHA \- default=false)
 ExperimentalHostUserNamespaceDefaulting=true|false (BETA \- default=false)
-GCERegionalPersistentDisk=true|false (BETA \- default=true)
 HugePages=true|false (BETA \- default=true)
 HyperVContainer=true|false (ALPHA \- default=false)
 Initializers=true|false (ALPHA \- default=false)
-KubeletPluginsWatcher=true|false (BETA \- default=true)
+KubeletPodResources=true|false (ALPHA \- default=false)
 LocalStorageCapacityIsolation=true|false (BETA \- default=true)
 MountContainers=true|false (ALPHA \- default=false)
 NodeLease=true|false (ALPHA \- default=false)
@@ -176,17 +189,17 @@ StreamingProxyRedirects=true|false (BETA \- default=true)
 SupportPodPidsLimit=true|false (ALPHA \- default=false)
 Sysctls=true|false (BETA \- default=true)
 TTLAfterFinished=true|false (ALPHA \- default=false)
-TaintBasedEvictions=true|false (ALPHA \- default=false)
+TaintBasedEvictions=true|false (BETA \- default=true)
 TaintNodesByCondition=true|false (BETA \- default=true)
 TokenRequest=true|false (BETA \- default=true)
 TokenRequestProjection=true|false (BETA \- default=true)
-VolumeScheduling=true|false (BETA \- default=true)
+ValidateProxyRedirects=true|false (ALPHA \- default=false)
 VolumeSnapshotDataSource=true|false (ALPHA \- default=false)
 VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
 
 .PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
+\fB\-h\fP, \fB\-\-help\fP=false
+    help for cloud\-controller\-manager
 
 .PP
 \fB\-\-http2\-max\-streams\-per\-connection\fP=0
@@ -229,8 +242,24 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     The duration the clients should wait between attempting acquisition and renewal of a leadership. This is only applicable if leader election is enabled.
 
 .PP
+\fB\-\-log\-backtrace\-at\fP=:0
+    when logging hits line file:N, emit a stack trace
+
+.PP
+\fB\-\-log\-dir\fP=""
+    If non\-empty, write log files in this directory
+
+.PP
+\fB\-\-log\-file\fP=""
+    If non\-empty, use this log file
+
+.PP
 \fB\-\-log\-flush\-frequency\fP=5s
     Maximum number of seconds between log flushes
+
+.PP
+\fB\-\-logtostderr\fP=true
+    log to standard error instead of files
 
 .PP
 \fB\-\-master\fP=""
@@ -253,8 +282,8 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     This flag is deprecated and will be removed in future releases. See node\-monitor\-period for Node health checking or route\-reconciliation\-period for cloud provider's route configuration settings.
 
 .PP
-\fB\-\-port\fP=10253
-    DEPRECATED: see \-\-secure\-port instead.
+\fB\-\-port\fP=0
+    The port on which to serve unsecured, unauthenticated access. Set to 0 to disable.
 
 .PP
 \fB\-\-profiling\fP=false
@@ -289,6 +318,14 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     The port on which to serve HTTPS with authentication and authorization.If 0, don't serve HTTPS at all.
 
 .PP
+\fB\-\-skip\-headers\fP=false
+    If true, avoid header prefixes in the log messages
+
+.PP
+\fB\-\-stderrthreshold\fP=2
+    logs at or above this threshold go to stderr
+
+.PP
 \fB\-\-tls\-cert\-file\fP=""
     File containing the default x509 Certificate for HTTPS. (CA cert, if any, concatenated after server cert). If HTTPS serving is enabled, and \-\-tls\-cert\-file and \-\-tls\-private\-key\-file are not provided, a self\-signed certificate and key are generated for the public address and saved to the directory specified by \-\-cert\-dir.
 
@@ -313,8 +350,16 @@ VolumeSubpathEnvExpansion=true|false (ALPHA \- default=false)
     If true, use individual service account credentials for each controller.
 
 .PP
+\fB\-v\fP, \fB\-\-v\fP=0
+    log level for V logs
+
+.PP
 \fB\-\-version\fP=false
     Print version information and quit
+
+.PP
+\fB\-\-vmodule\fP=
+    comma\-separated list of pattern=N settings for file\-filtered logging
 
 
 .SH HISTORY

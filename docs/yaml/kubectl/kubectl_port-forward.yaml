@@ -6,14 +6,14 @@ description: "Forward one or more local ports to a pod. \n\nUse resource type/na
   selected automatically. The forwarding session ends when the selected pod terminates,
   and rerun of the command is needed to resume forwarding."
 options:
+- name: address
+  default_value: '[localhost]'
+  usage: Addresses to listen on (comma separated)
 - name: pod-running-timeout
   default_value: 1m0s
   usage: |
     The length of time (like 5s, 2m, or 3h, higher than zero) to wait until at least one pod is running
 inherited_options:
-- name: alsologtostderr
-  default_value: "false"
-  usage: log to standard error as well as files
 - name: as
   usage: Username to impersonate for the operation
 - name: as-group
@@ -39,20 +39,19 @@ inherited_options:
     If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
 - name: kubeconfig
   usage: Path to the kubeconfig file to use for CLI requests.
-- name: log-backtrace-at
-  default_value: :0
-  usage: when logging hits line file:N, emit a stack trace
-- name: log-dir
-  usage: If non-empty, write log files in this directory
-- name: logtostderr
-  default_value: "false"
-  usage: log to standard error instead of files
 - name: match-server-version
   default_value: "false"
   usage: Require server version to match client version
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
+- name: profile
+  default_value: none
+  usage: |
+    Name of profile to capture. One of (none|cpu|heap|goroutine|threadcreate|block|mutex)
+- name: profile-output
+  default_value: profile.pprof
+  usage: Name of the file to write the profile to
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -60,20 +59,10 @@ inherited_options:
 - name: server
   shorthand: s
   usage: The address and port of the Kubernetes API server
-- name: stderrthreshold
-  default_value: "2"
-  usage: logs at or above this threshold go to stderr
 - name: token
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: v
-  shorthand: v
-  default_value: "0"
-  usage: log level for V logs
-- name: vmodule
-  usage: |
-    comma-separated list of pattern=N settings for file-filtered logging
 example: "  # Listen on ports 5000 and 6000 locally, forwarding data to/from ports
   5000 and 6000 in the pod\n  kubectl port-forward pod/mypod 5000 6000\n  \n  # Listen
   on ports 5000 and 6000 locally, forwarding data to/from ports 5000 and 6000 in a
@@ -81,7 +70,11 @@ example: "  # Listen on ports 5000 and 6000 locally, forwarding data to/from por
   6000\n  \n  # Listen on ports 5000 and 6000 locally, forwarding data to/from ports
   5000 and 6000 in a pod selected by the service\n  kubectl port-forward service/myservice
   5000 6000\n  \n  # Listen on port 8888 locally, forwarding to 5000 in the pod\n
-  \ kubectl port-forward pod/mypod 8888:5000\n  \n  # Listen on a random port locally,
-  forwarding to 5000 in the pod\n  kubectl port-forward pod/mypod :5000"
+  \ kubectl port-forward pod/mypod 8888:5000\n  \n  # Listen on port 8888 on all addresses,
+  forwarding to 5000 in the pod\n  kubectl port-forward --address 0.0.0.0 pod/mypod
+  8888:5000\n  \n  # Listen on port 8888 on localhost and selected IP, forwarding
+  to 5000 in the pod\n  kubectl port-forward --address localhost,10.19.21.23 pod/mypod
+  8888:5000\n  \n  # Listen on a random port locally, forwarding to 5000 in the pod\n
+  \ kubectl port-forward pod/mypod :5000"
 see_also:
 - kubectl

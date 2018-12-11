@@ -17,6 +17,7 @@ kubeadm reset [flags]
   -f, --force                             Reset the node without prompting for confirmation.
   -h, --help                              help for reset
       --ignore-preflight-errors strings   A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
+      --kubeconfig string                 The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
 ```
 
 ### Options inherited from parent commands

@@ -22,18 +22,18 @@ Downloads the kubelet configuration from a ConfigMap of the form "kubelet\-confi
     Do not change any state, just output the actions that would be performed.
 
 .PP
+\fB\-\-etcd\-upgrade\fP=true
+    Perform the upgrade of etcd.
+
+.PP
 \fB\-\-kubeconfig\fP="/etc/kubernetes/kubelet.conf"
-    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS
 .PP
 \fB\-\-azure\-container\-registry\-config\fP=""
     Path to the file containing Azure container registry configuration information.
-
-.PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
 
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s
@@ -54,11 +54,11 @@ Downloads the kubelet configuration from a ConfigMap of the form "kubelet\-confi
 
 .nf
   # Downloads the kubelet configuration from the ConfigMap in the cluster. Uses a specific desired kubelet version.
-  kubeadm upgrade node config \-\-kubelet\-version v1.11.0
+  kubeadm upgrade node config \-\-kubelet\-version v1.13.0
   
   # Simulates the downloading of the kubelet configuration from the ConfigMap in the cluster with a specific desired
   # version. Does not change any state locally on the node.
-  kubeadm upgrade node config \-\-kubelet\-version v1.11.0 \-\-dry\-run
+  kubeadm upgrade node config \-\-kubelet\-version v1.13.0 \-\-dry\-run
 
 .fi
 .RE

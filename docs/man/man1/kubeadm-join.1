@@ -80,11 +80,11 @@ Often times the same token is used for both parts. In this case, the
 
 .PP
 \fB\-\-discovery\-file\fP=""
-    A file or url from which to load cluster information.
+    A file or URL from which to load cluster information.
 
 .PP
 \fB\-\-discovery\-token\fP=""
-    A token used to validate cluster information fetched from the api server.
+    A token used to validate cluster information fetched from the API server.
 
 .PP
 \fB\-\-discovery\-token\-ca\-cert\-hash\fP=[]
@@ -99,13 +99,6 @@ Often times the same token is used for both parts. In this case, the
     Create a new control plane instance on this node
 
 .PP
-\fB\-\-feature\-gates\fP=""
-    A set of key=value pairs that describe feature gates for various features. Options are:
-Auditing=true|false (ALPHA \- default=false)
-CoreDNS=true|false (default=true)
-DynamicKubeletConfig=true|false (BETA \- default=false)
-
-.PP
 \fB\-\-ignore\-preflight\-errors\fP=[]
     A list of checks whose errors will be shown as warnings. Example: 'IsPrivilegedUser,Swap'. Value 'all' ignores errors from all checks.
 
@@ -114,22 +107,14 @@ DynamicKubeletConfig=true|false (BETA \- default=false)
     Specify the node name.
 
 .PP
-\fB\-\-tls\-bootstrap\-token\fP=""
-    A token used for TLS bootstrapping.
-
-.PP
 \fB\-\-token\fP=""
-    Use this token for both discovery\-token and tls\-bootstrap\-token.
+    Use this token for both discovery\-token and tls\-bootstrap\-token when those values are not provided.
 
 
 .SH OPTIONS INHERITED FROM PARENT COMMANDS
 .PP
 \fB\-\-azure\-container\-registry\-config\fP=""
     Path to the file containing Azure container registry configuration information.
-
-.PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
 
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s

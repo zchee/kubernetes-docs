@@ -20,9 +20,6 @@ options:
   default_value: "false"
   usage: Stdin is a TTY
 inherited_options:
-- name: alsologtostderr
-  default_value: "false"
-  usage: log to standard error as well as files
 - name: as
   usage: Username to impersonate for the operation
 - name: as-group
@@ -48,20 +45,19 @@ inherited_options:
     If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
 - name: kubeconfig
   usage: Path to the kubeconfig file to use for CLI requests.
-- name: log-backtrace-at
-  default_value: :0
-  usage: when logging hits line file:N, emit a stack trace
-- name: log-dir
-  usage: If non-empty, write log files in this directory
-- name: logtostderr
-  default_value: "false"
-  usage: log to standard error instead of files
 - name: match-server-version
   default_value: "false"
   usage: Require server version to match client version
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
+- name: profile
+  default_value: none
+  usage: |
+    Name of profile to capture. One of (none|cpu|heap|goroutine|threadcreate|block|mutex)
+- name: profile-output
+  default_value: profile.pprof
+  usage: Name of the file to write the profile to
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -69,20 +65,10 @@ inherited_options:
 - name: server
   shorthand: s
   usage: The address and port of the Kubernetes API server
-- name: stderrthreshold
-  default_value: "2"
-  usage: logs at or above this threshold go to stderr
 - name: token
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: v
-  shorthand: v
-  default_value: "0"
-  usage: log level for V logs
-- name: vmodule
-  usage: |
-    comma-separated list of pattern=N settings for file-filtered logging
 example: "  # Get output from running pod 123456-7890, using the first container by
   default\n  kubectl attach 123456-7890\n  \n  # Get output from ruby-container from
   pod 123456-7890\n  kubectl attach 123456-7890 -c ruby-container\n  \n  # Switch

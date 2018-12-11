@@ -42,7 +42,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|template|go-template|go-template-file|templatefile|jsonpath|jsonpath-file.
+    Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-file.
 - name: overwrite
   default_value: "false"
   usage: |
@@ -67,9 +67,6 @@ options:
   usage: |
     Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
 inherited_options:
-- name: alsologtostderr
-  default_value: "false"
-  usage: log to standard error as well as files
 - name: as
   usage: Username to impersonate for the operation
 - name: as-group
@@ -95,20 +92,19 @@ inherited_options:
     If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
 - name: kubeconfig
   usage: Path to the kubeconfig file to use for CLI requests.
-- name: log-backtrace-at
-  default_value: :0
-  usage: when logging hits line file:N, emit a stack trace
-- name: log-dir
-  usage: If non-empty, write log files in this directory
-- name: logtostderr
-  default_value: "false"
-  usage: log to standard error instead of files
 - name: match-server-version
   default_value: "false"
   usage: Require server version to match client version
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
+- name: profile
+  default_value: none
+  usage: |
+    Name of profile to capture. One of (none|cpu|heap|goroutine|threadcreate|block|mutex)
+- name: profile-output
+  default_value: profile.pprof
+  usage: Name of the file to write the profile to
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -116,20 +112,10 @@ inherited_options:
 - name: server
   shorthand: s
   usage: The address and port of the Kubernetes API server
-- name: stderrthreshold
-  default_value: "2"
-  usage: logs at or above this threshold go to stderr
 - name: token
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: v
-  shorthand: v
-  default_value: "0"
-  usage: log level for V logs
-- name: vmodule
-  usage: |
-    comma-separated list of pattern=N settings for file-filtered logging
 example: "  # Update pod 'foo' with the label 'unhealthy' and the value 'true'.\n
   \ kubectl label pods foo unhealthy=true\n  \n  # Update pod 'foo' with the label
   'status' and the value 'unhealthy', overwriting any existing value.\n  kubectl label

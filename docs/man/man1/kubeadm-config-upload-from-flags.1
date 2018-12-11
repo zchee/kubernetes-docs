@@ -45,12 +45,9 @@ The configuration is located in the "kube\-system" namespace in the "kubeadm\-co
 .PP
 \fB\-\-feature\-gates\fP=""
     A set of key=value pairs that describe feature gates for various features. Options are:
-Auditing=true|false (ALPHA \- default=false)
-CoreDNS=true|false (default=true)
-DynamicKubeletConfig=true|false (BETA \- default=false)
 
 .PP
-\fB\-\-kubernetes\-version\fP="stable\-1.11"
+\fB\-\-kubernetes\-version\fP="stable\-1"
     Choose a specific Kubernetes version for the control plane.
 
 .PP
@@ -76,12 +73,8 @@ DynamicKubeletConfig=true|false (BETA \- default=false)
     Path to the file containing Azure container registry configuration information.
 
 .PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
-
-.PP
 \fB\-\-kubeconfig\fP="/etc/kubernetes/admin.conf"
-    The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
+    The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file.
 
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s

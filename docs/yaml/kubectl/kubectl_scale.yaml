@@ -27,7 +27,7 @@ options:
 - name: output
   shorthand: o
   usage: |
-    Output format. One of: json|yaml|name|go-template-file|templatefile|template|go-template|jsonpath|jsonpath-file.
+    Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-file.
 - name: record
   default_value: "false"
   usage: |
@@ -55,9 +55,6 @@ options:
   usage: |
     The length of time to wait before giving up on a scale operation, zero means don't wait. Any other values should contain a corresponding time unit (e.g. 1s, 2m, 3h).
 inherited_options:
-- name: alsologtostderr
-  default_value: "false"
-  usage: log to standard error as well as files
 - name: as
   usage: Username to impersonate for the operation
 - name: as-group
@@ -83,20 +80,19 @@ inherited_options:
     If true, the server's certificate will not be checked for validity. This will make your HTTPS connections insecure
 - name: kubeconfig
   usage: Path to the kubeconfig file to use for CLI requests.
-- name: log-backtrace-at
-  default_value: :0
-  usage: when logging hits line file:N, emit a stack trace
-- name: log-dir
-  usage: If non-empty, write log files in this directory
-- name: logtostderr
-  default_value: "false"
-  usage: log to standard error instead of files
 - name: match-server-version
   default_value: "false"
   usage: Require server version to match client version
 - name: namespace
   shorthand: "n"
   usage: If present, the namespace scope for this CLI request
+- name: profile
+  default_value: none
+  usage: |
+    Name of profile to capture. One of (none|cpu|heap|goroutine|threadcreate|block|mutex)
+- name: profile-output
+  default_value: profile.pprof
+  usage: Name of the file to write the profile to
 - name: request-timeout
   default_value: "0"
   usage: |
@@ -104,20 +100,10 @@ inherited_options:
 - name: server
   shorthand: s
   usage: The address and port of the Kubernetes API server
-- name: stderrthreshold
-  default_value: "2"
-  usage: logs at or above this threshold go to stderr
 - name: token
   usage: Bearer token for authentication to the API server
 - name: user
   usage: The name of the kubeconfig user to use
-- name: v
-  shorthand: v
-  default_value: "0"
-  usage: log level for V logs
-- name: vmodule
-  usage: |
-    comma-separated list of pattern=N settings for file-filtered logging
 example: "  # Scale a replicaset named 'foo' to 3.\n  kubectl scale --replicas=3 rs/foo\n
   \ \n  # Scale a resource identified by type and name specified in \"foo.yaml\" to
   3.\n  kubectl scale --replicas=3 -f foo.yaml\n  \n  # If the deployment named mysql's

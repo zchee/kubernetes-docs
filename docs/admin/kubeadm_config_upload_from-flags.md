@@ -24,11 +24,9 @@ kubeadm config upload from-flags [flags]
       --cert-dir string                      The path where to save and store the certificates. (default "/etc/kubernetes/pki")
       --cri-socket string                    Specify the CRI socket to connect to. (default "/var/run/dockershim.sock")
       --feature-gates string                 A set of key=value pairs that describe feature gates for various features. Options are:
-                                             Auditing=true|false (ALPHA - default=false)
-                                             CoreDNS=true|false (default=true)
-                                             DynamicKubeletConfig=true|false (BETA - default=false)
+                                             
   -h, --help                                 help for from-flags
-      --kubernetes-version string            Choose a specific Kubernetes version for the control plane. (default "stable-1.11")
+      --kubernetes-version string            Choose a specific Kubernetes version for the control plane. (default "stable-1")
       --node-name string                     Specify the node name.
       --pod-network-cidr string              Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
       --service-cidr string                  Use alternative range of IP address for service VIPs. (default "10.96.0.0/12")
@@ -38,7 +36,7 @@ kubeadm config upload from-flags [flags]
 ### Options inherited from parent commands
 
 ```
-      --kubeconfig string   The KubeConfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
+      --kubeconfig string   The kubeconfig file to use when talking to the cluster. If the flag is not set, a set of standard locations are searched for an existing KubeConfig file. (default "/etc/kubernetes/admin.conf")
       --rootfs string       [EXPERIMENTAL] The path to the 'real' host root filesystem.
 ```
 

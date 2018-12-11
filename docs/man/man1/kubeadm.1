@@ -13,19 +13,15 @@ kubeadm \- kubeadm: easily bootstrap a secure Kubernetes cluster
 
 .SH DESCRIPTION
 .PP
-kubeadm: easily bootstrap a secure Kubernetes cluster.
-
-.PP
 .RS
 
 .nf
 ┌──────────────────────────────────────────────────────────┐
-│ KUBEADM IS CURRENTLY IN BETA                             │
+│ KUBEADM                                                  │
+│ Easily bootstrap a secure Kubernetes cluster             │
 │                                                          │
-│ But please, try it out and give us feedback at:          │
+│ Please give us feedback at:                              │
 │ https://github.com/kubernetes/kubeadm/issues             │
-│ and at\-mention @kubernetes/sig\-cluster\-lifecycle\-bugs    │
-│ or @kubernetes/sig\-cluster\-lifecycle\-feature\-requests    │
 └──────────────────────────────────────────────────────────┘
 
 .fi
@@ -38,19 +34,20 @@ Example usage:
 .RS
 
 .nf
-Create a two\-machine cluster with one master (which controls the cluster),
-and one node (where your workloads, like Pods and Deployments run).
+Create a two\-machine cluster with one control\-plane node
+(which controls the cluster), and one worker node
+(where your workloads, like Pods and Deployments run).
 
 ┌──────────────────────────────────────────────────────────┐
 │ On the first machine:                                    │
 ├──────────────────────────────────────────────────────────┤
-│ master# kubeadm init                                     │
+│ control\-plane# kubeadm init                              │
 └──────────────────────────────────────────────────────────┘
 
 ┌──────────────────────────────────────────────────────────┐
 │ On the second machine:                                   │
 ├──────────────────────────────────────────────────────────┤
-│ node# kubeadm join <arguments\-returned\-from\-init>        │
+│ worker# kubeadm join <arguments\-returned\-from\-init>      │
 └──────────────────────────────────────────────────────────┘
 
 You can then repeat the second step on as many other machines as you like.
@@ -63,10 +60,6 @@ You can then repeat the second step on as many other machines as you like.
 .PP
 \fB\-\-azure\-container\-registry\-config\fP=""
     Path to the file containing Azure container registry configuration information.
-
-.PP
-\fB\-\-google\-json\-key\fP=""
-    The Google Cloud Platform Service Account JSON Key to use for authentication.
 
 .PP
 \fB\-\-log\-flush\-frequency\fP=5s
