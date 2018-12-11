@@ -10,16 +10,16 @@ The "init" command executes the following phases:
 preflight                  Run master pre-flight checks
 kubelet-start              Writes kubelet settings and (re)starts the kubelet
 certs                      Certificate generation
-  /ca                        Generates the self-signed Kubernetes CA to provision identities for other Kubernetes components
-  /apiserver                 Generates the certificate for serving the Kubernetes API
-  /apiserver-kubelet-client  Generates the Client certificate for the API server to connect to kubelet
   /front-proxy-ca            Generates the self-signed CA to provision identities for front proxy
   /front-proxy-client        Generates the client for the front proxy
   /etcd-ca                   Generates the self-signed CA to provision identities for etcd
-  /etcd-server               Generates the certificate for serving etcd
-  /apiserver-etcd-client     Generates the client apiserver uses to access etcd
   /etcd-peer                 Generates the credentials for etcd nodes to communicate with each other
+  /apiserver-etcd-client     Generates the client apiserver uses to access etcd
+  /etcd-server               Generates the certificate for serving etcd
   /etcd-healthcheck-client   Generates the client certificate for liveness probes to healtcheck etcd
+  /ca                        Generates the self-signed Kubernetes CA to provision identities for other Kubernetes components
+  /apiserver                 Generates the certificate for serving the Kubernetes API
+  /apiserver-kubelet-client  Generates the Client certificate for the API server to connect to kubelet
   /sa                        Generates a private key for signing service account tokens along with its public key
 kubeconfig                 Generates all kubeconfig files necessary to establish the control plane and the admin kubeconfig file
   /admin                     Generates a kubeconfig file for the admin to use and for kubeadm itself

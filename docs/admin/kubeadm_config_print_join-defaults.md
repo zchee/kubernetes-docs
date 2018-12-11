@@ -17,7 +17,7 @@ kubeadm config print join-defaults [flags]
 ### Options
 
 ```
-      --component-configs strings   A comma-separated list for component config API objects to print the default values for. Available values: [KubeletConfiguration KubeProxyConfiguration]. If this flag is not set, no component configs will be printed.
+      --component-configs strings   A comma-separated list for component config API objects to print the default values for. Available values: [KubeProxyConfiguration KubeletConfiguration]. If this flag is not set, no component configs will be printed.
   -h, --help                        help for join-defaults
 ```
 
